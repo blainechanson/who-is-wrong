@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://jsdelivr.net"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- REMOVED JSDELIVR: Swapped out for unpkg to bypass connection timeout blocks globally -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons via Unpkg Fallback -->
+    <link rel="stylesheet" href="https://unpkg.com">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         .font-serif-court { font-family: 'Cinzel', serif; }
         .font-sans-court { font-family: 'Inter', sans-serif; }
@@ -161,5 +161,3 @@
             }, 1800);
 
             try {
-                const response = await fetch('/api/settle', {
-                    method: 'POST',
