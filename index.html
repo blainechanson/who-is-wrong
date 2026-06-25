@@ -5,101 +5,367 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
   <style>
-    :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --text-dark: #78716c; --accent: #d97706; --accent-hover: #f59e0b; }
+    :root {
+      --bg-main: #1c1917;
+      --bg-card: #0c0a09;
+      --text-main: #f5f5f4;
+      --text-muted: #a8a29e;
+      --text-dark: #78716c;
+      --accent: #d97706;
+      --accent-hover: #f59e0b;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     .font-serif-court { font-family: 'Cinzel', 'Georgia', serif; }
-    .sponsor-slot { width: 100%; background-color: var(--bg-card); padding: 12px; text-align: center; font-size: 12px; color: var(--text-dark); letter-spacing: 0.15em; border-bottom: 1px solid #292524; }
-    .sponsor-slot.bottom { border-bottom: none; border-top: 1px solid #292524; padding: 16px; }
-    main { max-width: 48rem; width: 100%; margin: 0 auto; padding: 3rem 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+
+    .sponsor-slot {
+      width: 100%;
+      background-color: var(--bg-card);
+      padding: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dark);
+      letter-spacing: 0.15em;
+      border-bottom: 1px solid #292524;
+    }
+
+    .sponsor-slot.bottom {
+      border-bottom: none;
+      border-top: 1px solid #292524;
+      padding: 16px;
+    }
+
+    main {
+      max-width: 48rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     header { text-align: center; margin-bottom: 2.5rem; }
-    .gavel-icon-box { display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; border-radius: 9999px; background-color: rgba(217, 119, 6, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); margin-bottom: 1rem; overflow: hidden; }
-    .header-gavel-photo { width: 4.4rem; height: 4.4rem; object-fit: contain; transform: rotate(-18deg); filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45)); }
-    h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent-hover); text-transform: uppercase; margin-bottom: 0.5rem; }
+
+    .gavel-icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 9999px;
+      background-color: rgba(217, 119, 6, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .header-gavel-photo {
+      width: 4.6rem;
+      height: 4.6rem;
+      object-fit: contain;
+      transform: rotate(-18deg);
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45));
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--accent-hover);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
     .subtitle { color: var(--text-muted); font-size: 1rem; font-style: italic; }
-    .card { background-color: var(--bg-card); border: 1px solid #292524; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-    .split-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
-    @media (min-width: 768px) { .split-grid { grid-template-columns: 1fr 1fr; } }
-    .party-square { background-color: rgba(255, 255, 255, 0.02); border: 1px solid #292524; border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid #292524;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .split-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .party-square {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid #292524;
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
     .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    label { font-size: 11px; font-weight: 600; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.05em; }
-    input, textarea { width: 100%; background-color: var(--bg-main); border: 1px solid #292524; border-radius: 0.375rem; padding: 0.75rem 1rem; color: var(--text-main); font-size: 0.875rem; }
+
+    label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-hover);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input, textarea {
+      width: 100%;
+      background-color: var(--bg-main);
+      border: 1px solid #292524;
+      border-radius: 0.375rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-size: 0.875rem;
+    }
+
     input:focus, textarea:focus { outline: none; border-color: var(--accent-hover); }
     textarea { resize: none; }
-    .btn-primary { width: 100%; background-color: var(--accent); color: #0c0a09; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
+
+    .btn-primary {
+      width: 100%;
+      background-color: var(--accent);
+      color: #0c0a09;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
     .hidden { display: none !important; }
+
     .loading-view { padding: 2rem 0 3rem; text-align: center; }
-    .gavel-scene { position: relative; width: 230px; height: 170px; margin: 0 auto 1.5rem; }
-    .gavel-photo { position: absolute; width: 165px; left: 8px; top: 10px; object-fit: contain; transform-origin: 78% 72%; transform: rotate(-24deg) translateY(-8px); filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5)); animation: gavelSlam 0.95s infinite ease-in-out; z-index: 2; }
-    .sound-block { position: absolute; width: 118px; height: 34px; right: 10px; bottom: 20px; border-radius: 50%; background: linear-gradient(180deg, #b7662b 0%, #7a3516 58%, #3a1608 100%); box-shadow: 0 10px 0 #1f0c05; z-index: 1; }
-    .sound-block::before { content: ""; position: absolute; left: 13px; right: 13px; top: 5px; height: 9px; border-radius: 999px; background: rgba(255, 182, 96, 0.28); }
-    .impact-lines { position: absolute; right: -4px; bottom: 72px; opacity: 0; animation: impactFlash 0.95s infinite ease-in-out; }
-    .impact-lines span { display: block; width: 32px; height: 4px; margin: 8px 0; background: #f5f5f4; border-radius: 999px; }
+
+    .gavel-scene {
+      position: relative;
+      width: 250px;
+      height: 178px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .gavel-photo {
+      position: absolute;
+      width: 176px;
+      left: 4px;
+      top: 6px;
+      object-fit: contain;
+      transform-origin: 78% 72%;
+      transform: rotate(-24deg) translateY(-8px);
+      filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+      animation: gavelSlam 0.95s infinite ease-in-out;
+      z-index: 2;
+    }
+
+    .sound-block {
+      position: absolute;
+      width: 122px;
+      height: 34px;
+      right: 10px;
+      bottom: 20px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #b7662b 0%, #7a3516 58%, #3a1608 100%);
+      box-shadow: 0 10px 0 #1f0c05;
+      z-index: 1;
+    }
+
+    .sound-block::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      right: 13px;
+      top: 5px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(255, 182, 96, 0.28);
+    }
+
+    .impact-lines {
+      position: absolute;
+      right: -4px;
+      bottom: 72px;
+      opacity: 0;
+      animation: impactFlash 0.95s infinite ease-in-out;
+    }
+
+    .impact-lines span {
+      display: block;
+      width: 32px;
+      height: 4px;
+      margin: 8px 0;
+      background: #f5f5f4;
+      border-radius: 999px;
+    }
+
     .impact-lines span:nth-child(1) { transform: rotate(-36deg); }
     .impact-lines span:nth-child(2) { transform: rotate(0deg); }
     .impact-lines span:nth-child(3) { transform: rotate(36deg); }
-    @keyframes gavelSlam { 0%, 100% { transform: rotate(-28deg) translateY(-13px); } 42% { transform: rotate(-7deg) translateY(20px); } 52% { transform: rotate(-11deg) translateY(12px); } }
-    @keyframes impactFlash { 0%, 38%, 100% { opacity: 0; } 42%, 56% { opacity: 1; } }
-    .stationery { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 2rem; }
-    .stationery-header { border-bottom: 1px solid #292524; padding-bottom: 1rem; text-align: center; margin-bottom: 1.5rem; }
-    .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
-    .case-id { font-family: monospace; font-size: 11px; color: var(--text-dark); margin-top: 0.25rem; }
+
+    @keyframes gavelSlam {
+      0%, 100% { transform: rotate(-28deg) translateY(-13px); }
+      42% { transform: rotate(-7deg) translateY(20px); }
+      52% { transform: rotate(-11deg) translateY(12px); }
+    }
+
+    @keyframes impactFlash {
+      0%, 38%, 100% { opacity: 0; }
+      42%, 56% { opacity: 1; }
+    }
+
+    .stationery {
+      background-color: var(--bg-main);
+      border: 2px solid rgba(217, 119, 6, 0.3);
+      border-radius: 0.5rem;
+      padding: 2rem;
+    }
+
+    .stationery-header {
+      border-bottom: 1px solid #292524;
+      padding-bottom: 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .stationery-header h2 {
+      font-size: 1.5rem;
+      color: var(--accent-hover);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .case-id {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text-dark);
+      margin-top: 0.25rem;
+    }
+
     .verdict-text { color: #e7e5e4; font-size: 1rem; line-height: 1.7; }
     .verdict-text .mb-4 { margin-bottom: 1.5rem; }
     .verdict-text h3 { color: var(--accent-hover); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
     .verdict-text p { font-size: 0.925rem; margin-bottom: 0.75rem; }
     .verdict-text .p-3 { background-color: rgba(217, 119, 6, 0.03); border: 1px solid rgba(217, 119, 6, 0.15); padding: 1rem; border-radius: 0.375rem; }
-    .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; }
-    .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-    .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
+
+    .stationery-footer {
+      border-top: 1px solid #292524;
+      padding-top: 1rem;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      background-color: var(--bg-main);
+      border: 1px solid #444;
+      color: #e7e5e4;
+      padding: 0.85rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .error-msg {
+      color: #ef4444;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
 <body>
   <div class="sponsor-slot">SPONSOR SPACE</div>
+
   <main>
     <header>
-      <div class="gavel-icon-box"><img id="header-gavel" alt="" class="header-gavel-photo"></div>
+      <div class="gavel-icon-box">
+        <img src="/images/gavel.jpg?v=7" alt="" class="header-gavel-photo">
+      </div>
       <h1 class="font-serif-court">Who Is Wrong</h1>
       <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
     </header>
+
     <div class="card">
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" placeholder="Your name..."></div>
-            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea></div>
+            <div class="input-group">
+              <label for="nameA">Party A (You / Accuser)</label>
+              <input type="text" id="nameA" placeholder="Your name...">
+            </div>
+            <div class="input-group">
+              <label for="argA">Your Argument / Bill of Complaints</label>
+              <textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea>
+            </div>
           </div>
+
           <div class="party-square">
-            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" placeholder="Their name..."></div>
-            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea></div>
+            <div class="input-group">
+              <label for="nameB">Party B (The Accused / Defense)</label>
+              <input type="text" id="nameB" placeholder="Their name...">
+            </div>
+            <div class="input-group">
+              <label for="argB">Their Argument / Counter-Claim</label>
+              <textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea>
+            </div>
           </div>
         </div>
+
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
+
       <div id="loading-view" class="loading-view hidden">
         <div class="gavel-scene" aria-hidden="true">
-          <img id="loading-gavel" alt="" class="gavel-photo">
+          <img src="/images/gavel.jpg?v=7" alt="" class="gavel-photo">
           <div class="sound-block"></div>
           <div class="impact-lines"><span></span><span></span><span></span></div>
         </div>
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
+
       <div id="verdict-view" class="stationery hidden">
-        <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+        <div class="stationery-header">
+          <h2>Official Decree</h2>
+          <div class="case-id" id="display-case-id">CASE NO. #00000</div>
+        </div>
         <div class="verdict-text"></div>
-        <div class="stationery-footer"><button class="btn-secondary" onclick="resetForm()">Hear Another Case</button></div>
+        <div class="stationery-footer">
+          <button class="btn-secondary" onclick="resetForm()">Hear Another Case</button>
+        </div>
       </div>
     </div>
   </main>
-  <div class="sponsor-slot bottom">SPONSOR SPACE</div>
-  <script>
-    const gavelImage = 'data:image/jpeg;base64,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';
-    document.getElementById('header-gavel').src = gavelImage;
-    document.getElementById('loading-gavel').src = gavelImage;
 
+  <div class="sponsor-slot bottom">SPONSOR SPACE</div>
+
+  <script>
     async function slamGavelButton() {
       const nameA = document.getElementById('nameA').value.trim();
       const argA = document.getElementById('argA').value.trim();
@@ -112,16 +378,19 @@
       const caseIdBox = document.getElementById('display-case-id');
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
+
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+
       errorBox.classList.add('hidden');
       formView.classList.add('hidden');
       verdictView.classList.add('hidden');
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
+
       try {
         const response = await fetch('/api/settle', {
           method: 'POST',
@@ -143,6 +412,7 @@
         submitBtn.disabled = false;
       }
     }
+
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
@@ -153,6 +423,7 @@
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
     }
+
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
   </script>
