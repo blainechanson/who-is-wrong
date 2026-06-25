@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArgueWithMe | The Supreme Court of Petty Disputes</title>
+    <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://jsdelivr.net"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         .font-serif-court { font-family: 'Cinzel', serif; }
         .font-sans-court { font-family: 'Inter', sans-serif; }
@@ -27,10 +27,10 @@
     <main class="max-w-2xl w-full mx-auto px-4 py-12 flex-grow flex flex-col justify-center">
         <!-- Header -->
         <header class="text-center mb-10">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-600/10 border border-amber-500/30 text-amber-500 text-2xl mb-4 animate-pulse">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-600/10 border border-amber-500/30 text-amber-500 text-2xl mb-4">
                 <i class="fa-solid fa-gavel"></i>
             </div>
-            <h1 class="font-serif-court text-4xl md:text-5xl font-extrabold tracking-wide text-amber-500 uppercase">Argue With Me</h1>
+            <h1 class="font-serif-court text-4xl md:text-5xl font-extrabold tracking-wide text-amber-500 uppercase">Who Is Wrong</h1>
             <p class="text-stone-400 mt-2 text-sm md:text-base italic">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
         </header>
 
@@ -127,17 +127,15 @@
         const loadingPhrases = [
             "Reviewing the absolute pettiness...",
             "Consulting the scrolls of minor grievances...",
-            "Ignoring the constitution, building mock trial logic...",
+            "Ignoring constitutions, building mock trial logic...",
             "Polishing the mahogany gavel...",
             "Drafting absolute, highly biased decrees..."
         ];
 
-        // Deep linking routing check on initialization
         window.addEventListener('DOMContentLoaded', async () => {
             const pathSegments = window.location.pathname.split('/');
             const potentialId = pathSegments[pathSegments.length - 1];
             
-            // Regex match for short alpha-numeric IDs
             if (potentialId && /^[a-z0-9]{8}$/i.test(potentialId)) {
                 loadExistingVerdict(potentialId);
             }
@@ -154,9 +152,14 @@
                 return;
             }
 
-            // Enter Loading State Loop
             formView.classList.add('hidden');
             loadingView.classList.remove('hidden');
             let phraseIdx = 0;
             const phraseInterval = setInterval(() => {
                 phraseIdx = (phraseIdx + 1) % loadingPhrases.length;
+                loadingText.innerText = loadingPhrases[phraseIdx];
+            }, 1800);
+
+            try {
+                const response = await fetch('/api/settle', {
+                    method: 'POST',
