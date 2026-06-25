@@ -1,84 +1,233 @@
-    <script>
-        const formView = document.getElementById('form-view');
-        const loadingView = document.getElementById('loading-view');
-        const verdictView = document.getElementById('verdict-view');
-        const submitBtn = document.getElementById('submit-btn');
-        const newCaseBtn = document.getElementById('new-case-btn');
-        const errorBox = document.getElementById('error-box');
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
+    <style>
+        :root {
+            --bg-main: #1c1917; 
+            --bg-card: #0c0a09; 
+            --text-main: #f5f5f4; 
+            --text-muted: #a8a29e; 
+            --text-dark: #78716c; 
+            --accent: #d97706; 
+            --accent-hover: #f59e0b; 
+            --border-color: #2e2a24;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .font-serif-court { font-family: 'Cinzel', 'Georgia', serif; }
+        .ad-space {
+            width: 100%;
+            background-color: var(--bg-card);
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-dark);
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid #292524;
+        }
+        .ad-space.bottom { border-bottom: none; border-top: 1px solid #292524; padding: 16px; }
         
-        const nameAInput = document.getElementById('nameA');
-        const argAInput = document.getElementById('argA');
-        const nameBInput = document.getElementById('nameB');
-        const argBInput = document.getElementById('argB');
-        const verdictContent = document.getElementById('verdict-content');
-        const caseIdEl = document.getElementById('case-id');
+        main {
+            max-width: 48rem;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        header { text-align: center; margin-bottom: 2.5rem; }
+        .gavel-icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 9999px;
+            background-color: rgba(217, 119, 6, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--accent-hover);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent-hover); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1rem; font-style: italic; }
 
-        // Check if the button is even being registered by the browser
-        if (!submitBtn) {
-            alert("CRITICAL BUG: The browser cannot find the button element with id='submit-btn'!");
-        } else {
-            console.log("Gavel button found in DOM and event listener attached successfully.");
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid #292524;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .split-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) { 
+            .split-grid { grid-template-columns: 1fr 1fr; } 
+        }
+        
+        .party-square {
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid #292524;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        submitBtn.addEventListener('click', async () => {
-            // Test 1: Did the click actually register?
-            alert("Gavel clicked! Starting validation checks...");
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        label { font-size: 11px; font-weight: 600; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.05em; }
+        input, textarea {
+            width: 100%;
+            background-color: var(--bg-main);
+            border: 1px solid #292524;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            font-size: 0.875rem;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent-hover); }
+        textarea { resize: none; }
 
-            const nameA = nameAInput ? nameAInput.value.trim() : '';
-            const argA = argAInput ? argAInput.value.trim() : '';
-            const nameB = nameBInput ? nameBInput.value.trim() : '';
-            const argB = argBInput ? argBInput.value.trim() : '';
+        .btn-primary {
+            width: 100%;
+            background-color: var(--accent);
+            color: #0c0a09;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .hidden { display: none !important; }
+        
+        .loading-view { padding: 3rem 0; text-align: center; }
+        .bounce-gavel { font-size: 3rem; color: var(--accent-hover); animation: bounceGavel 1s infinite alternate; margin-bottom: 1.5rem; }
+        @keyframes bounceGavel {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(-20deg); }
+        }
+        
+        .stationery {
+            background-color: var(--bg-main);
+            border: 2px solid rgba(217, 119, 6, 0.3);
+            border-radius: 0.5rem;
+            padding: 2rem;
+        }
+        .stationery-header { border-bottom: 1px solid #292524; padding-bottom: 1rem; text-align: center; margin-bottom: 1.5rem; }
+        .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
+        .case-id { font-family: monospace; font-size: 11px; color: var(--text-dark); margin-top: 0.25rem; }
+        
+        .verdict-text { color: #e7e5e4; font-size: 1rem; line-height: 1.7; }
+        .verdict-text .mb-4 { margin-bottom: 1.5rem; }
+        .verdict-text h3 { color: var(--accent-hover); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .verdict-text p { font-size: 0.925rem; margin-bottom: 0.75rem; }
+        .verdict-text .p-3 { background-color: rgba(217, 119, 6, 0.03); border: 1px solid rgba(217, 119, 6, 0.15); padding: 1rem; border-radius: 0.375rem; }
+        
+        .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; }
+        .flex-row { display: flex; margin-top: 1.5rem; }
+        .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
+        .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
 
-            // Test 2: Show what inputs the code read
-            alert(`Inputs read:\nParty A: [${nameA}]\nArg A: [${argA}]\nParty B: [${nameB}]\nArg B: [${argB}]`);
+    <div class="ad-space">ADVERTISEMENT SPACE</div>
 
-            if (!nameA || !argA || !nameB || !argB) {
-                alert("Validation failed: One or more fields are empty!");
-                errorBox.textContent = "Both parties must fill out their Name and Argument squares to stand trial.";
-                errorBox.classList.remove('hidden');
-                return;
-            }
+    <main>
+        <header>
+            <div class="gavel-icon-box">⚖️</div>
+            <h1 class="font-serif-court">Who Is Wrong</h1>
+            <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
+        </header>
 
-            alert("Validation passed! Switching to loading screen and launching fetch request...");
+        <div class="card">
+            <!-- Form View -->
+            <div id="form-view">
+                <div class="split-grid">
+                    <!-- Party A Square -->
+                    <div class="party-square">
+                        <div class="input-group">
+                            <label>Party A (You / Accuser)</label>
+                            <input type="text" id="nameA" placeholder="Your name...">
+                        </div>
+                        <div class="input-group">
+                            <label>Your Argument / Bill of Complaints</label>
+                            <textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea>
+                        </div>
+                    </div>
 
-            errorBox.classList.add('hidden');
-            formView.classList.add('hidden');
-            loadingView.classList.remove('hidden');
+                    <!-- Party B Square -->
+                    <div class="party-square">
+                        <div class="input-group">
+                            <label>Party B (The Accused / Defense)</label>
+                            <input type="text" id="nameB" placeholder="Their name...">
+                        </div>
+                        <div class="input-group">
+                            <label>Their Argument / Counter-Claim</label>
+                            <textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea>
+                        </div>
+                    </div>
+                </div>
 
-            try {
-                const response = await fetch('/api/settle', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nameA, argA, nameB, argB })
-                });
+                <!-- Direct inline execution binding handles event securely -->
+                <button id="submit-btn" class="btn-primary" onclick="executeCourtTrial()">🔨 Slam the Gavel</button>
+                <div id="error-box" class="error-msg hidden"></div>
+            </div>
 
-                const data = await response.json();
+            <!-- Loading View -->
+            <div id="loading-view" class="loading-view hidden">
+                <div class="bounce-gavel">🔨</div>
+                <p>The Court is deliberating your utter nonsense...</p>
+            </div>
 
-                if (!response.ok) {
-                    throw new Error(data.error || `Server returned code ${response.status}`);
-                }
-                
-                caseIdEl.textContent = `CASE NO. #${Math.floor(100000 + Math.random() * 900000)}`;
-                verdictContent.innerHTML = data.htmlContent || 'No verdict issued.';
-                
-                loadingView.classList.add('hidden');
-                verdictView.classList.remove('hidden');
-            } catch (err) {
-                loadingView.classList.add('hidden');
-                formView.classList.remove('hidden');
-                errorBox.textContent = `Trial Interrupted: ${err.message}`;
-                errorBox.classList.remove('hidden');
-                alert(`Fetch error encountered: ${err.message}`);
-            }
-        });
+            <!-- Verdict View -->
+            <div id="verdict-view" class="hidden">
+                <div class="stationery">
+                    <div class="stationery-header">
+                        <h2>Official Decree</h2>
+                        <div id="case-id" class="case-id">CASE NO. #PENDING</div>
+                    </div>
+                    <div id="verdict-content" class="verdict-text"></div>
+                    <div class="stationery-footer">
+                        <div style="font-size: 11px; color: var(--accent-hover);">SUPREME COURT OF PETTY DISPUTES</div>
+                        <div style="width: 6rem; height: 1px; background-color: #444; margin: 0.5rem auto;"></div>
+                        <div style="font-family: monospace; font-size: 10px; color: var(--text-dark);">FINAL AND BINDING</div>
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <button id="new-case-btn" class="btn-secondary" onclick="resetCourtTrial()">New Dispute</button>
+                </div>
+            </div>
+        </div>
+    </main>
 
-        newCaseBtn.addEventListener('click', () => {
-            nameAInput.value = '';
-            argAInput.value = '';
-            nameBInput.value = '';
-            argBInput.value = '';
-            verdictView.classList.add('hidden');
-            formView.classList.remove('hidden');
-        });
-    </script>
+    <div class="ad-space bottom">ADVERTISEMENT SPACE</div>
 
+    <script>
+        console.log("WHO-IS-WRONG COURT SYSTEM OPERATIONAL");
+
+        async function executeCourtTrial() {
+            // Read inputs directly from the document fields
