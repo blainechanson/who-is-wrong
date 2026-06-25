@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/settle", "destination": "/api/settle.js" },
+    { "source": "/api/verdict/:id", "destination": "/api/settle.js?id=:id" },
+    { "source": "/v/(.*)", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
