@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArgueWithMe | The Supreme Court of Petty Disputes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-serif-court { font-family: 'Cinzel', serif; }
+        .font-sans-court { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-stone-900 text-stone-100 font-sans-court min-h-screen flex flex-col justify-between selection:bg-amber-600 selection:text-white">
+
+    <!-- Ad Placement Holder Top -->
+    <div class="w-full bg-stone-950 p-2 text-center text-xs text-stone-500 border-b border-stone-800 tracking-widest">
+        ADVERTISEMENT SPACE
+    </div>
+
+    <main class="max-w-2xl w-full mx-auto px-4 py-12 flex-grow flex flex-col justify-center">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-600/10 border border-amber-500/30 text-amber-500 text-2xl mb-4 animate-pulse">
+                <i class="fa-solid fa-gavel"></i>
+            </div>
+            <h1 class="font-serif-court text-4xl md:text-5xl font-extrabold tracking-wide text-amber-500 uppercase">Argue With Me</h1>
+            <p class="text-stone-400 mt-2 text-sm md:text-base italic">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
+        </header>
+
+        <!-- Main Card Interface -->
+        <div class="bg-stone-950 border border-stone-800 rounded-xl p-6 shadow-2xl relative overflow-hidden">
+            
+            <!-- Dynamic Form Section -->
+            <div id="form-view" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Party A -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-amber-500 uppercase tracking-wider">Party A (You)</label>
+                        <input type="text" id="party-a-name" placeholder="Your Name" class="w-full bg-stone-900 border border-stone-800 rounded-lg px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500 transition-colors text-sm">
+                        <textarea id="party-a-argument" rows="3" placeholder="Your side of the argument... (e.g., Cereal is technically a cold soup.)" class="w-full bg-stone-900 border border-stone-800 rounded-lg px-4 py-3 text-stone-100 placeholder-stone-600 focus:outline-none focus:border-amber-500 transition-colors text-sm resize-none"></textarea>
+                    </div>
+                    <!-- Party B -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-amber-500 uppercase tracking-wider">Party B (The Opponent)</label>
+                        <input type="text" id="party-b-name" placeholder="Their Name" class="w-full bg-stone-900 border border-stone-800 rounded-lg px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500 transition-colors text-sm">
+                        <textarea id="party-b-argument" rows="3" placeholder="Their wrong opinion... (e.g., Cereal is just breakfast cereal, not a soup!)" class="w-full bg-stone-900 border border-stone-800 rounded-lg px-4 py-3 text-stone-100 placeholder-stone-600 focus:outline-none focus:border-amber-500 transition-colors text-sm resize-none"></textarea>
+                    </div>
+                </div>
+
+                <button id="submit-btn" class="w-full bg-amber-600 hover:bg-amber-500 active:bg-amber-700 text-stone-950 font-bold uppercase tracking-wider py-4 rounded-lg transition-colors cursor-pointer flex items-center justify-center space-x-2 shadow-lg shadow-amber-600/10">
+                    <span>Bang the Gavel (Settle It)</span>
+                </button>
+            </div>
+
+            <!-- Loading View -->
+            <div id="loading-view" class="hidden py-12 flex flex-col items-center justify-center space-y-4">
+                <div class="relative w-20 h-20 flex items-center justify-center">
+                    <i class="fa-solid fa-gavel text-4xl text-amber-500 animate-bounce"></i>
+                </div>
+                <p id="loading-text" class="text-stone-400 text-sm tracking-wide italic font-serif-court">Reviewing the petty evidence...</p>
+            </div>
+
+            <!-- Verdict / Output View -->
+            <div id="verdict-view" class="hidden space-y-6">
+                <!-- Legal Stationery Canvas Wrapper -->
+                <div class="bg-stone-900 border-2 border-amber-600/30 rounded-lg p-6 md:p-8 space-y-6 relative shadow-inner">
+                    <!-- Decorative Scales Background Watermark -->
+                    <div class="absolute inset-0 opacity-2 flex items-center justify-center pointer-events-none text-9xl text-stone-100">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+
+                    <div class="border-b border-stone-800 pb-4 text-center">
+                        <h2 class="font-serif-court text-xl tracking-widest text-amber-500 uppercase">Official Judicial Decree</h2>
+                        <p class="text-[10px] text-stone-500 font-mono mt-1">CASE ID: <span id="display-case-id">#000000</span></p>
+                    </div>
+
+                    <!-- Injecting dynamic inner HTML containing formatted response segments -->
+                    <div id="verdict-content" class="prose prose-invert max-w-none text-stone-300 text-sm md:text-base leading-relaxed space-y-4">
+                        <!-- Dynamic Content Parsed Here -->
+                    </div>
+
+                    <div class="border-t border-stone-800 pt-4 flex flex-col items-center justify-center space-y-1">
+                        <div class="font-serif-court text-xs text-amber-500 tracking-wider">CHIEF JUSTICE OF THE PETTY COURT</div>
+                        <div class="w-24 h-px bg-stone-700 my-1"></div>
+                        <div class="text-[10px] text-stone-600 font-mono uppercase tracking-widest">Verdict Final & Absolute</div>
+                    </div>
+                </div>
+
+                <!-- Share Loop Interactivity Row -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button id="copy-link-btn" class="flex-1 bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-200 font-semibold py-3 rounded-lg transition-colors cursor-pointer flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-link text-amber-500"></i>
+                        <span>Copy Shareable Link</span>
+                    </button>
+                    <button id="reset-btn" class="sm:w-1/3 bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-stone-200 font-semibold py-3 rounded-lg transition-colors cursor-pointer text-center">
+                        New Dispute
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Ad Placement Holder Bottom -->
+    <div class="w-full bg-stone-950 p-4 text-center text-xs text-stone-500 border-t border-stone-800 tracking-widest">
+        ADVERTISEMENT SPACE
+    </div>
+
+    <!-- Frontend Script Logic Context -->
+    <script>
+        const formView = document.getElementById('form-view');
+        const loadingView = document.getElementById('loading-view');
+        const verdictView = document.getElementById('verdict-view');
+        const loadingText = document.getElementById('loading-text');
+        const verdictContent = document.getElementById('verdict-content');
+        const displayCaseId = document.getElementById('display-case-id');
+        
+        let currentCaseId = null;
+
+        const loadingPhrases = [
+            "Reviewing the absolute pettiness...",
+            "Consulting the scrolls of minor grievances...",
+            "Ignoring the constitution, building mock trial logic...",
+            "Polishing the mahogany gavel...",
+            "Drafting absolute, highly biased decrees..."
+        ];
+
+        // Deep linking routing check on initialization
+        window.addEventListener('DOMContentLoaded', async () => {
+            const pathSegments = window.location.pathname.split('/');
+            const potentialId = pathSegments[pathSegments.length - 1];
+            
+            // Regex match for short alpha-numeric IDs
+            if (potentialId && /^[a-z0-9]{8}$/i.test(potentialId)) {
+                loadExistingVerdict(potentialId);
+            }
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', async () => {
+            const nameA = document.getElementById('party-a-name').value.trim() || "Party A";
+            const argA = document.getElementById('party-a-argument').value.trim();
+            const nameB = document.getElementById('party-b-name').value.trim() || "Party B";
+            const argB = document.getElementById('party-b-argument').value.trim();
+
+            if (!argA || !argB) {
+                alert("Both parties must enter an argument to be judged!");
+                return;
+            }
+
+            // Enter Loading State Loop
+            formView.classList.add('hidden');
+            loadingView.classList.remove('hidden');
+            let phraseIdx = 0;
+            const phraseInterval = setInterval(() => {
+                phraseIdx = (phraseIdx + 1) % loadingPhrases.length;
