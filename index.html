@@ -194,31 +194,36 @@
                 </div>
 
                 <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">🔨 Slam the Gavel</button>
-                <div id="error-box" class="error-msg hidden"></div>
+                <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
             </div>
 
             <!-- Loading View -->
             <div id="loading-view" class="loading-view hidden">
                 <div class="bounce-gavel">🔨</div>
-                <p>The Court is deliberating your utter nonsense...</p>
+                <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
             </div>
 
-            <!-- Verdict View -->
-            <div id="verdict-view" class="hidden">
-                <div class="stationery">
-                    <div class="stationery-header">
-                        <h2>Official Decree</h2>
-                        <div id="case-id" class="case-id">CASE NO. #PENDING</div>
+            <!-- Verdict Stationery View -->
+            <div id="verdict-view" class="stationery hidden">
+                <div class="stationery-header">
+                    <h2>Official Decree</h2>
+                    <div class="case-id" id="display-case-id">CASE NO. #00000</div>
+                </div>
+                
+                <div class="verdict-text">
+                    <div class="mb-4">
+                        <h3>The Court's Findings</h3>
+                        <p id="findings-text"></p>
                     </div>
-                    <div id="verdict-content" class="verdict-text"></div>
-                    <div class="stationery-footer">
-                        <div style="font-size: 11px; color: var(--accent-hover);">SUPREME COURT OF PETTY DISPUTES</div>
-                        <div style="width: 6rem; height: 1px; background-color: #444; margin: 0.5rem auto;"></div>
-                        <div style="font-family: monospace; font-size: 10px; color: var(--text-dark);">FINAL AND BINDING</div>
+                    
+                    <div class="mb-4 p-3">
+                        <h3>Final Verdict & Sentence</h3>
+                        <p id="final-sentence" style="font-weight: 700;"></p>
                     </div>
                 </div>
-                <div class="flex-row">
-                    <button id="new-case-btn" class="btn-secondary" onclick="resetTrial()">New Dispute</button>
+
+                <div class="stationery-footer">
+                    <button class="btn-secondary" onclick="resetForm()">Hear Another Case</button>
                 </div>
             </div>
         </div>
@@ -228,7 +233,6 @@
 
     <script>
         function slamGavelButton() {
-            var nA = document.getElementById('nameA').value.trim();
-            var aA = document.getElementById('argA').value.trim();
-            var nB = document.getElementById('nameB').value.trim();
-
+            // 1. Gather all inputs
+            const nameA = document.getElementById('nameA').value.trim();
+            const argA = document.getElementById('argA').value.trim();
