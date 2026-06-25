@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/api/settle", "dest": "/api/settle.js" },
-    { "src": "/api/verdict/(?<id>[^/]+)", "dest": "/api/settle.js?id=$id" },
-    { "src": "/v/(.*)", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/api/settle", "destination": "/api/settle.js" },
+    { "source": "/api/verdict/:id", "destination": "/api/settle.js?id=:id" },
+    { "source": "/v/:path*", "destination": "/index.html" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
-} 
+}
 
