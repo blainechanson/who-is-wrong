@@ -2,7 +2,8 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/settle", "destination": "/api/settle.js" },
+    { "source": "/images/:path*", "destination": "/images/:path*" },
     { "source": "/v/:path*", "destination": "/index.html" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|images/).*)", "destination": "/index.html" }
   ]
 }
