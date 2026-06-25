@@ -19,7 +19,8 @@ const openai = new OpenAI({
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// FIXED: Tell express to serve static files from the root directory instead of /public
+app.use(express.static(__dirname));
 
 // Rate Limiter configuration
 const apiLimiter = rateLimit({
@@ -30,7 +31,7 @@ const apiLimiter = rateLimit({
 	message: { success: false, error: "Too many arguments! The Judge needs a break. Please wait a minute before submitting again." }
 });
 
-// In-Memory Testing Database Storage (Bypasses Vercel's read-only file lock)
+// In-Memory Testing Database Storage
 const memoryDb = {};
 
 function saveVerdict(id, htmlContent) {
@@ -92,16 +93,16 @@ app.get('/api/verdict/:id', (req, res) => {
     }
 });
 
+// FIXED: Serve index.html directly from the root directory path
 app.get('/v/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Fallback to serve the main screen for all other page lookups
+// FIXED: Serve index.html directly from the root directory path for fallback routing
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
     console.log(`Court is in session on port: ${PORT}`);
 });
-
