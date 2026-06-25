@@ -1,0 +1,49 @@
+document.getElementById('submit-btn').addEventListener('click', async () => {
+    const nameA = document.getElementById('party-a-name').value.trim() || "Party A";
+    const argA = document.getElementById('party-a-argument').value.trim();
+    const nameB = document.getElementById('party-b-name').value.trim() || "Party B";
+    const argB = document.getElementById('party-b-argument').value.trim();
+
+    if (!argA || !argB) {
+        alert("Both parties must enter an argument to be judged!");
+        return;
+    }
+
+    formView.classList.add('hidden');
+    loadingView.classList.remove('hidden');
+    let phraseIdx = 0;
+    const phraseInterval = setInterval(() => {
+        phraseIdx = (phraseIdx + 1) % loadingPhrases.length;
+        loadingText.innerText = loadingPhrases[phraseIdx];
+    }, 1800);
+
+    try {
+        const response = await fetch('/api/settle', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nameA, argA, nameB, argB })
+        });
+        
+        const data = await response.json();
+        clearInterval(phraseInterval);
+
+        if (response.status === 429) {
+            // Catch the rate limit code explicitly and show a clean native alert pop-up notice
+            alert(data.error || "Too many requests. Please wait a minute.");
+            resetUI();
+            return;
+        }
+
+        if (data.success) {
+            renderVerdict(data.caseId, data.htmlContent);
+            window.history.pushState({}, '', `/v/${data.caseId}`);
+        } else {
+            alert("The Judge is currently indisposed. Try again shortly.");
+            resetUI();
+        }
+    } catch (err) {
+        clearInterval(phraseInterval);
+        alert("Network breakdown in court chambers.");
+        resetUI();
+    }
+});
