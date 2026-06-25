@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -192,7 +192,6 @@
                     </div>
                 </div>
 
-                <!-- Direct inline execution binding handles event securely -->
                 <button id="submit-btn" class="btn-primary" onclick="executeCourtTrial()">🔨 Slam the Gavel</button>
                 <div id="error-box" class="error-msg hidden"></div>
             </div>
@@ -227,7 +226,8 @@
     <div class="ad-space bottom">ADVERTISEMENT SPACE</div>
 
     <script>
-        console.log("WHO-IS-WRONG COURT SYSTEM OPERATIONAL");
-
         async function executeCourtTrial() {
-            // Read inputs directly from the document fields
+            const nameA = document.getElementById('nameA').value.trim();
+            const argA = document.getElementById('argA').value.trim();
+            const nameB = document.getElementById('nameB').value.trim();
+
