@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
+    <!-- Modern, self-contained native CSS styles to bypass all network & CORS blocks permanently -->
     <style>
         /* Base Variables & Reset */
         :root {
@@ -28,7 +29,7 @@
         }
         ::selection { background-color: var(--accent); color: #000; }
 
-        /* Layout & Typography */
+        /* Typography & Layout structural alignments */
         .font-serif-court { font-family: 'Cinzel', 'Georgia', serif; }
         .ad-space {
             width: 100%;
@@ -69,7 +70,7 @@
         h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent-hover); text-transform: uppercase; margin-bottom: 0.5rem; }
         .subtitle { color: var(--text-muted); font-size: 1rem; font-style: italic; }
 
-        /* Card System Workspace */
+        /* Card Container Interface Sheet */
         .card {
             background-color: var(--bg-card);
             border: 1px solid #292524;
@@ -97,7 +98,7 @@
         input:focus, textarea:focus { outline: none; border-color: var(--accent-hover); }
         textarea { resize: none; }
 
-        /* Interactive Buttons */
+        /* Actions Interactivity buttons */
         .btn-primary {
             width: 100%;
             background-color: var(--accent);
@@ -114,17 +115,18 @@
         }
         .btn-primary:hover { background-color: var(--accent-hover); }
         
+        /* Views Hidden Configurations Parameters toggle mapping */
         .hidden { display: none !important; }
         
-        /* Loading Screen View */
+        /* Loading Animation state engine rules */
         .loading-view { padding: 3rem 0; text-align: center; }
-        .bounce-gavel { font-size: 3rem; color: var(--accent-hover); animation: bounceGavel 0.6s infinite alternate; margin-bottom: 1.5rem; }
+        .bounce-gavel { font-size: 3rem; color: var(--accent-hover); animation: bounceGavel 1s infinite alternate; margin-bottom: 1.5rem; }
         @keyframes bounceGavel {
             0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-15px) rotate(-15deg); }
+            100% { transform: translateY(-20px) rotate(-20deg); }
         }
         
-        /* Court Stationery Output Canvas */
+        /* Stationery Output Frame Decree layout */
         .stationery {
             background-color: var(--bg-main);
             border: 2px solid rgba(217, 119, 6, 0.3);
@@ -136,7 +138,7 @@
         .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
         .case-id { font-family: monospace; font-size: 11px; color: var(--text-dark); margin-top: 0.25rem; }
         
-        /* Formatted Response Segments */
+        /* Dynamic Inner Segment Styling structures */
         .verdict-text { color: #e7e5e4; font-size: 1rem; line-height: 1.7; }
         .verdict-text .mb-4 { margin-bottom: 1.5rem; }
         .verdict-text h3 { color: var(--accent-hover); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
@@ -159,31 +161,41 @@
 </head>
 <body>
 
+    <!-- Ad Placement Holder Top -->
     <div class="ad-space">ADVERTISEMENT SPACE</div>
 
     <main>
+        <!-- Header -->
         <header>
             <div class="gavel-icon-box">⚖️</div>
             <h1 class="font-serif-court">Who Is Wrong</h1>
             <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
         </header>
 
+        <!-- Main Card Interface -->
         <div class="card">
+            
             <!-- Dynamic Form Section -->
             <div id="form-view" class="space-y-6">
                 <div class="grid">
+                    <!-- Party A -->
                     <div class="input-group">
                         <label>Party A (You)</label>
                         <input type="text" id="party-a-name" placeholder="Your Name">
                         <textarea id="party-a-argument" rows="3" placeholder="Your side of the argument... (e.g., You peel a banana top down.)"></textarea>
                     </div>
+                    <!-- Party B -->
                     <div class="input-group">
                         <label>Party B (The Opponent)</label>
                         <input type="text" id="party-b-name" placeholder="Their Name">
                         <textarea id="party-b-argument" rows="3" placeholder="Their wrong opinion... (e.g., You peel a banana bottom up.)"></textarea>
                     </div>
                 </div>
-                <button id="submit-btn" class="btn-primary">Bang the Gavel (Settle It)</button>
+
+                <!-- FIXED: Explicit type="button" strictly blocks browser extension form overrides -->
+                <button type="button" id="submit-btn" class="btn-primary">
+                    Bang the Gavel (Settle It)
+                </button>
             </div>
 
             <!-- Loading View -->
@@ -194,26 +206,15 @@
 
             <!-- Verdict / Output View -->
             <div id="verdict-view" class="hidden space-y-6">
+                <!-- Legal Stationery Canvas Wrapper -->
                 <div class="stationery">
                     <div class="stationery-header">
                         <h2 class="font-serif-court">Official Judicial Decree</h2>
                         <div id="display-case-id" class="case-id">CASE ID: #000000</div>
                     </div>
-                    <!-- FIXED: Fully closed structural block prevents view transition freezes -->
-                    <div id="verdict-content" class="verdict-text"></div>
-                    <div class="stationery-footer">
-                        <div class="footer-title font-serif-court">CHIEF JUSTICE OF THE PETTY COURT</div>
-                        <div class="footer-line"></div>
-                        <div class="footer-stamp">Verdict Final & Absolute</div>
-                    </div>
-                </div>
-                <div class="flex-row">
-                    <button id="copy-link-btn" class="btn-secondary">🔗 Copy Shareable Link</button>
-                    <button id="reset-btn" class="btn-reset">New Dispute</button>
-                </div>
-            </div>
-        </div>
-    </main>
+
+                    <!-- Injecting dynamic inner HTML formatted response segments -->
+                    <div id="verdict-content" class="verdict-text">
 
 
 
