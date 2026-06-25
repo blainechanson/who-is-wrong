@@ -36,7 +36,7 @@
       font-family: 'Cinzel', 'Georgia', serif;
     }
 
-    .ad-space {
+    .sponsor-slot {
       width: 100%;
       background-color: var(--bg-card);
       padding: 12px;
@@ -47,7 +47,7 @@
       border-bottom: 1px solid #292524;
     }
 
-    .ad-space.bottom {
+    .sponsor-slot.bottom {
       border-bottom: none;
       border-top: 1px solid #292524;
       padding: 16px;
@@ -81,6 +81,18 @@
       color: var(--accent-hover);
       font-size: 1.5rem;
       margin-bottom: 1rem;
+    }
+
+    .gavel-svg {
+      width: 1.4em;
+      height: 1.4em;
+      vertical-align: -0.25em;
+      flex-shrink: 0;
+    }
+
+    .gavel-large {
+      width: 3rem;
+      height: 3rem;
     }
 
     h1 {
@@ -177,6 +189,10 @@
       cursor: pointer;
       font-size: 0.95rem;
       margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .btn-primary:hover {
@@ -198,10 +214,11 @@
     }
 
     .bounce-gavel {
-      font-size: 3rem;
       color: var(--accent-hover);
       animation: bounceGavel 1s infinite alternate;
       margin-bottom: 1.5rem;
+      display: inline-flex;
+      justify-content: center;
     }
 
     @keyframes bounceGavel {
@@ -300,11 +317,19 @@
   </style>
 </head>
 <body>
-  <div class="ad-space">ADVERTISEMENT SPACE</div>
+  <div class="sponsor-slot">SPONSOR SPACE</div>
 
   <main>
     <header>
-      <div class="gavel-icon-box">⚖️</div>
+      <div class="gavel-icon-box">
+        <svg class="gavel-svg gavel-large" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="20" y="9" width="27" height="12" rx="3" fill="#8b4513" transform="rotate(38 33.5 15)" />
+          <rect x="15" y="18" width="35" height="10" rx="3" fill="#c47a2c" transform="rotate(38 32.5 23)" />
+          <rect x="31" y="27" width="9" height="31" rx="3" fill="#7a3f16" transform="rotate(-42 35.5 42.5)" />
+          <rect x="14" y="49" width="34" height="7" rx="3" fill="#5f3414" />
+        </svg>
+      </div>
+
       <h1 class="font-serif-court">Who Is Wrong</h1>
       <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
     </header>
@@ -337,12 +362,28 @@
           </div>
         </div>
 
-        <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">🔨 Slam the Gavel</button>
+        <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">
+          <svg class="gavel-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="20" y="9" width="27" height="12" rx="3" fill="#5f3414" transform="rotate(38 33.5 15)" />
+            <rect x="15" y="18" width="35" height="10" rx="3" fill="#8b4513" transform="rotate(38 32.5 23)" />
+            <rect x="31" y="27" width="9" height="31" rx="3" fill="#4a2810" transform="rotate(-42 35.5 42.5)" />
+          </svg>
+          Slam the Gavel
+        </button>
+
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
 
       <div id="loading-view" class="loading-view hidden">
-        <div class="bounce-gavel">🔨</div>
+        <div class="bounce-gavel">
+          <svg class="gavel-svg gavel-large" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="20" y="9" width="27" height="12" rx="3" fill="#8b4513" transform="rotate(38 33.5 15)" />
+            <rect x="15" y="18" width="35" height="10" rx="3" fill="#c47a2c" transform="rotate(38 32.5 23)" />
+            <rect x="31" y="27" width="9" height="31" rx="3" fill="#7a3f16" transform="rotate(-42 35.5 42.5)" />
+            <rect x="14" y="49" width="34" height="7" rx="3" fill="#5f3414" />
+          </svg>
+        </div>
+
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
 
@@ -361,7 +402,7 @@
     </div>
   </main>
 
-  <div class="ad-space bottom">ADVERTISEMENT SPACE</div>
+  <div class="sponsor-slot bottom">SPONSOR SPACE</div>
 
   <script>
     async function slamGavelButton() {
