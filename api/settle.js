@@ -1,19 +1,8 @@
 import { OpenAI } from 'openai';
 
-// Serverless function memory cache setup to handle rapid traffic lookups smoothly
-const memoryDb = {};
-
 export default async function handler(req, res) {
-    // Intercept standard verification checks to ensure routing functions perfectly
+    // Standard server configuration options pass to handle browser variations smoothly
     if (req.method === 'GET') {
-        const { id } = req.query;
-        if (id) {
-            const record = memoryDb[id] || null;
-            if (record) {
-                return res.status(200).json({ success: true, htmlContent: record.htmlContent });
-            }
-            return res.status(404).json({ success: false, error: "Case archive index missing." });
-        }
         return res.status(200).json({ status: "Court chambers operational." });
     }
 
@@ -26,6 +15,11 @@ export default async function handler(req, res) {
 
         if (!argA || !argB) {
             return res.status(400).json({ success: false, error: "Missing arguments" });
+        }
+
+        // Verify that the secret OpenAI Key is present before running script logic
+        if (!process.env.OPENAI_API_KEY) {
+            return res.status(500).json({ success: false, error: "OpenAI API Key is missing inside Vercel Settings!" });
         }
 
         const openai = new OpenAI({
@@ -55,15 +49,18 @@ Your output must structure itself exactly across these three parts:
 
         const rawHtmlResponse = completion.choices.message.content;
         
-        // Generate pseudo-random token lookup for sharing verification routes
+        // Generate an instant unique random ID for page routing
         const caseId = Math.random().toString(36).substring(2, 10);
-        
-        memoryDb[caseId] = { htmlContent: rawHtmlResponse, timestamp: new Date().toISOString() };
 
-        return res.status(200).json({ success: true, caseId, htmlContent: rawHtmlResponse });
+        // IMMEDIATE SECURE RETURN: Safely hand data back before Vercel clears system memory
+        return res.status(200).json({ 
+            success: true, 
+            caseId: caseId, 
+            htmlContent: rawHtmlResponse 
+        });
 
     } catch (error) {
         console.error("OpenAI Endpoint Failure:", error);
-        return res.status(500).json({ success: false, error: "Internal processing breakdown" });
+        return res.status(500).json({ success: false, error: error.message || "Internal processing breakdown" });
     }
 }
