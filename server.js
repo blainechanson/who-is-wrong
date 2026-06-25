@@ -21,7 +21,7 @@ const openai = new OpenAI({
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configure Rate Limiter (3 requests per 1 minute window)
+// Rate Limiter configuration
 const apiLimiter = rateLimit({
 	windowMs: 1 * 60 * 1000, 
 	max: 3, 
@@ -30,29 +30,19 @@ const apiLimiter = rateLimit({
 	message: { success: false, error: "Too many arguments! The Judge needs a break. Please wait a minute before submitting again." }
 });
 
-// FIXED FOR VERCEL: Using server memory arrays instead of writing local files
-const memoryDatabase = {};
+// In-Memory Testing Database Storage (Bypasses Vercel's read-only file lock)
+const memoryDb = {};
 
 function saveVerdict(id, htmlContent) {
-    memoryDatabase[id] = { htmlContent, timestamp: new Date().toISOString() };
+    memoryDb[id] = { htmlContent, timestamp: new Date().toISOString() };
 }
 
 function getVerdict(id) {
-    return memoryDatabase[id] || null;
+    return memoryDb[id] || null;
 }
 
-/**
- * API ENDPOINT: Submit arguments to OpenAI
- */
-app.post('/api/settle', apiLimiter, async (req, res) => {
-    try {
-        const { nameA, argA, nameB, argB } = req.body;
-
-        if (!argA || !argB) {
-            return res.status(400).json({ success: false, error: "Missing arguments" });
-        }
-
-        const systemPrompt = `You are the Chief Justice of the Supreme Court of Petty Disputes. 
+// System Prompt
+const systemPrompt = `You are the Chief Justice of the Supreme Court of Petty Disputes. 
 Your job is to read an argument between two individuals, strictly pick ONE clear winner using hilarious, absurd, yet highly formal legal reasoning.
 Never sit on the fence. Be completely biased toward one arbitrary side.
 Format your entire output using clean HTML tags (do not use code blocks like \`\`\`html). Use structural div styling tags.
@@ -60,6 +50,14 @@ Your output must structure itself exactly across these three parts:
 1. <div class="mb-4"><h3 class="text-amber-500 font-bold font-serif-court text-sm uppercase tracking-wider mb-1">I. The Indictment</h3><p class="text-sm">Recap the case with intense gravity (e.g., "[NameA] contends X, whereas [NameB] asserts Y...").</p></div>
 2. <div class="mb-4"><h3 class="text-amber-500 font-bold font-serif-court text-sm uppercase tracking-wider mb-1">II. The Judicial Opinion</h3><p class="text-sm">Break down the logic using ridiculous metaphors, historical analogies, or mock legal precedents.</p></div>
 3. <div class="p-3 bg-amber-600/5 border border-amber-600/20 rounded"><h3 class="text-amber-500 font-bold font-serif-court text-sm uppercase tracking-wider mb-1">III. The Absolute Decree</h3><p class="text-sm font-semibold">Declare the absolute, permanent winner. Order a playful, embarrassing punishment or action for the loser.</p></div>`;
+
+app.post('/api/settle', apiLimiter, async (req, res) => {
+    try {
+        const { nameA, argA, nameB, argB } = req.body;
+
+        if (!argA || !argB) {
+            return res.status(400).json({ success: false, error: "Missing arguments" });
+        }
 
         const userPrompt = `Party A: "${nameA}" argues: "${argA}"\nParty B: "${nameB}" argues: "${argB}"`;
 
@@ -98,7 +96,7 @@ app.get('/v/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Wildcard catch-all redirect to index mapping for standard layout structures
+// Fallback to serve the main screen for all other page lookups
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -106,3 +104,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Court is in session on port: ${PORT}`);
 });
+
