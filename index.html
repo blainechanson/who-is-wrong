@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
+  <title>Who Is Wrong? | Settle an Argument Online with a Funny AI Judge</title>
   <meta name="description" content="Settle petty disputes, funny arguments, roommate fights, relationship debates, family disagreements, and workplace nonsense with an AI-powered parody court judgement.">
   <meta name="keywords" content="who is wrong, settle an argument, funny argument judge, petty disputes, relationship argument, roommate dispute, family argument, workplace dispute, AI judge, funny verdict">
+  <meta name="theme-color" content="#1c1917">
+  <meta name="apple-mobile-web-app-title" content="Who Is Wrong">
+  <meta property="og:title" content="Who Is Wrong?">
+  <meta property="og:description" content="Settle an argument online with a funny AI judge for petty disputes, silly debates, and completely unofficial verdicts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whoiswrong.ai/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Who Is Wrong?">
+  <meta name="twitter:description" content="Settle an argument online with a funny AI judge for petty disputes, silly debates, and completely unofficial verdicts.">
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --text-dark: #78716c; --accent: #d97706; --accent-hover: #f59e0b; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,6 +27,7 @@
     .gavel-icon-box { display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; border-radius: 9999px; background-color: rgba(217, 119, 6, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); margin-bottom: 1rem; overflow: hidden; }
     .header-gavel-photo { width: 4.4rem; height: 4.4rem; object-fit: contain; transform: rotate(-18deg); filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45)); }
     h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent-hover); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .seo-heading { color: #fafaf9; font-size: 1.08rem; font-weight: 700; margin-bottom: 0.45rem; }
     .subtitle { color: var(--text-muted); font-size: 1rem; font-style: italic; }
     .card { background-color: var(--bg-card); border: 1px solid #292524; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
     .split-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
@@ -72,9 +82,31 @@
     @media (min-width: 768px) { .keyword-grid { grid-template-columns: 1fr 1fr; } }
     .keyword-panel { border: 1px solid #292524; border-radius: 0.5rem; padding: 1rem; background: rgba(255,255,255,0.02); }
     .keyword-panel h3 { color: #f59e0b; font-size: 0.9rem; margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .example-list, .faq-list { display: grid; gap: 0.75rem; margin-top: 1rem; }
+    .example-list p, .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
     .site-footer a { color: #d6d3d1; text-decoration: none; margin: 0 0.4rem; }
     .site-footer a:hover { color: var(--accent-hover); }
+    @media (max-width: 480px) {
+      main { padding: 2rem 0.85rem; }
+      header { margin-bottom: 1.75rem; }
+      h1 { font-size: 2rem; }
+      .seo-heading { font-size: 1rem; }
+      .subtitle { font-size: 0.95rem; line-height: 1.5; }
+      .card { padding: 1rem; border-radius: 0.6rem; }
+      .party-square { padding: 1rem; }
+      input, textarea { font-size: 16px; }
+      .gavel-scene { width: 220px; height: 165px; }
+      .gavel-photo { width: 160px; left: 25px; top: 7px; }
+      .sound-block { width: 105px; height: 31px; left: 20px; bottom: 21px; }
+      .impact-lines { left: 29px; bottom: 80px; }
+      .stationery { padding: 1.25rem; }
+      .stationery-header h2 { font-size: 1.25rem; }
+      .verdict-text, .verdict-text p, .verdict-text .p-3 p { font-size: 0.98rem; line-height: 1.7; }
+      .content-section { margin-top: 1.6rem; }
+      .site-footer { padding: 0 0.85rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -83,7 +115,8 @@
     <header>
       <div class="gavel-icon-box"><img id="header-gavel" alt="" class="header-gavel-photo"></div>
       <h1 class="font-serif-court">Who Is Wrong</h1>
-      <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
+      <p class="seo-heading">Settle an Argument Online with a Funny AI Judge</p>
+      <p class="subtitle">A ridiculous AI judge for petty arguments, silly debates, and completely unofficial verdicts.</p>
     </header>
     <div class="card">
       <div id="form-view">
@@ -130,6 +163,27 @@
         <div class="keyword-panel"><h3>Roommate Disputes</h3><p>Settle dishes, laundry, noise, borrowed food, thermostat wars, and other domestic courtroom emergencies.</p></div>
         <div class="keyword-panel"><h3>Family Arguments</h3><p>Bring sibling squabbles, holiday debates, parenting jokes, and family group-chat disputes before the bench.</p></div>
         <div class="keyword-panel"><h3>Workplace Nonsense</h3><p>Judge low-stakes office debates, lunch theft allegations, meeting crimes, and suspiciously strong coffee opinions.</p></div>
+      </div>
+    </section>
+    <section class="content-section" aria-label="Example disputes">
+      <h2>Example Disputes</h2>
+      <div class="example-list">
+        <p>Who is wrong for leaving dishes in the sink and calling it “soaking” for three business days?</p>
+        <p>Who is wrong in a roommate thermostat argument where one person wants winter and the other wants soup?</p>
+        <p>Who is wrong in a relationship debate about where to eat when both people said “I do not mind”?</p>
+        <p>Who is wrong for eating the last slice of pizza and claiming the box looked “emotionally abandoned”?</p>
+        <p>Who is wrong in a family argument about who ruined the group chat with unnecessary voice notes?</p>
+        <p>Who is wrong at work for scheduling a meeting that could absolutely have been an email?</p>
+      </div>
+    </section>
+    <section class="content-section" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Can I use it for relationship arguments?</h3><p>Yes, if the argument is harmless and low-stakes. It is best for funny couple debates, roommate disputes, family squabbles, friend drama, and workplace nonsense.</p></div>
+        <div class="faq-item"><h3>Can I share my verdict?</h3><p>Yes. After the judgement appears, use the Share This Case button or copy the text manually into a message, email, or social post.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>No. The current version creates a case number for fun, but it does not permanently save or publish your judgement.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, unlawful, or harmful information about yourself or anyone else.</p></div>
       </div>
     </section>
   </main>
