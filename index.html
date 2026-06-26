@@ -163,14 +163,14 @@
     <section class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
-        <div class="keyword-panel"><h3>Relationship Arguments</h3><p>Use the court for harmless couple debates, silly date-night disagreements, and classic “who was actually wrong?” moments.</p></div>
-        <div class="keyword-panel"><h3>Roommate Disputes</h3><p>Settle dishes, laundry, noise, borrowed food, thermostat wars, and other domestic courtroom emergencies.</p></div>
-        <div class="keyword-panel"><h3>Family Arguments</h3><p>Bring sibling squabbles, holiday debates, parenting jokes, and family group-chat disputes before the bench.</p></div>
-        <div class="keyword-panel"><h3>Workplace Nonsense</h3><p>Judge low-stakes office debates, lunch theft allegations, meeting crimes, and suspiciously strong coffee opinions.</p></div>
+        <div class="keyword-panel"><h3>Couple Debates</h3><p>Settle harmless arguments about dinner choices, forgotten chores, TV show betrayal, texting tone, and who started the nonsense.</p></div>
+        <div class="keyword-panel"><h3>Friend Group Drama</h3><p>Bring group chat disputes, late arrivals, unpaid coffee debts, bad playlist crimes, and suspiciously selective memory before the court.</p></div>
+        <div class="keyword-panel"><h3>Household Disputes</h3><p>Judge dishes in the sink, lights left on, mystery crumbs, laundry piles, missing snacks, and other domestic emergencies of great importance.</p></div>
+        <div class="keyword-panel"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, and the tiny injustices people refuse to let go.</p></div>
       </div>
     </section>
 
-    <section class="content-section" aria-label="Example argument prompts">
+    <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
       <h2>Example Argument Prompts</h2>
       <div class="example-list">
         <p>Am I wrong for being annoyed that my partner says “I do not mind” and then rejects every dinner suggestion?</p>
@@ -179,6 +179,18 @@
         <p>Who is wrong in a family argument about whether shoes belong at the front door or hidden from civilization?</p>
         <p>Settle a debate: is it rude to watch the next episode without the person you started the show with?</p>
         <p>Who is wrong at work when someone books a meeting for a question that could have been one sentence?</p>
+      </div>
+    </section>
+
+    <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
+      <h2>More Argument Ideas</h2>
+      <div class="example-list">
+        <p>Who is wrong when one person says “I’m nearly ready” but has not yet chosen an outfit, found their shoes, or accepted reality?</p>
+        <p>Settle a debate: is it acceptable to leave one tiny sip of juice in the bottle so you technically did not finish it?</p>
+        <p>Am I wrong for saying the person who chooses the movie should not spend twenty minutes scrolling after everyone already agreed?</p>
+        <p>Who is at fault when someone borrows a charger and returns it to a mysterious location known only to ancient spirits?</p>
+        <p>Settle an argument: should the person who cooked also be forced to admire the dishes like a museum exhibit before anyone cleans?</p>
+        <p>Am I overreacting because someone keeps saying “we should catch up soon” while making no attempt to catch, up, or soon?</p>
       </div>
     </section>
 
@@ -303,6 +315,8 @@
 
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
+        document.getElementById('page-one-examples').classList.add('hidden');
+        document.getElementById('page-two-examples').classList.remove('hidden');
       } catch (error) {
         loadingView.classList.add('hidden');
         formView.classList.remove('hidden');
@@ -322,6 +336,8 @@
       document.getElementById('form-view').classList.remove('hidden');
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
+      document.getElementById('page-one-examples').classList.remove('hidden');
+      document.getElementById('page-two-examples').classList.add('hidden');
       gavelScene.classList.remove('strike-now');
       clearGavelTimers();
       gavelSound.pause();
