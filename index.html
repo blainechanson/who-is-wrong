@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Who Is Wrong | The Supreme Court of Petty Disputes</title>
+  <meta name="description" content="Settle petty disputes, funny arguments, roommate fights, relationship debates, family disagreements, and workplace nonsense with an AI-powered parody court judgement.">
+  <meta name="keywords" content="who is wrong, settle an argument, funny argument judge, petty disputes, relationship argument, roommate dispute, family argument, workplace dispute, AI judge, funny verdict">
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --text-dark: #78716c; --accent: #d97706; --accent-hover: #f59e0b; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,6 +28,8 @@
     input, textarea { width: 100%; background-color: var(--bg-main); border: 1px solid #292524; border-radius: 0.375rem; padding: 0.75rem 1rem; color: var(--text-main); font-size: 0.875rem; }
     input:focus, textarea:focus { outline: none; border-color: var(--accent-hover); }
     textarea { resize: none; }
+    .field-note { color: var(--text-dark); font-size: 0.75rem; text-align: right; }
+    .fine-print { color: var(--text-dark); font-size: 0.78rem; line-height: 1.5; margin-top: 0.85rem; text-align: center; }
     .btn-primary { width: 100%; background-color: var(--accent); color: #0c0a09; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -56,9 +60,21 @@
     .verdict-text .p-3 { background-color: transparent; border: none; padding: 0; border-radius: 0; }
     .verdict-text .p-3 p { font-family: inherit; font-size: 1rem; font-weight: 500; line-height: 1.75; margin-bottom: 0.9rem; }
     .verdict-text .p-3 strong, .verdict-text .p-3 b { font-weight: 500; }
-    .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; }
+    .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    @media (min-width: 640px) { .stationery-footer { grid-template-columns: 1fr 1fr; } }
     .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
+    .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; }
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
+    .content-section { margin-top: 2rem; color: #d6d3d1; line-height: 1.7; }
+    .content-section h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
+    .content-section p { font-size: 0.95rem; margin-bottom: 0.9rem; }
+    .keyword-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-top: 1rem; }
+    @media (min-width: 768px) { .keyword-grid { grid-template-columns: 1fr 1fr; } }
+    .keyword-panel { border: 1px solid #292524; border-radius: 0.5rem; padding: 1rem; background: rgba(255,255,255,0.02); }
+    .keyword-panel h3 { color: #f59e0b; font-size: 0.9rem; margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
+    .site-footer a { color: #d6d3d1; text-decoration: none; margin: 0 0.4rem; }
+    .site-footer a:hover { color: var(--accent-hover); }
   </style>
 </head>
 <body>
@@ -73,15 +89,16 @@
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" placeholder="Your name..."></div>
-            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea></div>
+            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" maxlength="40" placeholder="Your name..."></div>
+            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" maxlength="360" placeholder="State your side of the dispute..."></textarea><div class="field-note"><span id="argA-count">0</span>/360</div></div>
           </div>
           <div class="party-square">
-            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" placeholder="Their name..."></div>
-            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea></div>
+            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" maxlength="40" placeholder="Their name..."></div>
+            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" maxlength="360" placeholder="State their side or what they claim..."></textarea><div class="field-note"><span id="argB-count">0</span>/360</div></div>
           </div>
         </div>
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
+        <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
       <div id="loading-view" class="loading-view hidden">
@@ -95,10 +112,33 @@
       <div id="verdict-view" class="stationery hidden">
         <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
         <div class="verdict-text"></div>
-        <div class="stationery-footer"><button class="btn-secondary" onclick="resetForm()">Hear Another Case</button></div>
+        <div class="stationery-footer">
+          <button class="btn-secondary" onclick="shareCase()">Share This Case</button>
+          <button class="btn-secondary" onclick="resetForm()">Hear Another Case</button>
+        </div>
       </div>
     </div>
+    <section class="content-section" aria-label="About this argument judge">
+      <h2>Settle Funny Arguments Online</h2>
+      <p>Who Is Wrong is a parody dispute judge for petty arguments, relationship debates, roommate disputes, family disagreements, friend group drama, and workplace nonsense. Enter both sides, slam the gavel, and receive a short, ridiculous court-style verdict.</p>
+      <p>The judgements are designed for laughs, screenshots, group chats, and social sharing. They are not legal advice, counselling, mediation, or a serious finding of fact.</p>
+    </section>
+    <section class="content-section" aria-label="Popular petty disputes">
+      <h2>Popular Cases</h2>
+      <div class="keyword-grid">
+        <div class="keyword-panel"><h3>Relationship Arguments</h3><p>Use the court for harmless couple debates, silly date-night disagreements, and classic “who was actually wrong?” moments.</p></div>
+        <div class="keyword-panel"><h3>Roommate Disputes</h3><p>Settle dishes, laundry, noise, borrowed food, thermostat wars, and other domestic courtroom emergencies.</p></div>
+        <div class="keyword-panel"><h3>Family Arguments</h3><p>Bring sibling squabbles, holiday debates, parenting jokes, and family group-chat disputes before the bench.</p></div>
+        <div class="keyword-panel"><h3>Workplace Nonsense</h3><p>Judge low-stakes office debates, lunch theft allegations, meeting crimes, and suspiciously strong coffee opinions.</p></div>
+      </div>
+    </section>
   </main>
+  <footer class="site-footer">
+    <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
+    <p><a href="#privacy">Privacy</a> <a href="#terms">Terms</a> <a href="mailto:admin@whoiswrong.ai">Contact</a></p>
+    <p id="privacy"><strong>Privacy:</strong> Submissions are sent to an AI service to generate a judgement. Avoid submitting personal, private, sensitive, or identifying information.</p>
+    <p id="terms"><strong>Terms:</strong> By using this site, you agree to use it only for harmless entertainment and not to submit unlawful, defamatory, private, or harmful content.</p>
+  </footer>
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
   <script>
@@ -109,6 +149,14 @@
     const gavelSound = document.getElementById('gavel-sound');
     const gavelHitTimes = [0, 430, 860];
     let gavelTimers = [];
+    let currentShareText = '';
+
+    function updateCount(textareaId, counterId) {
+      document.getElementById(counterId).textContent = document.getElementById(textareaId).value.length;
+    }
+
+    document.getElementById('argA').addEventListener('input', () => updateCount('argA', 'argA-count'));
+    document.getElementById('argB').addEventListener('input', () => updateCount('argB', 'argB-count'));
 
     function clearGavelTimers() {
       gavelTimers.forEach(timer => clearTimeout(timer));
@@ -145,12 +193,25 @@
       const caseIdBox = document.getElementById('display-case-id');
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
+      const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
+      const cooldownRemaining = 10000 - (Date.now() - lastJudgementAt);
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+      if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
+        errorBox.textContent = 'Please keep names and arguments within the character limits.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      if (cooldownRemaining > 0) {
+        errorBox.textContent = `The court needs ${Math.ceil(cooldownRemaining / 1000)} more seconds before hearing another case.`;
+        errorBox.classList.remove('hidden');
+        return;
+      }
       errorBox.classList.add('hidden');
+      localStorage.setItem('lastJudgementAt', Date.now().toString());
       formView.classList.add('hidden');
       verdictView.classList.add('hidden');
       loadingView.classList.remove('hidden');
@@ -166,6 +227,8 @@
         if (!response.ok || !data.success) throw new Error(data.error || 'The court failed to reach a verdict.');
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
+        const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
+        currentShareText = `I took a petty dispute to the Supreme Court of Petty Disputes.\n\nCASE NO. #${data.caseId}\n\n${plainVerdict.slice(0, 520)}${plainVerdict.length > 520 ? '...' : ''}\n\nSettle yours here: ${window.location.origin && window.location.origin !== 'null' ? window.location.origin : window.location.href}`;
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
       } catch (error) {
@@ -177,7 +240,6 @@
         submitBtn.disabled = false;
       }
     }
-
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
@@ -192,9 +254,27 @@
       gavelSound.pause();
       gavelSound.currentTime = 0;
     }
-
+    async function shareCase() {
+      const shareText = currentShareText || 'I settled a petty dispute at the Supreme Court of Petty Disputes.';
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'Who Is Wrong?', text: shareText });
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(shareText);
+          alert('Share text copied. Paste it into your message, email, or social post.');
+        } else {
+          alert(shareText);
+        }
+      } catch (error) {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(shareText);
+          alert('Share text copied. Paste it into your message, email, or social post.');
+        }
+      }
+    }
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
+    window.shareCase = shareCase;
   </script>
 </body>
 </html>
