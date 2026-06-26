@@ -1,5 +1,14 @@
 import OpenAI from 'openai';
 
+const recentRequests = new Map();
+const NAME_LIMIT = 40;
+const ARGUMENT_LIMIT = 360;
+const COOLDOWN_MS = 10000;
+
+function cleanText(value, limit) {
+  return String(value || '').trim().slice(0, limit);
+}
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     return res.status(200).json({ status: 'Court chambers operational.' });
@@ -10,62 +19,67 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { nameA, argA, nameB, argB } = req.body;
+    const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress || 'unknown';
+    const lastRequest = recentRequests.get(ip) || 0;
+
+    if (Date.now() - lastRequest < COOLDOWN_MS) {
+      return res.status(429).json({ success: false, error: 'The court is still banging paperwork into order. Please wait a few seconds.' });
+    }
+
+    recentRequests.set(ip, Date.now());
+
+    const nameA = cleanText(req.body?.nameA, NAME_LIMIT);
+    const argA = cleanText(req.body?.argA, ARGUMENT_LIMIT);
+    const nameB = cleanText(req.body?.nameB, NAME_LIMIT);
+    const argB = cleanText(req.body?.argB, ARGUMENT_LIMIT);
 
     if (!nameA || !argA || !nameB || !argB) {
-      return res.status(400).json({
-        success: false,
-        error: 'Missing required names or arguments.'
-      });
+      return res.status(400).json({ success: false, error: 'Missing required names or arguments.' });
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({
-        success: false,
-        error: 'OpenAI API Key is missing inside Vercel Settings!'
-      });
+      return res.status(500).json({ success: false, error: 'OpenAI API Key is missing inside Vercel Settings!' });
     }
 
     const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
+      apiKey: process.env.OPENAI_API_KEY,
     });
 
     const systemPrompt = `You are the Chief Justice of the Supreme Court of Petty Disputes.
-Your job is to read an argument between two individuals, strictly pick ONE clear winner using hilarious, absurd, yet highly formal legal reasoning.
-Never sit on the fence. Be completely biased toward one arbitrary side.
-Format your entire output using clean HTML tags only. Do not use markdown code blocks. Do not include script tags, style tags, or event handlers.
+Your audience is everyday people sharing funny, low-stakes arguments with partners, friends, roommates, family members, and coworkers.
+Your job is to read both sides and pick ONE clear winner.
+Keep the judgement short, sharp, and highly entertaining.
+Never sit on the fence. Never give real legal, medical, financial, or counselling advice.
+Do not mention that you are an AI.
+Avoid mean cruelty, protected-class insults, defamation, or serious accusations. Keep it playful.
+Return clean HTML only. Do not use markdown or code fences.
+Use exactly these three sections:
+1. <div class="mb-4"><h3>I. The Indictment</h3><p>One or two punchy sentences summarising the dispute.</p></div>
+2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Two to four funny sentences explaining the ridiculous court logic.</p></div>
+3. <div class="p-3"><h3>III. The Absolute Decree</h3><p>Two or three sentences declaring the winner and giving the loser a harmless silly punishment.</p></div>`;
 
-Your output must structure itself exactly across these three parts:
-1. <div class="mb-4"><h3>I. The Indictment</h3><p>Recap the case with intense gravity.</p></div>
-2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Break down the logic using ridiculous metaphors, historical analogies, or mock legal precedents.</p></div>
-3. <div class="p-3"><h3>III. The Absolute Decree</h3><p><strong>Declare the absolute, permanent winner. Order a playful, embarrassing punishment or action for the loser.</strong></p></div>`;
-
-    const userPrompt = `Party A: "${nameA}" argues: "${argA}"
-Party B: "${nameB}" argues: "${argB}"`;
+    const userPrompt = `Party A: "${nameA}" argues: "${argA}"\nParty B: "${nameB}" argues: "${argB}"`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt }
+        { role: 'user', content: userPrompt },
       ],
-      temperature: 0.8,
-      max_tokens: 600
+      temperature: 0.85,
+      max_tokens: 380,
     });
 
-    const rawHtmlResponse = completion.choices[0].message.content;
+    const rawHtmlResponse = completion.choices[0]?.message?.content || '';
     const caseId = Math.random().toString(36).substring(2, 10).toUpperCase();
 
     return res.status(200).json({
       success: true,
       caseId,
-      htmlContent: rawHtmlResponse
+      htmlContent: rawHtmlResponse,
     });
   } catch (error) {
     console.error('OpenAI Endpoint Failure:', error);
-    return res.status(500).json({
-      success: false,
-      error: error.message || 'Internal processing breakdown'
-    });
+    return res.status(500).json({ success: false, error: error.message || 'Internal processing breakdown' });
   }
 }
