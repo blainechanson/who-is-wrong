@@ -125,12 +125,12 @@
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" maxlength="40" placeholder="Your name..."></div>
-            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" maxlength="360" placeholder="State your side of the dispute..."></textarea><div class="field-note"><span id="argA-count">0</span>/360</div></div>
+            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" minlength="2" maxlength="40" placeholder="Your name..."></div>
+            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" minlength="9" maxlength="360" placeholder="State your side of the dispute..."></textarea><div class="field-note"><span id="argA-count">0</span>/360</div></div>
           </div>
           <div class="party-square">
-            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" maxlength="40" placeholder="Their name..."></div>
-            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" maxlength="360" placeholder="State their side or what they claim..."></textarea><div class="field-note"><span id="argB-count">0</span>/360</div></div>
+            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" minlength="2" maxlength="40" placeholder="Their name..."></div>
+            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" minlength="9" maxlength="360" placeholder="State their side or what they claim..."></textarea><div class="field-note"><span id="argB-count">0</span>/360</div></div>
           </div>
         </div>
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
@@ -225,6 +225,7 @@
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
     const gavelHitTimes = [0, 430, 860];
+    const localCooldownMs = 15000;
     let gavelTimers = [];
     let currentShareText = '';
 
@@ -271,14 +272,29 @@
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
       const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
-      const cooldownRemaining = 10000 - (Date.now() - lastJudgementAt);
+      const cooldownRemaining = localCooldownMs - (Date.now() - lastJudgementAt);
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+      if (nameA.length < 2 || nameB.length < 2) {
+        errorBox.textContent = 'Please enter names with at least two characters.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      if (argA.replace(/[^a-z0-9]/gi, '').length < 9 || argB.replace(/[^a-z0-9]/gi, '').length < 9) {
+        errorBox.textContent = 'Please give the judge a little more detail before slamming the gavel.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
       if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
         errorBox.textContent = 'Please keep names and arguments within the character limits.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      if (argA.toLowerCase() === argB.toLowerCase()) {
+        errorBox.textContent = 'Please give the judge two different sides of the argument.';
         errorBox.classList.remove('hidden');
         return;
       }
@@ -301,7 +317,11 @@
           body: JSON.stringify({ nameA, argA, nameB, argB })
         });
         const data = await response.json();
-        if (!response.ok || !data.success) throw new Error(data.error || 'The court failed to reach a verdict.');
+        if (!response.ok || !data.success) {
+          const message = data.error || 'The court failed to reach a verdict.';
+          if (response.status === 429) alert(message);
+          throw new Error(message);
+        }
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
