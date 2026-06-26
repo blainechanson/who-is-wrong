@@ -160,13 +160,23 @@
       <p>The judgements are designed for laughs, screenshots, group chats, and social sharing. They are not legal advice, counselling, mediation, or a serious finding of fact.</p>
     </section>
 
-    <section class="content-section" aria-label="Popular petty disputes">
+    <section id="page-one-popular" class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
         <div class="keyword-panel"><h3>Couple Debates</h3><p>Settle harmless arguments about dinner choices, forgotten chores, TV show betrayal, texting tone, and who started the nonsense.</p></div>
         <div class="keyword-panel"><h3>Friend Group Drama</h3><p>Bring group chat disputes, late arrivals, unpaid coffee debts, bad playlist crimes, and suspiciously selective memory before the court.</p></div>
         <div class="keyword-panel"><h3>Household Disputes</h3><p>Judge dishes in the sink, lights left on, mystery crumbs, laundry piles, missing snacks, and other domestic emergencies of great importance.</p></div>
         <div class="keyword-panel"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, and the tiny injustices people refuse to let go.</p></div>
+      </div>
+    </section>
+
+    <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
+      <h2>More Cases to Try</h2>
+      <div class="keyword-grid">
+        <div class="keyword-panel"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of “just having a bite.”</p></div>
+        <div class="keyword-panel"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said “turn left” far too late.</p></div>
+        <div class="keyword-panel"><h3>Holiday Disputes</h3><p>Bring packing chaos, airport timing, souvenir budgets, hotel room claims, and vacation itinerary drama before the bench.</p></div>
+        <div class="keyword-panel"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, and other small social crimes with big opinions.</p></div>
       </div>
     </section>
 
@@ -315,6 +325,8 @@
 
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
+        document.getElementById('page-one-popular').classList.add('hidden');
+        document.getElementById('page-two-popular').classList.remove('hidden');
         document.getElementById('page-one-examples').classList.add('hidden');
         document.getElementById('page-two-examples').classList.remove('hidden');
       } catch (error) {
@@ -336,6 +348,8 @@
       document.getElementById('form-view').classList.remove('hidden');
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
+      document.getElementById('page-one-popular').classList.remove('hidden');
+      document.getElementById('page-two-popular').classList.add('hidden');
       document.getElementById('page-one-examples').classList.remove('hidden');
       document.getElementById('page-two-examples').classList.add('hidden');
       gavelScene.classList.remove('strike-now');
