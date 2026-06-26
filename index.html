@@ -86,8 +86,7 @@
     .example-list p, .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
     .faq-item h3 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
-    .site-footer a { color: #d6d3d1; text-decoration: none; margin: 0 0.4rem; }
-    .site-footer a:hover { color: var(--accent-hover); }
+    .site-footer .footer-links { color: #d6d3d1; }
     @media (max-width: 480px) {
       main { padding: 2rem 0.85rem; }
       header { margin-bottom: 1.75rem; }
@@ -118,6 +117,7 @@
       <p class="seo-heading">Settle an Argument Online with a Funny AI Judge</p>
       <p class="subtitle">A ridiculous AI judge for petty arguments, silly debates, and completely unofficial verdicts.</p>
     </header>
+
     <div class="card">
       <div id="form-view">
         <div class="split-grid">
@@ -134,6 +134,7 @@
         <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
+
       <div id="loading-view" class="loading-view hidden">
         <div id="gavel-scene" class="gavel-scene" aria-hidden="true">
           <img id="loading-gavel" alt="" class="gavel-photo">
@@ -142,6 +143,7 @@
         </div>
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
+
       <div id="verdict-view" class="stationery hidden">
         <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
         <div class="verdict-text"></div>
@@ -151,11 +153,13 @@
         </div>
       </div>
     </div>
+
     <section class="content-section" aria-label="About this argument judge">
       <h2>Settle Funny Arguments Online</h2>
       <p>Who Is Wrong is a parody dispute judge for petty arguments, relationship debates, roommate disputes, family disagreements, friend group drama, and workplace nonsense. Enter both sides, slam the gavel, and receive a short, ridiculous court-style verdict.</p>
       <p>The judgements are designed for laughs, screenshots, group chats, and social sharing. They are not legal advice, counselling, mediation, or a serious finding of fact.</p>
     </section>
+
     <section class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
@@ -165,17 +169,19 @@
         <div class="keyword-panel"><h3>Workplace Nonsense</h3><p>Judge low-stakes office debates, lunch theft allegations, meeting crimes, and suspiciously strong coffee opinions.</p></div>
       </div>
     </section>
-    <section class="content-section" aria-label="Example disputes">
-      <h2>Example Disputes</h2>
+
+    <section class="content-section" aria-label="Example argument prompts">
+      <h2>Example Argument Prompts</h2>
       <div class="example-list">
-        <p>Who is wrong for leaving dishes in the sink and calling it “soaking” for three business days?</p>
-        <p>Who is wrong in a roommate thermostat argument where one person wants winter and the other wants soup?</p>
-        <p>Who is wrong in a relationship debate about where to eat when both people said “I do not mind”?</p>
-        <p>Who is wrong for eating the last slice of pizza and claiming the box looked “emotionally abandoned”?</p>
-        <p>Who is wrong in a family argument about who ruined the group chat with unnecessary voice notes?</p>
-        <p>Who is wrong at work for scheduling a meeting that could absolutely have been an email?</p>
+        <p>Am I wrong for being annoyed that my partner says “I do not mind” and then rejects every dinner suggestion?</p>
+        <p>Who is at fault when a roommate keeps using the last of the milk and putting the empty carton back?</p>
+        <p>Am I overreacting because my friend is always late but calls it “being spontaneous”?</p>
+        <p>Who is wrong in a family argument about whether shoes belong at the front door or hidden from civilization?</p>
+        <p>Settle a debate: is it rude to watch the next episode without the person you started the show with?</p>
+        <p>Who is wrong at work when someone books a meeting for a question that could have been one sentence?</p>
       </div>
     </section>
+
     <section class="content-section" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
       <div class="faq-list">
@@ -187,14 +193,17 @@
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
-    <p><a href="#privacy">Privacy</a> <a href="#terms">Terms</a> <a href="mailto:admin@whoiswrong.ai">Contact</a></p>
+    <p class="footer-links">Privacy | Terms | Contact: admin@whoiswrong.ai</p>
     <p id="privacy"><strong>Privacy:</strong> Submissions are sent to an AI service to generate a judgement. Avoid submitting personal, private, sensitive, or identifying information.</p>
     <p id="terms"><strong>Terms:</strong> By using this site, you agree to use it only for harmless entertainment and not to submit unlawful, defamatory, private, or harmful content.</p>
   </footer>
+
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
+
   <script>
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = gavelImage;
@@ -249,21 +258,25 @@
       const submitBtn = document.getElementById('submit-btn');
       const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
       const cooldownRemaining = 10000 - (Date.now() - lastJudgementAt);
+
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
         errorBox.textContent = 'Please keep names and arguments within the character limits.';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (cooldownRemaining > 0) {
         errorBox.textContent = `The court needs ${Math.ceil(cooldownRemaining / 1000)} more seconds before hearing another case.`;
         errorBox.classList.remove('hidden');
         return;
       }
+
       errorBox.classList.add('hidden');
       localStorage.setItem('lastJudgementAt', Date.now().toString());
       formView.classList.add('hidden');
@@ -271,18 +284,23 @@
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
       startGavelSequence();
+
       try {
         const response = await fetch('/api/settle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nameA, argA, nameB, argB })
         });
+
         const data = await response.json();
         if (!response.ok || !data.success) throw new Error(data.error || 'The court failed to reach a verdict.');
+
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
+
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
         currentShareText = `I took a petty dispute to the Supreme Court of Petty Disputes.\n\nCASE NO. #${data.caseId}\n\n${plainVerdict.slice(0, 520)}${plainVerdict.length > 520 ? '...' : ''}\n\nSettle yours here: ${window.location.origin && window.location.origin !== 'null' ? window.location.origin : window.location.href}`;
+
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
       } catch (error) {
@@ -294,6 +312,7 @@
         submitBtn.disabled = false;
       }
     }
+
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
@@ -308,8 +327,10 @@
       gavelSound.pause();
       gavelSound.currentTime = 0;
     }
+
     async function shareCase() {
       const shareText = currentShareText || 'I settled a petty dispute at the Supreme Court of Petty Disputes.';
+
       try {
         if (navigator.share) {
           await navigator.share({ title: 'Who Is Wrong?', text: shareText });
@@ -326,6 +347,7 @@
         }
       }
     }
+
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
     window.shareCase = shareCase;
