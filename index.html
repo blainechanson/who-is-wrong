@@ -40,10 +40,10 @@
     .impact-lines span:nth-child(1) { transform: rotate(-36deg); }
     .impact-lines span:nth-child(2) { transform: rotate(0deg); }
     .impact-lines span:nth-child(3) { transform: rotate(36deg); }
-    .gavel-scene.slam-active .gavel-photo { animation: gavelSlam var(--slam-cycle, 1.35s) ease-in-out 0s 3 both; }
-    .gavel-scene.slam-active .impact-lines { animation: impactFlash var(--slam-cycle, 1.35s) ease-in-out 0s 3 both; }
-    @keyframes gavelSlam { 0%, 100% { transform: rotate(16deg); } 48% { transform: rotate(-18deg); } 60% { transform: rotate(-12deg); } }
-    @keyframes impactFlash { 0%, 44%, 100% { opacity: 0; } 48%, 62% { opacity: 1; } }
+    .gavel-scene.strike-now .gavel-photo { animation: gavelStrike 0.34s ease-in-out both; }
+    .gavel-scene.strike-now .impact-lines { animation: impactFlash 0.34s ease-in-out both; }
+    @keyframes gavelStrike { 0%, 100% { transform: rotate(16deg); } 42% { transform: rotate(-18deg); } 58% { transform: rotate(-12deg); } }
+    @keyframes impactFlash { 0%, 34%, 100% { opacity: 0; } 42%, 64% { opacity: 1; } }
     .stationery { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 2rem; }
     .stationery-header { border-bottom: 1px solid #292524; padding-bottom: 1rem; text-align: center; margin-bottom: 1.5rem; }
     .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
@@ -66,21 +66,37 @@
       <h1 class="font-serif-court">Who Is Wrong</h1>
       <p class="subtitle">Settle your petty, stupid arguments with absolute, unyielding judicial authority.</p>
     </header>
+
     <div class="card">
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" placeholder="Your name..."></div>
-            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea></div>
+            <div class="input-group">
+              <label for="nameA">Party A (You / Accuser)</label>
+              <input type="text" id="nameA" placeholder="Your name...">
+            </div>
+            <div class="input-group">
+              <label for="argA">Your Argument / Bill of Complaints</label>
+              <textarea id="argA" rows="4" placeholder="State your side of the dispute..."></textarea>
+            </div>
           </div>
+
           <div class="party-square">
-            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" placeholder="Their name..."></div>
-            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea></div>
+            <div class="input-group">
+              <label for="nameB">Party B (The Accused / Defense)</label>
+              <input type="text" id="nameB" placeholder="Their name...">
+            </div>
+            <div class="input-group">
+              <label for="argB">Their Argument / Counter-Claim</label>
+              <textarea id="argB" rows="4" placeholder="State their side or what they claim..."></textarea>
+            </div>
           </div>
         </div>
+
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
+
       <div id="loading-view" class="loading-view hidden">
         <div id="gavel-scene" class="gavel-scene" aria-hidden="true">
           <img id="loading-gavel" alt="" class="gavel-photo">
@@ -89,48 +105,66 @@
         </div>
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
+
       <div id="verdict-view" class="stationery hidden">
-        <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+        <div class="stationery-header">
+          <h2>Official Decree</h2>
+          <div class="case-id" id="display-case-id">CASE NO. #00000</div>
+        </div>
         <div class="verdict-text"></div>
-        <div class="stationery-footer"><button class="btn-secondary" onclick="resetForm()">Hear Another Case</button></div>
+        <div class="stationery-footer">
+          <button class="btn-secondary" onclick="resetForm()">Hear Another Case</button>
+        </div>
       </div>
     </div>
   </main>
+
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
+
   <script>
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = gavelImage;
     document.getElementById('loading-gavel').src = gavelImage;
+
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
 
-    function syncSlamTimingToSound() {
-      if (Number.isFinite(gavelSound.duration) && gavelSound.duration > 0) {
-        const cycleSeconds = Math.max(0.65, Math.min(2.5, gavelSound.duration / 3));
-        gavelScene.style.setProperty('--slam-cycle', `${cycleSeconds}s`);
-      }
+    const gavelHitTimes = [120, 860, 1600];
+    let gavelTimers = [];
+
+    function clearGavelTimers() {
+      gavelTimers.forEach(timer => clearTimeout(timer));
+      gavelTimers = [];
+    }
+
+    function strikeGavelOnce() {
+      gavelScene.classList.remove('strike-now');
+      void gavelScene.offsetWidth;
+      gavelScene.classList.add('strike-now');
     }
 
     function startGavelSequence() {
-      syncSlamTimingToSound();
-      gavelScene.classList.remove('slam-active');
-      void gavelScene.offsetWidth;
-      gavelScene.classList.add('slam-active');
+      clearGavelTimers();
+      gavelScene.classList.remove('strike-now');
 
       gavelSound.pause();
       gavelSound.currentTime = 0;
+
       const playAttempt = gavelSound.play();
       if (playAttempt) playAttempt.catch(() => {});
-    }
 
-    gavelSound.addEventListener('loadedmetadata', syncSlamTimingToSound);
+      gavelHitTimes.forEach(time => {
+        gavelTimers.push(setTimeout(strikeGavelOnce, time));
+      });
+    }
 
     async function slamGavelButton() {
       const nameA = document.getElementById('nameA').value.trim();
       const argA = document.getElementById('argA').value.trim();
       const nameB = document.getElementById('nameB').value.trim();
       const argB = document.getElementById('argB').value.trim();
+
       const errorBox = document.getElementById('validation-error');
       const formView = document.getElementById('form-view');
       const loadingView = document.getElementById('loading-view');
@@ -138,25 +172,34 @@
       const caseIdBox = document.getElementById('display-case-id');
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
+
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+
       errorBox.classList.add('hidden');
       formView.classList.add('hidden');
       verdictView.classList.add('hidden');
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
+
       startGavelSequence();
+
       try {
         const response = await fetch('/api/settle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nameA, argA, nameB, argB })
         });
+
         const data = await response.json();
-        if (!response.ok || !data.success) throw new Error(data.error || 'The court failed to reach a verdict.');
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'The court failed to reach a verdict.');
+        }
+
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
         loadingView.classList.add('hidden');
@@ -170,19 +213,24 @@
         submitBtn.disabled = false;
       }
     }
+
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
       document.getElementById('nameB').value = '';
       document.getElementById('argB').value = '';
+
       document.getElementById('validation-error').classList.add('hidden');
       document.getElementById('form-view').classList.remove('hidden');
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
-      gavelScene.classList.remove('slam-active');
+
+      gavelScene.classList.remove('strike-now');
+      clearGavelTimers();
       gavelSound.pause();
       gavelSound.currentTime = 0;
     }
+
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
   </script>
