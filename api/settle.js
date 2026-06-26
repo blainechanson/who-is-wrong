@@ -197,14 +197,15 @@ Rules:
 - Do not mention that you are an AI.
 
 Length:
-- Keep the full judgement under 170 words.
-- Each section should be short enough to read quickly on a phone.
+- Keep the full judgement between 190 and 240 words.
+- Use three short sections that are easy to read on a phone.
+- Do not ramble. Every sentence should either explain the dispute, make a joke, or deliver the verdict.
 
 Return clean HTML only. Do not use markdown or code fences.
 Use exactly these three sections:
-1. <div class="mb-4"><h3>I. The Indictment</h3><p>One or two punchy sentences summarising the dispute using the people's names.</p></div>
-2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Two or three funny sentences explaining the ridiculous court logic using the people's names.</p></div>
-3. <div class="p-3"><h3>III. The Absolute Decree</h3><p>Two sentences declaring the winner by name and giving the loser by name a harmless silly punishment.</p></div>`;
+1. <div class="mb-4"><h3>I. The Indictment</h3><p>Two punchy sentences summarising the dispute using the people's names.</p></div>
+2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Four or five funny sentences explaining the ridiculous court logic using the people's names.</p></div>
+3. <div class="p-3"><h3>III. The Absolute Decree</h3><p>Three sentences declaring the winner by name, explaining why, and giving the loser by name a harmless silly punishment.</p></div>`;
 
     const userPrompt = `Party A: "${nameA}" argues: "${argA}"\nParty B: "${nameB}" argues: "${argB}"`;
 
@@ -215,7 +216,7 @@ Use exactly these three sections:
         { role: 'user', content: userPrompt },
       ],
       temperature: 0.85,
-      max_tokens: 380,
+      max_tokens: 520,
     });
 
     const rawHtmlResponse = completion.choices[0]?.message?.content || '';
