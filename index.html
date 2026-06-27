@@ -47,6 +47,8 @@
     .btn-primary { width: 100%; background-color: var(--accent); color: #0c0a09; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+    .btn-generator { display: block; width: 100%; background-color: transparent; border: 1px solid #444; color: #f5f5f4; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.9rem 1rem; border-radius: 0.5rem; text-align: center; text-decoration: none; font-size: 0.86rem; margin-top: 0.75rem; }
+    .btn-generator:hover { border-color: var(--accent-hover); color: #ffffff; }
     .hidden { display: none !important; }
     .loading-view { padding: 2rem 0 3rem; text-align: center; }
     .gavel-scene { position: relative; width: 250px; height: 180px; margin: 0 auto 1.5rem; }
@@ -126,40 +128,23 @@
       <p class="seo-heading">Settle an Argument Online with a Funny AI Judge</p>
       <p class="subtitle">A ridiculous AI judge for petty arguments, silly debates, and completely unofficial verdicts.</p>
     </header>
-
     <div class="card">
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group">
-              <label for="nameA">Party A (You / Accuser)</label>
-              <input type="text" id="nameA" minlength="2" maxlength="40" placeholder="Your name...">
-            </div>
-            <div class="input-group">
-              <label for="argA">Your Argument / Bill of Complaints</label>
-              <textarea id="argA" rows="4" minlength="9" maxlength="360" placeholder="State your side of the dispute..."></textarea>
-              <div class="field-note"><span id="argA-count">0</span>/360</div>
-            </div>
+            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" minlength="2" maxlength="40" placeholder="Your name..."></div>
+            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" minlength="9" maxlength="360" placeholder="State your side of the dispute..."></textarea><div class="field-note"><span id="argA-count">0</span>/360</div></div>
           </div>
-
           <div class="party-square">
-            <div class="input-group">
-              <label for="nameB">Party B (The Accused / Defense)</label>
-              <input type="text" id="nameB" minlength="2" maxlength="40" placeholder="Their name...">
-            </div>
-            <div class="input-group">
-              <label for="argB">Their Argument / Counter-Claim</label>
-              <textarea id="argB" rows="4" minlength="9" maxlength="360" placeholder="State their side or what they claim..."></textarea>
-              <div class="field-note"><span id="argB-count">0</span>/360</div>
-            </div>
+            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" minlength="2" maxlength="40" placeholder="Their name..."></div>
+            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" minlength="9" maxlength="360" placeholder="State their side or what they claim..."></textarea><div class="field-note"><span id="argB-count">0</span>/360</div></div>
           </div>
         </div>
-
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
+        <a class="btn-generator" href="/funny-argument-generator">Need a Case Idea?</a>
         <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
-
       <div id="loading-view" class="loading-view hidden">
         <div id="gavel-scene" class="gavel-scene" aria-hidden="true">
           <img id="loading-gavel" alt="" class="gavel-photo">
@@ -168,12 +153,8 @@
         </div>
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
-
       <div id="verdict-view" class="stationery hidden">
-        <div class="stationery-header">
-          <h2>Official Decree</h2>
-          <div class="case-id" id="display-case-id">CASE NO. #00000</div>
-        </div>
+        <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
         <div class="verdict-text"></div>
         <div class="stationery-footer">
           <button class="btn-secondary" onclick="shareCase()">Share This Case</button>
@@ -181,13 +162,11 @@
         </div>
       </div>
     </div>
-
     <section id="about-section" class="content-section" aria-label="About this argument judge">
       <h2>Settle Funny Arguments Online</h2>
       <p>Who Is Wrong is a parody dispute judge for petty arguments, relationship debates, roommate disputes, family disagreements, friend group drama, and workplace nonsense. Enter both sides, slam the gavel, and receive a short, ridiculous court-style verdict.</p>
       <p>The judgements are designed for laughs, screenshots, group chats, and social sharing. They are not legal advice, counselling, mediation, or a serious finding of fact.</p>
     </section>
-
     <section id="page-one-popular" class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
@@ -197,7 +176,6 @@
         <div class="keyword-panel"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, and the tiny injustices people refuse to let go.</p></div>
       </div>
     </section>
-
     <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
       <h2>More Cases to Try</h2>
       <div class="keyword-grid">
@@ -207,7 +185,6 @@
         <div class="keyword-panel"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, and other small social crimes with big opinions.</p></div>
       </div>
     </section>
-
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
       <h2>Example Argument Prompts</h2>
       <div class="example-list">
@@ -219,7 +196,6 @@
         <p>Who is wrong at work when someone books a meeting for a question that could have been one sentence?</p>
       </div>
     </section>
-
     <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
       <h2>More Argument Ideas</h2>
       <div class="example-list">
@@ -231,7 +207,6 @@
         <p>Am I overreacting because someone keeps saying “we should catch up soon” while making no attempt to catch, up, or soon?</p>
       </div>
     </section>
-
     <section class="content-section" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
       <div class="faq-list">
@@ -243,7 +218,6 @@
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
     <p class="footer-links">
@@ -255,22 +229,18 @@
     <p class="footer-links">
       <a href="/funny-argument-generator">Funny Argument Generator</a>
     </p>
-    <p class="footer-links">
+       <p class="footer-links">
       <a href="/privacy">Privacy</a> |
       <a href="/terms">Terms</a> |
       <a href="/contact">Contact</a>
     </p>
   </footer>
-
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
-
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
-
   <script>
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = gavelImage;
     document.getElementById('loading-gavel').src = gavelImage;
-
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
     const gavelHitTimes = [0, 430, 860];
@@ -314,10 +284,8 @@
       gavelScene.classList.remove('strike-now');
       gavelSound.pause();
       gavelSound.currentTime = 0;
-
       const playAttempt = gavelSound.play();
       if (playAttempt) playAttempt.catch(() => {});
-
       gavelHitTimes.forEach(time => {
         gavelTimers.push(setTimeout(strikeGavelOnce, time));
       });
@@ -328,7 +296,6 @@
       const argA = document.getElementById('argA').value.trim();
       const nameB = document.getElementById('nameB').value.trim();
       const argB = document.getElementById('argB').value.trim();
-
       const errorBox = document.getElementById('validation-error');
       const formView = document.getElementById('form-view');
       const loadingView = document.getElementById('loading-view');
@@ -336,7 +303,6 @@
       const caseIdBox = document.getElementById('display-case-id');
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
-
       const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
       const cooldownRemaining = localCooldownMs - (Date.now() - lastJudgementAt);
 
@@ -471,7 +437,6 @@
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
     window.shareCase = shareCase;
-
     applyPrefilledCase();
   </script>
 
@@ -480,4 +445,4 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
-</html>
+</html> 
