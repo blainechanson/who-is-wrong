@@ -47,10 +47,10 @@
     .field-note { color: var(--text-dark); font-size: 0.75rem; text-align: right; }
     .fine-print { color: #e7e5e4; font-size: 0.78rem; line-height: 1.5; margin-top: 0.85rem; text-align: center; }
     .btn-primary { width: 100%; background-color: var(--accent); color: #0c0a09; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
-    .btn-primary:hover { background-color: var(--accent-hover); }
+    .btn-primary:hover { background-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
     .btn-generator { display: block; width: 100%; background-color: transparent; border: 1px solid #444; color: #f5f5f4; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.9rem 1rem; border-radius: 0.5rem; text-align: center; text-decoration: none; font-size: 0.86rem; margin-top: 0.75rem; }
-    .btn-generator:hover { border-color: var(--accent-hover); color: #ffffff; }
+    .btn-generator:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     .hidden { display: none !important; }
     .loading-view { padding: 2rem 0 3rem; text-align: center; }
     .gavel-scene { position: relative; width: 250px; height: 180px; margin: 0 auto 1.5rem; }
@@ -68,6 +68,8 @@
     @keyframes impactFlash { 0%, 4%, 100% { opacity: 0; } 6%, 44% { opacity: 1; } }
     .stationery { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 2rem; }
     .stationery-header { border-bottom: 1px solid #292524; padding-bottom: 1rem; text-align: center; margin-bottom: 1.5rem; }
+    .stationery-art { display: grid; grid-template-columns: 5.4rem 1fr 5.4rem; align-items: center; gap: 1rem; }
+    .stationery-photo { width: 5.4rem; height: 4rem; object-fit: cover; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.35rem; background-color: #0c0a09; }
     .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
     .case-id { font-family: monospace; font-size: 11px; color: var(--text-dark); margin-top: 0.25rem; }
     .verdict-text { color: #fafaf9; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; line-height: 1.8; font-weight: 500; letter-spacing: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
@@ -81,7 +83,7 @@
     .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     @media (min-width: 560px) { .stationery-footer { grid-template-columns: repeat(2, 1fr); } }
     .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-    .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; }
+    .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
     .history-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
     .history-header h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
@@ -96,6 +98,7 @@
     .history-case-actions { border-top: 1px solid #292524; padding-top: 0.85rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
     @media (min-width: 560px) { .history-case-actions { grid-template-columns: 1fr 1fr; } }
     .history-controls { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .history-bottom-controls { margin-top: 1rem; display: grid; grid-template-columns: 1fr; }
     @media (min-width: 560px) { .history-controls { grid-template-columns: 1fr 1fr; } }
     .content-section { margin-top: 2rem; color: #d6d3d1; line-height: 1.7; }
     .content-section h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
@@ -110,7 +113,7 @@
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
-    .site-footer a:hover { border-color: var(--accent-hover); color: #ffffff; text-decoration: none; }
+    .site-footer a:hover { border-color: var(--accent-hover); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     @media (max-width: 480px) {
       main { padding: 2rem 0.85rem; }
       header { margin-bottom: 1.75rem; }
@@ -125,7 +128,9 @@
       .sound-block { width: 105px; height: 31px; left: 20px; bottom: 21px; }
       .impact-lines { left: 29px; bottom: 80px; }
       .stationery { padding: 1.25rem; }
-      .stationery-header h2 { font-size: 1.25rem; }
+      .stationery-art { grid-template-columns: 4.2rem 1fr 4.2rem; gap: 0.6rem; }
+      .stationery-photo { width: 4.2rem; height: 3.2rem; }
+      .stationery-header h2 { font-size: 1.05rem; }
       .verdict-text, .verdict-text p, .verdict-text .p-3 p { font-size: 0.98rem; line-height: 1.7; }
       .content-section { margin-top: 1.6rem; }
       .keyword-grid { gap: 0.6rem; margin-top: 0.75rem; }
@@ -172,7 +177,13 @@
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
       <div id="verdict-view" class="stationery hidden">
-        <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+        <div class="stationery-header">
+          <div class="stationery-art">
+            <img id="decree-gavel" alt="" class="stationery-photo">
+            <div><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+            <img id="decree-scales" alt="" class="stationery-photo">
+          </div>
+        </div>
         <div class="verdict-text"></div>
         <div class="stationery-footer">
           <button class="btn-secondary" onclick="shareCurrentCertificate()">Share Certificate</button>
@@ -193,6 +204,9 @@
           <button class="btn-secondary" onclick="backToJudgeFromHistory()">Back to the Judge</button>
         </div>
         <div id="history-list" class="history-list"></div>
+        <div id="history-bottom-controls" class="history-bottom-controls hidden">
+          <button class="btn-secondary" onclick="backToTopFromHistory()">Back to Top</button>
+        </div>
       </div>
     </div>
     <section id="about-section" class="content-section" aria-label="About this argument judge">
@@ -273,6 +287,8 @@
     const justiceScalesImage = 'justice-scales.png?v=2';
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = headerGavelImage;
+    document.getElementById('decree-gavel').src = headerGavelImage;
+    document.getElementById('decree-scales').src = justiceScalesImage;
     document.getElementById('loading-gavel').src = gavelImage;
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
@@ -488,10 +504,13 @@
     function renderHistory() {
       const historyList = document.getElementById('history-list');
       const history = getHistory();
+      const bottomControls = document.getElementById('history-bottom-controls');
       if (!history.length) {
         historyList.innerHTML = '<div class="history-empty">No case history yet. Hear a case first, then the latest verdicts will appear here.</div>';
+        bottomControls.classList.add('hidden');
         return;
       }
+      bottomControls.classList.remove('hidden');
       historyList.innerHTML = history.map(record => `
         <article class="history-case">
           <div class="history-case-header">
@@ -529,6 +548,10 @@
       document.getElementById('form-view').classList.remove('hidden');
       showFormContentSections();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToTopFromHistory() {
+      document.getElementById('history-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function clearHistory() {
@@ -763,6 +786,7 @@
     window.downloadCurrentCertificate = downloadCurrentCertificate;
     window.showHistory = showHistory;
     window.backToJudgeFromHistory = backToJudgeFromHistory;
+    window.backToTopFromHistory = backToTopFromHistory;
     window.clearHistory = clearHistory;
     window.shareHistoryCertificate = shareHistoryCertificate;
     window.downloadHistoryCertificate = downloadHistoryCertificate;
