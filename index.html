@@ -79,7 +79,7 @@
     .verdict-text .p-3 p { font-family: inherit; font-size: 1rem; font-weight: 500; line-height: 1.75; margin-bottom: 0.9rem; }
     .verdict-text .p-3 strong, .verdict-text .p-3 b { font-weight: 500; }
     .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-    @media (min-width: 640px) { .stationery-footer { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 560px) { .stationery-footer { grid-template-columns: repeat(2, 1fr); } }
     .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
     .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; }
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
@@ -90,6 +90,8 @@
     .history-empty { border: 1px solid #292524; border-radius: 0.5rem; padding: 1rem; color: #d6d3d1; text-align: center; }
     .history-case { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; }
     .history-case-header { border-bottom: 1px solid #292524; padding-bottom: 0.85rem; text-align: center; margin-bottom: 1rem; }
+    .history-certificate-art { display: grid; grid-template-columns: 4.8rem 1fr 4.8rem; align-items: center; gap: 0.85rem; margin-bottom: 0.8rem; }
+    .history-certificate-photo { width: 4.8rem; height: 3.6rem; object-fit: cover; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.35rem; background-color: #0c0a09; }
     .history-case-header h3 { color: var(--accent-hover); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
     .history-case-actions { border-top: 1px solid #292524; padding-top: 0.85rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
     @media (min-width: 560px) { .history-case-actions { grid-template-columns: 1fr 1fr; } }
@@ -107,7 +109,8 @@
     .faq-item h3 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
     .site-footer .footer-links { color: #d6d3d1; }
-    .site-footer a { color: #d6d3d1; margin: 0 0.35rem; white-space: nowrap; }
+    .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
+    .site-footer a:hover { border-color: var(--accent-hover); color: #ffffff; text-decoration: none; }
     @media (max-width: 480px) {
       main { padding: 2rem 0.85rem; }
       header { margin-bottom: 1.75rem; }
@@ -157,7 +160,7 @@
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
         <a class="btn-generator" href="/funny-argument-generator">Need a Case Idea?</a>
         <button type="button" class="btn-generator" onclick="showHistory()">View Case History</button>
-        <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, or identifying information.</p>
+        <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, bullying, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
       <div id="loading-view" class="loading-view hidden">
@@ -173,8 +176,9 @@
         <div class="verdict-text"></div>
         <div class="stationery-footer">
           <button class="btn-secondary" onclick="shareCurrentCertificate()">Share Certificate</button>
+          <button class="btn-secondary" onclick="downloadCurrentCertificate()">Download Certificate</button>
           <button class="btn-secondary" onclick="showHistory()">View History</button>
-          <button class="btn-secondary" onclick="resetForm()">Hear Another Case</button>
+          <button class="btn-secondary" onclick="resetForm()">Back to the Judge</button>
         </div>
       </div>
       <div id="history-view" class="hidden">
@@ -184,11 +188,11 @@
             <p>Your last 8 verdicts from this browser session appear here. New cases push the oldest cases out automatically.</p>
           </div>
         </div>
-        <div id="history-list" class="history-list"></div>
         <div class="history-controls">
           <button class="btn-secondary" onclick="clearHistory()">Clear History</button>
           <button class="btn-secondary" onclick="backToJudgeFromHistory()">Back to the Judge</button>
         </div>
+        <div id="history-list" class="history-list"></div>
       </div>
     </div>
     <section id="about-section" class="content-section" aria-label="About this argument judge">
@@ -222,7 +226,7 @@
         <p>Am I overreacting because my friend is always late but calls it “being spontaneous”?</p>
         <p>Does putting an unrinsed plate into the dishwasher make you lazy, or does rinsing it beforehand defeat the entire purpose of owning a $1,000 dishwasher?</p>
         <p>Settle a debate: is it rude to watch the next episode without the person you started the show with?</p>
-        <p>Who is wrong at work when someone books a meeting for a question that could have been one sentence?</p>
+        <p>Who is wrong at work when someone books a meeting for a question that could have been answered with one sentence?</p>
       </div>
     </section>
     <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
@@ -243,7 +247,7 @@
         <div class="faq-item"><h3>Can I use it for relationship arguments?</h3><p>Yes, if the argument is harmless and low-stakes. It is best for funny couple debates, roommate disputes, family squabbles, friend drama, and workplace nonsense.</p></div>
         <div class="faq-item"><h3>Can I share my verdict?</h3><p>Yes. After the judgement appears, use Share Certificate to send or download a certificate-style image of the verdict.</p></div>
         <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
-        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, unlawful, or harmful information about yourself or anyone else.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
       </div>
     </section>
   </main>
@@ -490,7 +494,13 @@
       }
       historyList.innerHTML = history.map(record => `
         <article class="history-case">
-          <div class="history-case-header"><h3>Official Decree</h3><div class="case-id">CASE NO. #${record.caseId}</div></div>
+          <div class="history-case-header">
+            <div class="history-certificate-art">
+              <img src="${headerGavelImage}" alt="" class="history-certificate-photo">
+              <div><h3>Official Decree</h3><div class="case-id">CASE NO. #${record.caseId}</div></div>
+              <img src="${justiceScalesImage}" alt="" class="history-certificate-photo">
+            </div>
+          </div>
           <div class="verdict-text">${record.htmlContent}</div>
           <div class="history-case-actions">
             <button class="btn-secondary" onclick="shareHistoryCertificate('${record.caseId}')">Share Certificate</button>
@@ -735,6 +745,10 @@
       shareCertificate(currentCaseRecord);
     }
 
+    function downloadCurrentCertificate() {
+      downloadCertificate(currentCaseRecord);
+    }
+
     function shareHistoryCertificate(caseId) {
       shareCertificate(findHistoryRecord(caseId));
     }
@@ -746,6 +760,7 @@
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
     window.shareCurrentCertificate = shareCurrentCertificate;
+    window.downloadCurrentCertificate = downloadCurrentCertificate;
     window.showHistory = showHistory;
     window.backToJudgeFromHistory = backToJudgeFromHistory;
     window.clearHistory = clearHistory;
