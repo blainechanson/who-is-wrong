@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/header-gavel.png" type="image/png">
   <title>Who Is Wrong? | Settle an Argument Online with a Funny AI Judge</title>
   <meta name="description" content="Settle petty disputes, funny arguments, roommate fights, relationship debates, family disagreements, and workplace nonsense with an AI-powered parody court judgement.">
   <meta name="keywords" content="who is wrong, settle an argument, funny argument judge, petty disputes, relationship argument, roommate dispute, family argument, workplace dispute, AI judge, funny verdict">
+  <link rel="canonical" href="https://whoiswrong.ai/">
   <meta name="theme-color" content="#1c1917">
   <meta name="apple-mobile-web-app-title" content="Who Is Wrong">
   <meta property="og:title" content="Who Is Wrong?">
@@ -28,8 +30,8 @@
     .sponsor-slot.bottom { border-bottom: none; border-top: 1px solid #292524; padding: 16px; }
     main { max-width: 48rem; width: 100%; margin: 0 auto; padding: 3rem 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
     header { text-align: center; margin-bottom: 2.5rem; }
-    .gavel-icon-box { display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; border-radius: 9999px; background-color: rgba(217, 119, 6, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); margin-bottom: 1rem; overflow: hidden; }
-    .header-gavel-photo { width: 4.4rem; height: 4.4rem; object-fit: contain; transform: rotate(-18deg); filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45)); }
+    .gavel-icon-box { display: inline-flex; align-items: center; justify-content: center; width: 5.4rem; height: 5.4rem; border-radius: 9999px; background-color: rgba(217, 119, 6, 0.12); border: 1px solid rgba(245, 158, 11, 0.45); margin-bottom: 1rem; overflow: hidden; }
+    .header-gavel-photo { width: 100%; height: 100%; object-fit: cover; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45)); }
     h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent-hover); text-transform: uppercase; margin-bottom: 0.5rem; }
     .seo-heading { color: #fafaf9; font-size: 1.08rem; font-weight: 700; margin-bottom: 0.45rem; }
     .subtitle { color: var(--text-muted); font-size: 1rem; font-style: italic; }
@@ -43,13 +45,7 @@
     input:focus, textarea:focus { outline: none; border-color: var(--accent-hover); }
     textarea { resize: none; }
     .field-note { color: var(--text-dark); font-size: 0.75rem; text-align: right; }
-    .fine-print {
-  color: #e7e5e4;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  margin-top: 0.85rem;
-  text-align: center;
-}
+    .fine-print { color: #e7e5e4; font-size: 0.78rem; line-height: 1.5; margin-top: 0.85rem; text-align: center; }
     .btn-primary { width: 100%; background-color: var(--accent); color: #0c0a09; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.95rem; margin-top: 1rem; }
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -122,7 +118,7 @@
       .keyword-panel h3 { margin-bottom: 0.3rem; }
       .keyword-panel p { margin-bottom: 0; }
       .site-footer { padding: 0 0.85rem 1.5rem; }
-    }
+          }
   </style>
 </head>
 <body>
@@ -233,17 +229,18 @@
       <a href="/family-argument-judge">Family Argument Judge</a>
     </p>
     <p class="footer-links">
-  <a href="/funny-argument-generator">Funny Argument Generator</a> |
-  <a href="/privacy">Privacy</a> |
-  <a href="/terms">Terms</a> |
-  <a href="/contact">Contact</a>
-</p>
+      <a href="/funny-argument-generator">Funny Argument Generator</a> |
+      <a href="/privacy">Privacy</a> |
+      <a href="/terms">Terms</a> |
+      <a href="/contact">Contact</a>
+    </p>
   </footer>
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
   <script>
+      const headerGavelImage = 'header-gavel.png?v=1';
     const gavelImage = 'gavel-web.svg?v=2';
-    document.getElementById('header-gavel').src = gavelImage;
+    document.getElementById('header-gavel').src = headerGavelImage;
     document.getElementById('loading-gavel').src = gavelImage;
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
@@ -309,77 +306,61 @@
       const submitBtn = document.getElementById('submit-btn');
       const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
       const cooldownRemaining = localCooldownMs - (Date.now() - lastJudgementAt);
-
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
-
       if (nameA.length < 2 || nameB.length < 2) {
         errorBox.textContent = 'Please enter names with at least two characters.';
         errorBox.classList.remove('hidden');
         return;
       }
-
       if (argA.replace(/[^a-z0-9]/gi, '').length < 9 || argB.replace(/[^a-z0-9]/gi, '').length < 9) {
         errorBox.textContent = 'Please give the judge a little more detail before slamming the gavel.';
         errorBox.classList.remove('hidden');
         return;
       }
-
       if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
         errorBox.textContent = 'Please keep names and arguments within the character limits.';
         errorBox.classList.remove('hidden');
         return;
       }
-
       if (argA.toLowerCase() === argB.toLowerCase()) {
         errorBox.textContent = 'Please give the judge two different sides of the argument.';
         errorBox.classList.remove('hidden');
         return;
       }
-
       if (cooldownRemaining > 0) {
         errorBox.textContent = `The court needs ${Math.ceil(cooldownRemaining / 1000)} more seconds before hearing another case.`;
         errorBox.classList.remove('hidden');
         return;
       }
-
       errorBox.classList.add('hidden');
       localStorage.setItem('lastJudgementAt', Date.now().toString());
-
       formView.classList.add('hidden');
       verdictView.classList.add('hidden');
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
-
       startGavelSequence();
-
       try {
         const response = await fetch('/api/settle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nameA, argA, nameB, argB })
         });
-
         const data = await response.json();
-
         if (!response.ok || !data.success) {
           const message = data.error || 'The court failed to reach a verdict.';
           if (response.status === 429) alert(message);
           throw new Error(message);
         }
-
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
-
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
-        currentShareText = `I took a petty dispute to the Supreme Court of Petty Disputes.\n\nCASE NO. #${data.caseId}\n\n${plainVerdict.slice(0, 520)}${plainVerdict.length > 520 ? '...' : ''}\n\nSettle yours here: ${window.location.origin && window.location.origin !== 'null' ? window.location.origin : window.location.href}`;
-
+               currentShareText = `I took a petty dispute to the Supreme Court of Petty Disputes.\n\nCASE NO. #${data.caseId}\n\n${plainVerdict.slice(0, 520)}${plainVerdict.length > 520 ? '...' : ''}\n\nSettle yours here: ${window.location.origin && window.location.origin !== 'null' ? window.location.origin : window.location.href}`;
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
-
         document.getElementById('about-section').classList.add('hidden');
         document.getElementById('page-one-popular').classList.add('hidden');
         document.getElementById('page-two-popular').classList.remove('hidden');
@@ -394,33 +375,27 @@
         submitBtn.disabled = false;
       }
     }
-
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
       document.getElementById('nameB').value = '';
       document.getElementById('argB').value = '';
       document.getElementById('validation-error').classList.add('hidden');
-
       document.getElementById('form-view').classList.remove('hidden');
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
-
       document.getElementById('about-section').classList.remove('hidden');
       document.getElementById('page-one-popular').classList.remove('hidden');
       document.getElementById('page-two-popular').classList.add('hidden');
       document.getElementById('page-one-examples').classList.remove('hidden');
       document.getElementById('page-two-examples').classList.add('hidden');
-
       gavelScene.classList.remove('strike-now');
       clearGavelTimers();
       gavelSound.pause();
       gavelSound.currentTime = 0;
     }
-
     async function shareCase() {
       const shareText = currentShareText || 'I settled a petty dispute at the Supreme Court of Petty Disputes.';
-
       try {
         if (navigator.share) {
           await navigator.share({ title: 'Who Is Wrong?', text: shareText });
@@ -437,13 +412,11 @@
         }
       }
     }
-
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
     window.shareCase = shareCase;
     applyPrefilledCase();
   </script>
-
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
