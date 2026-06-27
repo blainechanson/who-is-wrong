@@ -12,9 +12,13 @@
   <meta property="og:description" content="Settle an argument online with a funny AI judge for petty disputes, silly debates, and completely unofficial verdicts.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://whoiswrong.ai/">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://whoiswrong.ai/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Who Is Wrong?">
   <meta name="twitter:description" content="Settle an argument online with a funny AI judge for petty disputes, silly debates, and completely unofficial verdicts.">
+  <meta name="twitter:image" content="https://whoiswrong.ai/og-image.png">
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --text-dark: #78716c; --accent: #d97706; --accent-hover: #f59e0b; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -87,6 +91,7 @@
     .faq-item h3 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: var(--text-dark); font-size: 0.78rem; line-height: 1.6; text-align: center; }
     .site-footer .footer-links { color: #d6d3d1; }
+    .site-footer a { color: #d6d3d1; margin: 0 0.35rem; }
     @media (max-width: 480px) {
       main { padding: 2rem 0.85rem; }
       header { margin-bottom: 1.75rem; }
@@ -212,9 +217,19 @@
   </main>
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
-    <p class="footer-links">Privacy | Terms | Contact: admin@whoiswrong.ai</p>
-    <p id="privacy"><strong>Privacy:</strong> Submissions are sent to an AI service to generate a judgement. Avoid submitting personal, private, sensitive, or identifying information.</p>
-    <p id="terms"><strong>Terms:</strong> By using this site, you agree to use it only for harmless entertainment and not to submit unlawful, defamatory, private, or harmful content.</p>
+    <p class="footer-links">
+      <a href="/settle-an-argument">Settle an Argument</a> |
+      <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
+      <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
+      <a href="/family-argument-judge">Family Argument Judge</a> |
+      <a href="/funny-argument-generator">Funny Argument Generator</a>
+    </p>
+    <p class="footer-links">
+      <a href="/privacy">Privacy</a> |
+      <a href="/terms">Terms</a> |
+      <a href="/contact">Contact</a>
+    </p>
+    <p>Contact: <a href="mailto:admin@whoiswrong.ai">admin@whoiswrong.ai</a></p>
   </footer>
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
@@ -383,10 +398,9 @@
     window.resetForm = resetForm;
     window.shareCase = shareCase;
   </script>
-  
   <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
