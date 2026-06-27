@@ -374,10 +374,31 @@
     let currentIdea = '';
 
     function newIdea() {
-      const nextIdea = ideas[Math.floor(Math.random() * ideas.length)];
-      currentIdea = nextIdea;
-      ideaText.textContent = nextIdea;
-    }
+  const storageKey = 'seenFunnyArgumentIdeas';
+  let seen = [];
+
+  try {
+    seen = JSON.parse(localStorage.getItem(storageKey) || '[]');
+  } catch (error) {
+    seen = [];
+  }
+
+  if (!Array.isArray(seen) || seen.length >= ideas.length) {
+    seen = [];
+  }
+
+  const unseenIndexes = ideas
+    .map((_, index) => index)
+    .filter(index => !seen.includes(index));
+
+  const nextIndex = unseenIndexes[Math.floor(Math.random() * unseenIndexes.length)];
+
+  seen.push(nextIndex);
+  localStorage.setItem(storageKey, JSON.stringify(seen));
+
+  currentIdea = ideas[nextIndex];
+  ideaText.textContent = currentIdea;
+}
 
     async function copyIdea() {
       if (!currentIdea) newIdea();
