@@ -29,7 +29,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/((?!api/|_vercel/|privacy|terms|contact|settle-an-argument|relationship-argument-judge|roommate-dispute-judge|family-argument-judge|funny-argument-generator|og-image.png|header-gavel.png|robots.txt|sitemap.xml|gavel-web.svg|gavel.svg|gavel-hit.mp3).*)",
+      "source": "/((?!api/|_vercel/|privacy|terms|contact|settle-an-argument|relationship-argument-judge|roommate-dispute-judge|family-argument-judge|funny-argument-generator|og-image.png|header-gavel.png|justice-scales.png|robots.txt|sitemap.xml|gavel-web.svg|gavel.svg|gavel-hit.mp3).*)",
       "destination": "/index.html"
     }
   ]
