@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Funny Argument Generator | Random Petty Dispute Ideas</title>
-  <meta name="description" content="Generate random funny argument ideas for couples, roommates, families, friends, and workplace nonsense, then take the dispute to the Who Is Wrong AI judge.">
+  <meta name="description" content="Generate random funny argument cases for couples, roommates, families, friends, and workplace nonsense, then take both sides to the Who Is Wrong AI judge.">
   <link rel="canonical" href="https://whoiswrong.ai/funny-argument-generator">
   <meta property="og:title" content="Funny Argument Generator | Who Is Wrong?">
-  <meta property="og:description" content="Generate random funny argument ideas, then take the dispute to the Who Is Wrong AI judge.">
+  <meta property="og:description" content="Generate random funny two-sided argument cases, then take the dispute to the Who Is Wrong AI judge.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://whoiswrong.ai/funny-argument-generator">
   <meta property="og:image" content="https://whoiswrong.ai/og-image.png">
@@ -21,12 +21,15 @@
     a { color: var(--accent-hover); }
     .back { display: inline-block; margin-bottom: 1.5rem; color: var(--text-muted); text-decoration: none; }
     .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
-    h1, h2 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
+    h1, h2, h3 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
     h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
     h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
+    h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
     p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .idea-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; min-height: 9rem; display: flex; align-items: center; }
-    .idea-box p { color: #ffffff; font-size: 1.12rem; line-height: 1.65; margin: 0; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
+    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    .side p { color: #f5f5f4; margin-bottom: 0; }
     .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
     @media (min-width: 640px) { .button-row { grid-template-columns: repeat(3, 1fr); } }
     button, .button { display: inline-block; width: 100%; border: none; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
@@ -40,379 +43,350 @@
   <main>
     <a class="back" href="/">Back to the judge</a>
     <section class="panel">
-      <h1>Funny Argument Generator</h1>
-      <p>Need a petty dispute idea? Generate a random harmless argument prompt, copy it, then take it to the Who Is Wrong court.</p>
-      <p>This generator is free, instant, and does not use AI. It simply pulls from a built-in list of funny argument ideas.</p>
+      <h1>Funny Case Generator</h1>
+      <p>Need a petty dispute ready for court? Generate a random two-sided case, then send both arguments to the Who Is Wrong judge.</p>
+      <p>This generator is free, instant, and does not use AI. It pulls from a built-in list and avoids repeats in the same browser until the list has been used.</p>
 
-      <div class="idea-box" aria-live="polite">
-        <p id="ideaText">Click New Idea to summon a fresh dispute.</p>
+      <div class="case-box" aria-live="polite">
+        <p id="caseTitle" class="case-title">Click New Case to summon a fresh dispute.</p>
+        <div class="side">
+          <h3>Side A</h3>
+          <p id="sideA">The court awaits a complaint.</p>
+        </div>
+        <div class="side">
+          <h3>Side B</h3>
+          <p id="sideB">The defence is currently pretending to be reasonable.</p>
+        </div>
       </div>
 
       <div class="button-row">
-        <button class="primary" type="button" onclick="newIdea()">New Idea</button>
-        <button class="secondary" type="button" onclick="copyIdea()">Copy Idea</button>
-        <a class="button secondary" href="/">Use the Judge</a>
+        <button class="primary" type="button" onclick="newCase()">New Case</button>
+        <button class="secondary" type="button" onclick="copyCase()">Copy Case</button>
+        <button class="secondary" type="button" onclick="useCase()">Use This Case</button>
       </div>
 
-      <p class="note">Keep arguments harmless, low-stakes, and safe. Do not use private, sensitive, identifying, defamatory, or harmful information.</p>
+      <p class="note">Use these cases as starting points. Reword them to suit your situation, keep it harmless, and avoid private or identifying details. The judge will still ask for names before hearing the case.</p>
 
       <h2>What This Is For</h2>
-      <p>These prompts are made for couple debates, roommate disputes, family squabbles, friend group drama, food opinions, workplace nonsense, and everyday tiny injustices.</p>
+      <p>These two-sided cases are made for couple debates, roommate disputes, family squabbles, friend group drama, food opinions, workplace nonsense, and everyday tiny injustices.</p>
     </section>
   </main>
   <script>
-    const ideas = [
-      "Who is wrong when one person says they are ready but still has to find their shoes, keys, wallet, and emotional stability?",
-      "Is it rude to ask what everyone wants for dinner and then reject every answer like a professional menu critic?",
-      "Who is at fault when someone leaves one tiny sip in the bottle so they can claim they did not finish it?",
-      "Is folding laundry optional if the clean clothes are already living comfortably in a chair?",
-      "Who is wrong when someone says they will be five minutes but clearly means a full documentary-length delay?",
-      "Is it acceptable to start a movie and then spend the first twenty minutes explaining why another movie might be better?",
-      "Who is at fault when the remote control disappears into the couch and everyone denies being the last holder?",
-      "Is it a crime to eat the fries from someone else's plate after saying you did not want fries?",
-      "Who is wrong when someone uses the last clean mug and leaves it beside the sink like a museum exhibit?",
-      "Is it fair to call dibs on leftovers before everyone has finished eating the original meal?",
-      "Who is at fault when the group chat makes plans and one person replies only after the booking is impossible?",
-      "Is it rude to watch the next episode without the person you started the show with?",
-      "Who is wrong when someone changes the car music after only eight seconds of a song?",
-      "Is it acceptable to leave a phone charger in a mysterious location and then blame the house?",
-      "Who is at fault when someone says the kitchen is clean but the counter tells a different story?",
-      "Is it wrong to put an unrinsed plate into the dishwasher and trust the machine to do its actual job?",
-      "Who is wrong when one person insists the thermostat is fine while everyone else is dressed for another season?",
-      "Is it rude to send a message that just says 'we need to talk' and then disappear for three hours?",
-      "Who is at fault when someone borrows a hoodie and slowly turns it into part of their legal identity?",
-      "Is it acceptable to say 'surprise me' when ordering food and then be surprised badly?",
-      "Who is wrong when someone eats snacks loudly during the quietest part of a movie?",
-      "Is it fair to reserve a parking spot in your mind and then become offended when someone else parks there?",
-      "Who is at fault when someone loads the dishwasher like they are solving a puzzle badly?",
-      "Is it rude to leave a meeting invite with no agenda and the emotional weight of a court summons?",
-      "Who is wrong when someone says 'I am not hungry' and then eats half of another person's meal?",
-      "Is it acceptable to leave exactly one square of toilet paper and declare the roll technically not empty?",
-      "Who is at fault when a person snoozes the alarm six times and claims it is part of waking up?",
-      "Is it wrong to use the good towel for cleaning up a spill during a panic?",
-      "Who is wrong when someone starts telling a story and then forgets the entire point halfway through?",
-      "Is it rude to ask 'are you wearing that?' when the person is clearly already wearing that?",
-      "Who is at fault when someone makes coffee and leaves three drops in the pot as a symbolic offering?",
-      "Is it acceptable to open a new packet before finishing the old packet because the old packet feels less exciting?",
-      "Who is wrong when one person says the room is not messy because there is still a visible path through it?",
-      "Is it fair to claim the best seat because you were 'thinking about sitting there' first?",
-      "Who is at fault when someone puts an empty box back in the pantry to preserve false hope?",
-      "Is it wrong to correct someone's pronunciation of a food while eating their food?",
-      "Who is wrong when someone says they love surprises but demands clues, hints, and full scheduling details?",
-      "Is it rude to leave unread messages while posting elsewhere like a public alibi?",
-      "Who is at fault when a person says they will do the dishes later and later becomes a historical period?",
-      "Is it acceptable to take the blanket and claim it happened naturally during sleep?",
-      "Who is wrong when someone changes the agreed restaurant because they suddenly remembered their mood?",
-      "Is it fair to call shotgun before anyone knows whose car is being used?",
-      "Who is at fault when someone leaves crumbs on the counter and calls them seasoning?",
-      "Is it rude to reply 'k' and then insist nothing is wrong?",
-      "Who is wrong when someone refuses directions but also refuses being lost?",
-      "Is it acceptable to eat dessert before dinner if dinner is already emotionally delayed?",
-      "Who is at fault when one person packs for a weekend like they are relocating permanently?",
-      "Is it wrong to say 'just one more thing' and then add seven tasks?",
-      "Who is wrong when someone takes a group photo and refuses to approve any version where anyone else looks good?",
-      "Is it rude to hum a song until everyone else catches it like a minor curse?",
-      "Who is at fault when someone keeps a cardboard box because it is 'a good box'?",
-      "Is it acceptable to leave shoes in the doorway if they are technically organized in a small traffic hazard?",
-      "Who is wrong when one person says the food is not spicy while another person is negotiating with their own face?",
-      "Is it fair to say a text had no tone when it arrived wearing a tiny invisible attitude?",
-      "Who is at fault when someone finishes the shared snack and says, 'I thought you were done'?",
-      "Is it rude to put a spoon in the sink directly after someone proudly announced the kitchen was clean?",
-      "Who is wrong when a person says they are saving money but orders delivery with courtroom confidence?",
-      "Is it acceptable to use speakerphone in a shared room for a conversation nobody requested?",
-      "Who is at fault when someone keeps buying more reusable bags because they forgot the reusable bags?",
-      "Is it wrong to rearrange the fridge and then deny making the food impossible to find?",
-      "Who is wrong when someone says 'let's leave early' but means 'let's begin preparing emotionally at noon'?",
-      "Is it rude to ask for a bite and then take a bite large enough to change the meal's future?",
-      "Who is at fault when someone pauses a show every two minutes to explain theories nobody asked for?",
-      "Is it acceptable to call cleaning 'done' when the difficult items have been moved to another room?",
-      "Who is wrong when one person remembers an agreement and the other remembers a completely different universe?",
-      "Is it fair to use the last of the milk and put the empty carton back like a trap?",
-      "Who is at fault when someone leaves the cap off the toothpaste and calls it a lifestyle choice?",
-      "Is it rude to make a playlist for everyone and then skip everyone else's songs?",
-      "Who is wrong when someone says 'I know a shortcut' and adds fourteen minutes to the journey?",
-      "Is it acceptable to ask someone what is wrong while holding the exact evidence of what is wrong?",
-      "Who is at fault when someone moves an object while cleaning and then forgets the new sacred location?",
-      "Is it wrong to open the oven repeatedly and blame the food for cooking slowly?",
-      "Who is wrong when a person says 'no rush' but checks for updates every four minutes?",
-      "Is it rude to bring up an old argument with the phrase 'I am over it, but'?",
-      "Who is at fault when someone treats the laundry basket as a general suggestion?",
-      "Is it acceptable to call a chair 'storage' if clothes have lived there for more than a week?",
-      "Who is wrong when someone says the leftovers are still good based on hope rather than evidence?",
-      "Is it fair to ask for advice and then argue with every piece of advice offered?",
-      "Who is at fault when someone leaves all cabinet doors open like the kitchen is making a speech?",
-      "Is it rude to say 'calm down' during a tiny dispute and immediately make it larger?",
-      "Who is wrong when one person claims they never interrupt while interrupting that claim?",
-      "Is it acceptable to put the empty ice tray back in the freezer as a cold betrayal?",
-      "Who is at fault when someone says they cleaned the bathroom but only moved the bottles into a straighter line?",
-      "Is it wrong to say 'we should catch up soon' while making no attempt to catch, up, or soon?",
-      "Who is wrong when someone leaves a single sock in every room like a trail of laundry evidence?",
-      "Is it rude to ask 'what are you doing?' when the answer is clearly sitting quietly in peace?",
-      "Who is at fault when someone uses all the hot water and calls it self-care?",
-      "Is it acceptable to leave a grocery list at home and then buy vibes instead of ingredients?",
-      "Who is wrong when a person says they are not competitive and then keeps score in their soul?",
-      "Is it fair to claim the last slice because your cut was smaller earlier?",
-      "Who is at fault when someone reads a recipe once and then freestyle-cooks with dangerous confidence?",
-      "Is it rude to rearrange shared furniture because you had a vision at 10 p.m.?",
-      "Who is wrong when someone says a task is easy but never volunteers to do it?",
-      "Is it acceptable to use 'I forgot' as a defence for the fourth time this week?",
-      "Who is at fault when someone leaves a wet towel on the bed and acts surprised by the trial?",
-      "Is it wrong to take the first pancake because the first pancake is clearly a practice pancake?",
-      "Who is wrong when someone starts cleaning only when guests are already walking up the driveway?",
-      "Is it rude to ask if someone is asleep after they have said goodnight three times?",
-      "Who is at fault when someone puts groceries away in places no reasonable person would investigate?",
-      "Is it acceptable to say 'it is basically the same thing' about two foods that are emotionally different?",
-      "Who is wrong when someone insists they are listening but cannot identify the subject of the sentence?",
-      "Is it fair to claim a shared dessert is 'too rich' and then keep eating it heroically?",
-      "Who is at fault when someone sets a timer and then leaves the room as if the timer has staff?",
-      "Is it rude to send six short messages instead of one normal message?",
-      "Who is wrong when a person insists the bag is not heavy while handing it to someone else immediately?",
-      "Is it acceptable to keep a broken item because you might fix it during a future personality change?",
-      "Who is at fault when someone uses the last clean fork and starts eating cereal with a spoon they resent?",
-      "Is it wrong to call something 'ours' only after it becomes useful?",
-      "Who is wrong when someone says the car is clean but the cup holders are conducting research?",
-      "Is it rude to put laundry in the machine and forget it until it develops a second personality?",
-      "Who is at fault when someone takes the comfortable pillow and leaves the decorative one as compensation?",
-      "Is it acceptable to pretend not to hear a question because the answer requires movement?",
-      "Who is wrong when someone says 'I will remember' instead of writing down the one thing they never remember?",
-      "Is it fair to save a seat with a jacket in a crowded room and treat the jacket as a legal representative?",
-      "Who is at fault when someone turns off the lights while another person is clearly still using the room?",
-      "Is it rude to ask for a small favour and then reveal it has three stages and a ladder?",
-      "Who is wrong when someone says they are fine and then cleans aggressively?",
-      "Is it acceptable to leave batteries in a drawer and never know which ones are alive?",
-      "Who is at fault when someone opens a cupboard and forgets to close it because their thoughts left first?",
-      "Is it wrong to put ketchup on food someone else cooked before tasting it?",
-      "Who is wrong when someone says 'I can multitask' while failing two tasks at once?",
-      "Is it rude to say 'interesting' in a tone that clearly means the opposite?",
-      "Who is at fault when someone borrows scissors and returns them to a location known only by fate?",
-      "Is it acceptable to leave the shopping cart slightly outside the return bay and call it close enough?",
-      "Who is wrong when someone declares a room too hot after choosing the warmest clothing available?",
-      "Is it fair to choose a restaurant and then order the same thing you could have made at home?",
-      "Who is at fault when someone makes plans and then needs a recovery period from having made plans?",
-      "Is it rude to use the last clean plate for toast and create an unnecessary dish emergency?",
-      "Who is wrong when someone refuses to admit they are lost because the map is 'being dramatic'?",
-      "Is it acceptable to call a pile 'organized' because you know roughly what layer things are in?",
-      "Who is at fault when someone closes a browser tab and loses something important everyone warned them to save?",
-      "Is it wrong to offer to split dessert and then eat at double speed?",
-      "Who is wrong when someone says they will not be long and returns after the ice has melted?",
-      "Is it rude to leave a voicemail that just says 'call me back' with no hint of emotional weather?",
-      "Who is at fault when someone buys a plant and assigns watering duties to optimism?",
-      "Is it acceptable to keep expired condiments because the date feels more like a suggestion?",
-      "Who is wrong when one person says 'lower your voice' and the other was simply born at volume seven?",
-      "Is it fair to say 'I cleaned up' when everything was moved into one drawer of chaos?",
-      "Who is at fault when someone eats the decorative snacks before guests arrive?",
-      "Is it rude to say 'whatever you want' and then veto the first five options?",
-      "Who is wrong when someone leaves the bin full because there is still theoretical space at the top?",
-      "Is it acceptable to keep hitting snooze if everyone else in the house is now awake?",
-      "Who is at fault when someone changes the subject right when they are losing the debate?",
-      "Is it wrong to say a chair is free when your bag is clearly enjoying its own seat?",
-      "Who is wrong when someone insists the dish is not burnt because only one side has lost hope?",
-      "Is it rude to leave a shopping bag in the hallway and expect everyone to adapt?",
-      "Who is at fault when someone takes a screenshot but forgets why it was important?",
-      "Is it acceptable to tell someone to relax while doing the least relaxing thing possible?",
-      "Who is wrong when someone asks 'quick question' and then opens a full investigation?",
-      "Is it fair to call the best blanket 'the spare blanket' while using it every night?",
-      "Who is at fault when someone promises to be spontaneous but requires a full itinerary?",
-      "Is it rude to finish someone's sentence incorrectly and with confidence?",
-      "Who is wrong when someone stores pans in a way that makes breakfast sound like construction?",
-      "Is it acceptable to claim you did not lose something if you know it is somewhere in the house?",
-      "Who is at fault when someone says 'I looked everywhere' but only checked the most obvious place badly?",
-      "Is it wrong to take the corner piece of dessert before everyone has seen the dessert?",
-      "Who is wrong when someone refuses leftovers and then regrets it after the container is gone?",
-      "Is it rude to narrate someone's parking attempt from the passenger seat?",
-      "Who is at fault when someone drinks from the carton and calls it efficient?",
-      "Is it acceptable to start cleaning one area and somehow make three other areas worse?",
-      "Who is wrong when someone says they do not care where to sit but rejects every table?",
-      "Is it fair to call dibs on the shower while still lying down?",
-      "Who is at fault when someone buys snacks for the house and then hides the best ones for morale?",
-      "Is it rude to turn a simple errand into a tour of four extra shops?",
-      "Who is wrong when someone insists they are not tired while speaking in slow-motion sentences?",
-      "Is it acceptable to leave the printer paper empty and hope the next person enjoys discovery?",
-      "Who is at fault when someone asks for honesty and then dislikes the honest answer?",
-      "Is it wrong to use the fancy glass for water when a normal glass is available?",
-      "Who is wrong when someone says they will be quiet and then unloads dishes like a parade?",
-      "Is it rude to put a suitcase on the bed after it has travelled through public spaces?",
-      "Who is at fault when someone starts a sentence with 'do not be mad' and then delivers evidence?",
-      "Is it acceptable to use the phrase 'technically clean' about anything touching the floor?",
-      "Who is wrong when someone orders the same meal every time but spends ten minutes pretending to decide?",
-      "Is it fair to claim a charger as yours because you have been using it for a while?",
-      "Who is at fault when someone turns a thermostat one degree and acts like peace has been restored?",
-      "Is it rude to leave read receipts on and then ignore messages with official documentation?",
-      "Who is wrong when someone says they are great at directions but cannot tell left from restaurant?",
-      "Is it acceptable to leave the bed unmade because you plan to return to it eventually?",
-      "Who is at fault when someone buys a kitchen gadget and uses it once with great ceremony?",
-      "Is it wrong to eat cereal for dinner and call it a balanced emotional choice?",
-      "Who is wrong when someone refuses to use coasters because they believe tables should be brave?",
-      "Is it rude to start packing for a trip on the morning of the trip and recruit witnesses?",
-      "Who is at fault when someone leaves a cabinet open at forehead height?",
-      "Is it acceptable to keep a gift bag forever because gift bags are clearly immortal?",
-      "Who is wrong when someone says the schedule is flexible but treats every delay like a scandal?",
-      "Is it fair to call a meal homemade if the oven did most of the moral labour?",
-      "Who is at fault when someone says 'I am just browsing' and exits with three bags?",
-      "Is it rude to make tea or coffee and not ask the person sitting nearby?",
-      "Who is wrong when someone puts a new roll beside the holder instead of doing the final brave step?",
-      "Is it acceptable to treat the passenger seat as a mobile storage unit?",
-      "Who is at fault when someone saves too many tabs and calls it research?",
-      "Is it wrong to move someone's bookmark because the book was in your way?",
-      "Who is wrong when someone says they are not judging but provides a detailed judgement?",
-      "Is it rude to start eating before everyone sits down if the food is at peak temperature?",
-      "Who is at fault when someone says 'I never said that' and the group chat has receipts?",
-      "Is it acceptable to call a tiny mess 'character'?",
-      "Who is wrong when someone chooses the smallest task and celebrates like the project is complete?",
-      "Is it fair to say a room smells fine if you are the reason it does not?",
-      "Who is at fault when someone leaves a door slightly open and creates a suspense film?",
-      "Is it rude to request a taste and then return the spoon with a review?",
-      "Who is wrong when someone claims the phone is on silent but it keeps announcing itself?",
-      "Is it acceptable to turn a birthday plan into a committee meeting?",
-      "Who is at fault when someone uses the phrase 'while you are up' too many times?",
-      "Is it wrong to wear shoes inside after seeing a freshly cleaned floor?",
-      "Who is wrong when someone answers 'maybe' to a question that requires logistics?",
-      "Is it rude to leave the microwave at one second like a tiny unfinished cliffhanger?",
-      "Who is at fault when someone says they made the bed but only pulled the blanket over the evidence?",
-      "Is it acceptable to borrow a pen and return it without the cap as if nothing happened?",
-      "Who is wrong when someone claims the volume is normal while the neighbours now know the plot?",
-      "Is it fair to eat the garnish if it was clearly trying to be important?",
-      "Who is at fault when someone uses all the storage space and calls it efficient packing?",
-      "Is it rude to ask 'are you sure?' after someone has made a perfectly normal choice?",
-      "Who is wrong when someone says 'I will do it tomorrow' for a task that has met several tomorrows?",
-      "Is it acceptable to put a hot pan in the sink and surprise the next person with steam drama?",
-      "Who is at fault when someone says they did not make a mess because the mess was already forming?",
-      "Is it wrong to put the good snacks on a high shelf and call it security?",
-      "Who is wrong when someone tells the same story but adds new evidence every time?",
-      "Is it rude to correct someone's grammar during an argument you are losing?",
-      "Who is at fault when someone chooses a password hint that helps absolutely nobody?",
-      "Is it acceptable to leave holiday decorations up because taking them down feels too final?",
-      "Who is wrong when someone says they cleaned the car but left every receipt since last summer?",
-      "Is it fair to claim the bigger half because your half looked smaller from your angle?",
-      "Who is at fault when someone starts a project on the dining table and the dining table resigns?",
-      "Is it rude to make a dramatic sigh and then say 'nothing' when asked?",
-      "Who is wrong when someone treats the freezer as a long-term archive of unidentified meals?",
-      "Is it acceptable to say 'I am on my way' when you are still choosing socks?",
-      "Who is at fault when someone saves the easiest chore until someone else does it?",
-      "Is it wrong to claim a mug as yours because you have formed an emotional bond?",
-      "Who is wrong when someone says they are being helpful but mainly supervises?",
-      "Is it rude to leave a tiny amount of cereal so you do not have to throw out the box?",
-      "Who is at fault when someone says a room is clean because the mess is now behind a closed door?",
-      "Is it acceptable to ask a question during the most important part of a show?",
-      "Who is wrong when someone uses 'I was going to' as a complete legal defence?",
-      "Is it fair to choose the shortest queue and then blame destiny when it becomes the slowest?",
-      "Who is at fault when someone borrows tape and returns a nearly empty roll with confidence?",
-      "Is it rude to say 'I told you so' if you also said five other possible outcomes?",
-      "Who is wrong when someone calls a snack 'shared' only after opening it?",
-      "Is it acceptable to leave a suitcase half-unpacked for longer than the trip lasted?",
-      "Who is at fault when someone says they do not need a list and returns without the main item?",
-      "Is it wrong to sit in someone's usual seat and then act surprised by tradition?",
-      "Who is wrong when someone says the charger is communal but keeps it beside their bed?",
-      "Is it rude to ask for a favour from another room instead of walking ten steps?",
-      "Who is at fault when someone declares a fridge item expired based entirely on vibes?",
-      "Is it acceptable to put clean dishes away in the wrong place if they are technically away?",
-      "Who is wrong when someone says 'quick stop' and enters a shop with no visible exit strategy?",
-      "Is it fair to say 'I helped cook' if your contribution was stirring twice?",
-      "Who is at fault when someone borrows a book and returns it with a suspiciously different spine?",
-      "Is it rude to use the last clean towel and leave the next person a decorative hand towel?",
-      "Who is wrong when someone starts a debate and then says they do not want to argue?",
-      "Is it acceptable to claim a leftover slice because you thought about it all day?",
-      "Who is at fault when someone says they can fix it and immediately searches for instructions?",
-      "Is it wrong to leave a pen in the washing machine and blame the pockets?",
-      "Who is wrong when someone asks for the truth and then cross-examines the truth?",
-      "Is it rude to say 'fine' in a tone that requires subtitles?",
-      "Who is at fault when someone puts the empty container back in the fridge to avoid finality?",
-      "Is it acceptable to keep a drawer full of mystery cables because one might matter someday?",
-      "Who is wrong when someone says they do not snore but has no awake witnesses?",
-      "Is it fair to eat the broken chips first and then claim there were barely any chips left?",
-      "Who is at fault when someone cleans around an object instead of moving it?",
-      "Is it rude to say 'you choose' when you secretly have a correct answer?",
-      "Who is wrong when someone says 'I am listening' while scrolling with visible commitment?",
-      "Is it acceptable to leave one dish soaking so long it becomes part of the sink?",
-      "Who is at fault when someone treats the front door area as a shoe exhibition?",
-      "Is it wrong to finish the good cereal and leave the responsible cereal for everyone else?",
-      "Who is wrong when someone says a plan is simple and then introduces a spreadsheet?",
-      "Is it rude to bring up the exact thing someone asked you not to bring up?",
-      "Who is at fault when someone claims a blanket corner and slowly annexes the entire blanket?",
-      "Is it acceptable to say you cooked dinner if dinner came from three packets and hope?",
-      "Who is wrong when someone uses all the hooks and says there is still floor space?",
-      "Is it fair to call a snack cupboard 'organized' when it collapses emotionally when opened?",
-      "Who is at fault when someone makes a joke during a serious chore discussion and derails the meeting?",
-      "Is it rude to say 'no offence' before a sentence clearly wearing boots?",
-      "Who is wrong when someone insists they are almost done but is still at the beginning of the task?",
-      "Is it acceptable to leave a browser window open forever because closing it feels like losing knowledge?",
-      "Who is at fault when someone claims the last dessert because they 'called it in their head'?",
-      "Is it wrong to put a nearly empty packet back because there are technically crumbs?",
-      "Who is wrong when someone says 'that is not where it goes' but cannot explain where it goes?",
-      "Is it rude to ask someone to pause a live event like time has a remote?",
-      "Who is at fault when someone volunteers to bring something and arrives with an excuse instead?",
-      "Is it acceptable to keep a cup on the bedside table until it becomes furniture?",
-      "Who is wrong when someone says 'I was just about to' only after hearing footsteps?",
-      "Is it fair to claim you cleaned if the vacuum never left its storage place?",
-      "Who is at fault when someone says they are low-maintenance and then lists twelve preferences?",
-      "Is it rude to start a sentence with 'actually' during a harmless story?",
-      "Who is wrong when someone wants credit for remembering a birthday after being reminded twice?",
-      "Is it acceptable to call a meal 'light' because you ate it standing up?",
-      "Who is at fault when someone refuses a jacket and then complains about being cold?",
-      "Is it wrong to put the remote somewhere safe and immediately make it unsafe by forgetting where?",
-      "Who is wrong when someone says they will tidy before bed and then negotiates with morning instead?",
-      "Is it rude to say 'interesting choice' about someone's outfit, meal, or life decision?",
-      "Who is at fault when someone uses every pan to cook one simple meal?",
-      "Is it acceptable to leave a note that says 'do not eat' on food everyone knows is tempting?",
-      "Who is wrong when someone says they are leaving now but means they have begun the leaving concept?",
-      "Is it fair to call something a tradition after doing it twice?",
-      "Who is at fault when someone says a task will take two minutes and creates a new afternoon?",
-      "Is it rude to open someone else's delivery package because you were curious and nearby?",
-      "Who is wrong when someone says the playlist is for everyone but controls it like a kingdom?",
-      "Is it acceptable to call a sandwich homemade if someone else made every part of it?",
-      "Who is at fault when someone sees a full bin and decides it is a problem for the next era?",
-      "Is it wrong to save the biggest strawberry for yourself because you found it first?",
-      "Who is wrong when someone says 'trust me' right before making the worst possible turn?",
-      "Is it rude to ask for help after already doing the task in the most difficult way?",
-      "Who is at fault when someone treats the coffee table as a paperwork farm?",
-      "Is it acceptable to keep using a cracked phone screen and call it character building?",
-      "Who is wrong when someone says they will only be a minute and then starts a full outfit change?",
-      "Is it fair to call a decision unanimous when everyone else was too tired to object?"
+    const cases = [
+      {
+        title: "The Streaming Betrayal",
+        sideA: "Side A says watching the next episode alone was a direct violation of the sacred couch treaty.",
+        sideB: "Side B says Side A fell asleep first, which legally released all streaming obligations."
+      },
+      {
+        title: "The Dinner Suggestion Trap",
+        sideA: "Side A says asking for dinner ideas and rejecting every option is emotional menu terrorism.",
+        sideB: "Side B says they wanted suggestions, not a parade of obviously wrong answers."
+      },
+      {
+        title: "The Last Sip Incident",
+        sideA: "Side A says leaving one tiny sip in the bottle is just avoiding responsibility for finishing it.",
+        sideB: "Side B says the bottle was technically not empty and therefore justice has no case."
+      },
+      {
+        title: "The Laundry Chair",
+        sideA: "Side A says clean clothes belong in drawers, not living rent-free on a chair.",
+        sideB: "Side B says the chair is a temporary textile management system with excellent airflow."
+      },
+      {
+        title: "The Five-Minute Lie",
+        sideA: "Side A says 'five minutes' should not mean a full historical era of waiting.",
+        sideB: "Side B says time is flexible when shoes, keys, and personal readiness are involved."
+      },
+      {
+        title: "The Movie Selection Crisis",
+        sideA: "Side A says choosing a movie should not take longer than watching one.",
+        sideB: "Side B says the right movie matters and rushed art decisions ruin households."
+      },
+      {
+        title: "The Missing Remote",
+        sideA: "Side A says Side B had the remote last and must answer for its disappearance.",
+        sideB: "Side B says the couch is clearly the true suspect and should be searched first."
+      },
+      {
+        title: "The Unwanted Fries",
+        sideA: "Side A says Side B claimed not to want fries and then stole half the basket.",
+        sideB: "Side B says shared fries become community property once placed within arm's reach."
+      },
+      {
+        title: "The Dishwashing Philosophy",
+        sideA: "Side A says dishes should be rinsed before going into the dishwasher.",
+        sideB: "Side B says rinsing dishes defeats the purpose of owning a machine with one job."
+      },
+      {
+        title: "The Thermostat War",
+        sideA: "Side A says the room is freezing and basic human survival is at stake.",
+        sideB: "Side B says Side A owns jumpers and should stop treating the thermostat like a campfire."
+      },
+      {
+        title: "The Borrowed Hoodie",
+        sideA: "Side A says the hoodie was borrowed and should return home immediately.",
+        sideB: "Side B says the hoodie has emotionally bonded and cannot be safely relocated."
+      },
+      {
+        title: "The Speakerphone Trial",
+        sideA: "Side A says speakerphone in a shared room is a public nuisance.",
+        sideB: "Side B says their hands were busy and everyone else was free to enjoy the bonus conversation."
+      },
+      {
+        title: "The Blanket Annexation",
+        sideA: "Side A says Side B slowly stole the entire blanket during the night.",
+        sideB: "Side B says blankets move naturally and no hostile takeover can be proven."
+      },
+      {
+        title: "The Empty Carton Trap",
+        sideA: "Side A says putting an empty milk carton back is a crime against breakfast.",
+        sideB: "Side B says there was a symbolic splash left and hope is important."
+      },
+      {
+        title: "The Group Chat Delay",
+        sideA: "Side A says Side B ignored plans until every useful option was gone.",
+        sideB: "Side B says they replied when emotionally available and calendars should respect that."
+      },
+      {
+        title: "The Shortcut Disaster",
+        sideA: "Side A says Side B's shortcut added fourteen minutes and three new regrets.",
+        sideB: "Side B says adventure is part of travel and maps are too controlling."
+      },
+      {
+        title: "The Hot Water Scandal",
+        sideA: "Side A says Side B used all the hot water and left everyone else in punishment mode.",
+        sideB: "Side B says self-care requires commitment and the water heater should try harder."
+      },
+      {
+        title: "The Chair Storage Defence",
+        sideA: "Side A says a chair covered in clothes is no longer a chair.",
+        sideB: "Side B says the chair has been promoted to wardrobe assistant."
+      },
+      {
+        title: "The Meeting That Could Have Been A Message",
+        sideA: "Side A says Side B booked a meeting for a question that could have been one sentence.",
+        sideB: "Side B says tone matters and calendars exist to be filled bravely."
+      },
+      {
+        title: "The Mystery Crumbs",
+        sideA: "Side A says Side B left crumbs on the counter and fled the scene.",
+        sideB: "Side B says crumbs are tiny and should not be treated like structural damage."
+      },
+      {
+        title: "The Late Arrival",
+        sideA: "Side A says Side B is always late and calls it spontaneity.",
+        sideB: "Side B says arriving exactly when the event becomes interesting is a gift."
+      },
+      {
+        title: "The Grocery List Gamble",
+        sideA: "Side A says Side B forgot the list and bought vibes instead of ingredients.",
+        sideB: "Side B says shopping requires instinct and the pantry should be more welcoming."
+      },
+      {
+        title: "The Shared Dessert Sprint",
+        sideA: "Side A says Side B agreed to split dessert and then ate at competitive speed.",
+        sideB: "Side B says dessert waits for no one and slow spoons lose rights."
+      },
+      {
+        title: "The Shoes At The Door",
+        sideA: "Side A says shoes at the front door create a domestic obstacle course.",
+        sideB: "Side B says shoes by the door are efficient, honest, and ready for action."
+      },
+      {
+        title: "The K Reply",
+        sideA: "Side A says replying 'k' is emotionally suspicious and possibly hostile.",
+        sideB: "Side B says 'k' is efficient communication and not every letter needs a parade."
+      },
+      {
+        title: "The Coffee Pot Symbolism",
+        sideA: "Side A says leaving three drops of coffee in the pot is not sharing.",
+        sideB: "Side B says three drops prove generosity and prevent the pot from feeling abandoned."
+      },
+      {
+        title: "The Passenger Seat DJ",
+        sideA: "Side A says Side B changed the music before the song had a chance to live.",
+        sideB: "Side B says eight seconds is enough time to identify a musical mistake."
+      },
+      {
+        title: "The Leftover Expiry Debate",
+        sideA: "Side A says the leftovers have become suspicious and should leave the fridge.",
+        sideB: "Side B says leftovers deserve due process before being declared a biohazard."
+      },
+      {
+        title: "The One More Errand",
+        sideA: "Side A says a quick errand became a tour of four shops and one emotional detour.",
+        sideB: "Side B says efficiency means doing nearby tasks while destiny has already provided parking."
+      },
+      {
+        title: "The Alarm Snooze Trial",
+        sideA: "Side A says six snoozes punished everyone in the house.",
+        sideB: "Side B says waking up is a gradual negotiation and the alarm knew the risks."
+      },
+      {
+        title: "The Kitchen Clean Claim",
+        sideA: "Side A says the kitchen was not clean because the counter was still telling stories.",
+        sideB: "Side B says the major landmarks were clean and perfection is exhausting."
+      },
+      {
+        title: "The Phone Charger Relocation",
+        sideA: "Side A says Side B borrowed the charger and returned it to a mystery realm.",
+        sideB: "Side B says the charger was placed somewhere safe, which is different from remembered."
+      },
+      {
+        title: "The Outfit Question",
+        sideA: "Side A says asking 'are you wearing that?' was unnecessary and dangerous.",
+        sideB: "Side B says it was a neutral inquiry wearing no emotional boots whatsoever."
+      },
+      {
+        title: "The Parking Commentary",
+        sideA: "Side A says Side B narrating the parking attempt made everything worse.",
+        sideB: "Side B says helpful passenger observations are a public service."
+      },
+      {
+        title: "The Open Cabinet Situation",
+        sideA: "Side A says Side B leaves cabinet doors open like the kitchen is haunted.",
+        sideB: "Side B says open cabinets improve workflow and create visual inventory."
+      },
+      {
+        title: "The Last Slice Claim",
+        sideA: "Side A says Side B had no right to claim the last slice without public consultation.",
+        sideB: "Side B says they thought about it first and mental dibs should count."
+      },
+      {
+        title: "The Shared Snack Boundary",
+        sideA: "Side A says the snack became 'shared' only after Side B opened it.",
+        sideB: "Side B says snacks in a common area are entering society and must participate."
+      },
+      {
+        title: "The Message Avalanche",
+        sideA: "Side A says six tiny messages should have been one normal message.",
+        sideB: "Side B says each thought deserved its own dramatic entrance."
+      },
+      {
+        title: "The Unmade Bed Theory",
+        sideA: "Side A says making the bed is basic civilization.",
+        sideB: "Side B says the bed will be used again and should not be lied to."
+      },
+      {
+        title: "The Good Mug Dispute",
+        sideA: "Side A says Side B keeps taking the best mug every morning.",
+        sideB: "Side B says mug preference is personal chemistry and cannot be legislated."
+      },
+      {
+        title: "The Birthday Reminder Credit",
+        sideA: "Side A says remembering after two reminders does not deserve full credit.",
+        sideB: "Side B says the final remembering is what matters to history."
+      },
+      {
+        title: "The Packing Emergency",
+        sideA: "Side A says Side B packs for a weekend like fleeing the country.",
+        sideB: "Side B says preparedness is not a flaw just because the suitcase has ambition."
+      },
+      {
+        title: "The Bin Full Theory",
+        sideA: "Side A says the bin was clearly full and needed taking out.",
+        sideB: "Side B says there was theoretical space if everyone believed harder."
+      },
+      {
+        title: "The Recipe Freestyle",
+        sideA: "Side A says Side B ignored the recipe and created dinner uncertainty.",
+        sideB: "Side B says recipes are suggestions and confidence is an ingredient."
+      },
+      {
+        title: "The Read Receipt Evidence",
+        sideA: "Side A says Side B read the message and ignored it with documentation.",
+        sideB: "Side B says reading is not the same as being emotionally ready to reply."
+      },
+      {
+        title: "The Sofa Seat Tradition",
+        sideA: "Side A says Side B sat in their usual spot and disturbed household order.",
+        sideB: "Side B says unoccupied furniture cannot enter witness protection."
+      },
+      {
+        title: "The Tiny Favour Expansion",
+        sideA: "Side A says Side B asked for a tiny favour that secretly had seven steps.",
+        sideB: "Side B says the favour revealed itself naturally and nobody could have predicted the ladder."
+      },
+      {
+        title: "The Shopping Cart Near Miss",
+        sideA: "Side A says Side B should have returned the shopping cart properly.",
+        sideB: "Side B says the cart was close enough to the bay to understand the assignment."
+      },
+      {
+        title: "The Decorative Towel Incident",
+        sideA: "Side A says Side B used the good towel for a suspicious cleanup mission.",
+        sideB: "Side B says emergencies do not pause to check towel hierarchy."
+      },
+      {
+        title: "The Secret Snack Shelf",
+        sideA: "Side A says hiding the good snacks is selfish and undermines household trust.",
+        sideB: "Side B says the high shelf is a security measure against snack chaos."
+      }
     ];
 
-    const ideaText = document.getElementById('ideaText');
-    let currentIdea = '';
+    const caseTitle = document.getElementById('caseTitle');
+    const sideA = document.getElementById('sideA');
+    const sideB = document.getElementById('sideB');
+    let currentCase = null;
 
-    function newIdea() {
-  const storageKey = 'seenFunnyArgumentIdeas';
-  let seen = [];
-
-  try {
-    seen = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  } catch (error) {
-    seen = [];
-  }
-
-  if (!Array.isArray(seen) || seen.length >= ideas.length) {
-    seen = [];
-  }
-
-  const unseenIndexes = ideas
-    .map((_, index) => index)
-    .filter(index => !seen.includes(index));
-
-  const nextIndex = unseenIndexes[Math.floor(Math.random() * unseenIndexes.length)];
-
-  seen.push(nextIndex);
-  localStorage.setItem(storageKey, JSON.stringify(seen));
-
-  currentIdea = ideas[nextIndex];
-  ideaText.textContent = currentIdea;
-}
-
-    async function copyIdea() {
-      if (!currentIdea) newIdea();
+    function getSeenCases() {
       try {
-        await navigator.clipboard.writeText(currentIdea);
-        alert('Argument idea copied.');
+        const seen = JSON.parse(localStorage.getItem('seenFunnyArgumentCases') || '[]');
+        return Array.isArray(seen) ? seen : [];
       } catch (error) {
-        alert(currentIdea);
+        return [];
       }
     }
 
-    newIdea();
-    window.newIdea = newIdea;
-    window.copyIdea = copyIdea;
+    function saveSeenCases(seen) {
+      localStorage.setItem('seenFunnyArgumentCases', JSON.stringify(seen));
+    }
+
+    function newCase() {
+      let seen = getSeenCases();
+      if (seen.length >= cases.length) {
+        seen = [];
+      }
+
+      const unseenIndexes = cases
+        .map((_, index) => index)
+        .filter(index => !seen.includes(index));
+
+      const nextIndex = unseenIndexes[Math.floor(Math.random() * unseenIndexes.length)];
+      seen.push(nextIndex);
+      saveSeenCases(seen);
+
+      currentCase = cases[nextIndex];
+      caseTitle.textContent = currentCase.title;
+      sideA.textContent = currentCase.sideA;
+      sideB.textContent = currentCase.sideB;
+    }
+
+    async function copyCase() {
+      if (!currentCase) newCase();
+      const text = `${currentCase.title}\n\nSide A:\n${currentCase.sideA}\n\nSide B:\n${currentCase.sideB}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Case copied.');
+      } catch (error) {
+        alert(text);
+      }
+    }
+
+    function useCase() {
+      if (!currentCase) newCase();
+      const params = new URLSearchParams({
+        argA: currentCase.sideA,
+        argB: currentCase.sideB,
+      });
+      window.location.href = `/?${params.toString()}`;
+    }
+
+    newCase();
+    window.newCase = newCase;
+    window.copyCase = copyCase;
+    window.useCase = useCase;
   </script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
