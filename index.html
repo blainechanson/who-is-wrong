@@ -93,7 +93,7 @@
     .history-case-header h3 { color: var(--accent-hover); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
     .history-case-actions { border-top: 1px solid #292524; padding-top: 0.85rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
     @media (min-width: 560px) { .history-case-actions { grid-template-columns: 1fr 1fr; } }
-    .history-controls { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .history-controls { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     @media (min-width: 560px) { .history-controls { grid-template-columns: 1fr 1fr; } }
     .content-section { margin-top: 2rem; color: #d6d3d1; line-height: 1.7; }
     .content-section h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
@@ -198,7 +198,7 @@
     </section>
     <section id="page-one-popular" class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
-       <div class="keyword-grid">
+      <div class="keyword-grid">
         <div class="keyword-panel"><h3>Couple Debates</h3><p>Settle harmless arguments about dinner choices, forgotten chores, TV show betrayal, texting tone, and who started the nonsense.</p></div>
         <div class="keyword-panel"><h3>Friend Group Drama</h3><p>Bring group chat disputes, late arrivals, unpaid coffee debts, bad playlist crimes, and suspiciously selective memory before the court.</p></div>
         <div class="keyword-panel"><h3>Household Disputes</h3><p>Judge dishes in the sink, lights left on, mystery crumbs, laundry piles, missing snacks, and other domestic emergencies of great importance.</p></div>
@@ -242,7 +242,7 @@
         <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
         <div class="faq-item"><h3>Can I use it for relationship arguments?</h3><p>Yes, if the argument is harmless and low-stakes. It is best for funny couple debates, roommate disputes, family squabbles, friend drama, and workplace nonsense.</p></div>
         <div class="faq-item"><h3>Can I share my verdict?</h3><p>Yes. After the judgement appears, use Share Certificate to send or download a certificate-style image of the verdict.</p></div>
-        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
         <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, unlawful, or harmful information about yourself or anyone else.</p></div>
       </div>
     </section>
@@ -266,6 +266,7 @@
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
   <script>
     const headerGavelImage = 'header-gavel.png?v=1';
+    const justiceScalesImage = 'justice-scales.png?v=2';
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = headerGavelImage;
     document.getElementById('loading-gavel').src = gavelImage;
@@ -397,8 +398,8 @@
         errorBox.textContent = 'Please give the judge a little more detail before slamming the gavel.';
         errorBox.classList.remove('hidden');
         return;
-      }     
-       if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
+      }
+      if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
         errorBox.textContent = 'Please keep names and arguments within the character limits.';
         errorBox.classList.remove('hidden');
         return;
@@ -511,14 +512,13 @@
     }
 
     function backToJudgeFromHistory() {
+      historyReturnView = 'form';
       document.getElementById('history-view').classList.add('hidden');
-      if (historyReturnView === 'verdict' && currentCaseRecord) {
-        document.getElementById('verdict-view').classList.remove('hidden');
-        showVerdictContentSections();
-      } else {
-        document.getElementById('form-view').classList.remove('hidden');
-        showFormContentSections();
-      }
+      document.getElementById('verdict-view').classList.add('hidden');
+      document.getElementById('loading-view').classList.add('hidden');
+      document.getElementById('form-view').classList.remove('hidden');
+      showFormContentSections();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function clearHistory() {
@@ -571,6 +571,43 @@
       return Math.max(980, Math.min(1800, height + 145));
     }
 
+    function loadCertificateImage(src) {
+      return new Promise(resolve => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => resolve(null);
+        image.src = src;
+      });
+    }
+
+    function drawCertificatePhoto(ctx, image, x, y, width, height) {
+      if (!image) return;
+      const imageRatio = image.width / image.height;
+      const targetRatio = width / height;
+      let sourceX = 0;
+      let sourceY = 0;
+      let sourceWidth = image.width;
+      let sourceHeight = image.height;
+
+      if (imageRatio > targetRatio) {
+        sourceWidth = image.height * targetRatio;
+        sourceX = (image.width - sourceWidth) / 2;
+      } else {
+        sourceHeight = image.width / targetRatio;
+        sourceY = (image.height - sourceHeight) / 2;
+      }
+
+      ctx.save();
+      drawRoundedRect(ctx, x, y, width, height, 10);
+      ctx.clip();
+      ctx.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height);
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(217, 119, 6, 0.45)';
+      ctx.lineWidth = 2;
+      drawRoundedRect(ctx, x, y, width, height, 10);
+      ctx.stroke();
+    }
+
     async function certificateBlob(record) {
       const width = 1200;
       const height = calculateCertificateHeight(record);
@@ -579,6 +616,10 @@
       canvas.height = height;
       const ctx = canvas.getContext('2d');
       const sections = parseCertificateSections(record);
+      const [gavelIcon, scalesIcon] = await Promise.all([
+        loadCertificateImage(headerGavelImage),
+        loadCertificateImage(justiceScalesImage),
+      ]);
 
       ctx.fillStyle = '#0c0a09';
       ctx.fillRect(0, 0, width, height);
@@ -588,6 +629,9 @@
       ctx.strokeStyle = 'rgba(217, 119, 6, 0.75)';
       ctx.lineWidth = 4;
       ctx.stroke();
+
+      drawCertificatePhoto(ctx, gavelIcon, 96, 82, 150, 108);
+      drawCertificatePhoto(ctx, scalesIcon, width - 246, 82, 150, 108);
 
       ctx.textAlign = 'center';
       ctx.fillStyle = '#f59e0b';
@@ -714,4 +758,6 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
-</html>      
+</html>
+
+
