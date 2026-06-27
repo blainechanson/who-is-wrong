@@ -126,22 +126,40 @@
       <p class="seo-heading">Settle an Argument Online with a Funny AI Judge</p>
       <p class="subtitle">A ridiculous AI judge for petty arguments, silly debates, and completely unofficial verdicts.</p>
     </header>
+
     <div class="card">
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
-            <div class="input-group"><label for="nameA">Party A (You / Accuser)</label><input type="text" id="nameA" minlength="2" maxlength="40" placeholder="Your name..."></div>
-            <div class="input-group"><label for="argA">Your Argument / Bill of Complaints</label><textarea id="argA" rows="4" minlength="9" maxlength="360" placeholder="State your side of the dispute..."></textarea><div class="field-note"><span id="argA-count">0</span>/360</div></div>
+            <div class="input-group">
+              <label for="nameA">Party A (You / Accuser)</label>
+              <input type="text" id="nameA" minlength="2" maxlength="40" placeholder="Your name...">
+            </div>
+            <div class="input-group">
+              <label for="argA">Your Argument / Bill of Complaints</label>
+              <textarea id="argA" rows="4" minlength="9" maxlength="360" placeholder="State your side of the dispute..."></textarea>
+              <div class="field-note"><span id="argA-count">0</span>/360</div>
+            </div>
           </div>
+
           <div class="party-square">
-            <div class="input-group"><label for="nameB">Party B (The Accused / Defense)</label><input type="text" id="nameB" minlength="2" maxlength="40" placeholder="Their name..."></div>
-            <div class="input-group"><label for="argB">Their Argument / Counter-Claim</label><textarea id="argB" rows="4" minlength="9" maxlength="360" placeholder="State their side or what they claim..."></textarea><div class="field-note"><span id="argB-count">0</span>/360</div></div>
+            <div class="input-group">
+              <label for="nameB">Party B (The Accused / Defense)</label>
+              <input type="text" id="nameB" minlength="2" maxlength="40" placeholder="Their name...">
+            </div>
+            <div class="input-group">
+              <label for="argB">Their Argument / Counter-Claim</label>
+              <textarea id="argB" rows="4" minlength="9" maxlength="360" placeholder="State their side or what they claim..."></textarea>
+              <div class="field-note"><span id="argB-count">0</span>/360</div>
+            </div>
           </div>
         </div>
+
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
         <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
       </div>
+
       <div id="loading-view" class="loading-view hidden">
         <div id="gavel-scene" class="gavel-scene" aria-hidden="true">
           <img id="loading-gavel" alt="" class="gavel-photo">
@@ -150,8 +168,12 @@
         </div>
         <p class="subtitle">Reviewing petty transcripts... Consulting ancient scrolls...</p>
       </div>
+
       <div id="verdict-view" class="stationery hidden">
-        <div class="stationery-header"><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+        <div class="stationery-header">
+          <h2>Official Decree</h2>
+          <div class="case-id" id="display-case-id">CASE NO. #00000</div>
+        </div>
         <div class="verdict-text"></div>
         <div class="stationery-footer">
           <button class="btn-secondary" onclick="shareCase()">Share This Case</button>
@@ -159,11 +181,13 @@
         </div>
       </div>
     </div>
+
     <section id="about-section" class="content-section" aria-label="About this argument judge">
       <h2>Settle Funny Arguments Online</h2>
       <p>Who Is Wrong is a parody dispute judge for petty arguments, relationship debates, roommate disputes, family disagreements, friend group drama, and workplace nonsense. Enter both sides, slam the gavel, and receive a short, ridiculous court-style verdict.</p>
       <p>The judgements are designed for laughs, screenshots, group chats, and social sharing. They are not legal advice, counselling, mediation, or a serious finding of fact.</p>
     </section>
+
     <section id="page-one-popular" class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
@@ -173,6 +197,7 @@
         <div class="keyword-panel"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, and the tiny injustices people refuse to let go.</p></div>
       </div>
     </section>
+
     <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
       <h2>More Cases to Try</h2>
       <div class="keyword-grid">
@@ -182,6 +207,7 @@
         <div class="keyword-panel"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, and other small social crimes with big opinions.</p></div>
       </div>
     </section>
+
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
       <h2>Example Argument Prompts</h2>
       <div class="example-list">
@@ -193,6 +219,7 @@
         <p>Who is wrong at work when someone books a meeting for a question that could have been one sentence?</p>
       </div>
     </section>
+
     <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
       <h2>More Argument Ideas</h2>
       <div class="example-list">
@@ -204,6 +231,7 @@
         <p>Am I overreacting because someone keeps saying “we should catch up soon” while making no attempt to catch, up, or soon?</p>
       </div>
     </section>
+
     <section class="content-section" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
       <div class="faq-list">
@@ -215,29 +243,34 @@
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
     <p class="footer-links">
-  <a href="/settle-an-argument">Settle an Argument</a> |
-  <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
-  <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
-  <a href="/family-argument-judge">Family Argument Judge</a>
-</p>
-<p class="footer-links">
-  <a href="/funny-argument-generator">Funny Argument Generator</a>
-</p>
+      <a href="/settle-an-argument">Settle an Argument</a> |
+      <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
+      <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
+      <a href="/family-argument-judge">Family Argument Judge</a>
+    </p>
+    <p class="footer-links">
+      <a href="/funny-argument-generator">Funny Argument Generator</a>
+    </p>
     <p class="footer-links">
       <a href="/privacy">Privacy</a> |
       <a href="/terms">Terms</a> |
       <a href="/contact">Contact</a>
     </p>
-    </footer>
+  </footer>
+
   <div class="sponsor-slot bottom">SPONSOR SPACE</div>
+
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
+
   <script>
     const gavelImage = 'gavel-web.svg?v=2';
     document.getElementById('header-gavel').src = gavelImage;
     document.getElementById('loading-gavel').src = gavelImage;
+
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
     const gavelHitTimes = [0, 430, 860];
@@ -251,6 +284,19 @@
 
     document.getElementById('argA').addEventListener('input', () => updateCount('argA', 'argA-count'));
     document.getElementById('argB').addEventListener('input', () => updateCount('argB', 'argB-count'));
+
+    function applyPrefilledCase() {
+      const params = new URLSearchParams(window.location.search);
+      const prefillArgA = (params.get('argA') || '').trim().slice(0, 360);
+      const prefillArgB = (params.get('argB') || '').trim().slice(0, 360);
+      if (!prefillArgA && !prefillArgB) return;
+
+      document.getElementById('argA').value = prefillArgA;
+      document.getElementById('argB').value = prefillArgB;
+      updateCount('argA', 'argA-count');
+      updateCount('argB', 'argB-count');
+      document.getElementById('nameA').focus();
+    }
 
     function clearGavelTimers() {
       gavelTimers.forEach(timer => clearTimeout(timer));
@@ -268,8 +314,10 @@
       gavelScene.classList.remove('strike-now');
       gavelSound.pause();
       gavelSound.currentTime = 0;
+
       const playAttempt = gavelSound.play();
       if (playAttempt) playAttempt.catch(() => {});
+
       gavelHitTimes.forEach(time => {
         gavelTimers.push(setTimeout(strikeGavelOnce, time));
       });
@@ -280,6 +328,7 @@
       const argA = document.getElementById('argA').value.trim();
       const nameB = document.getElementById('nameB').value.trim();
       const argB = document.getElementById('argB').value.trim();
+
       const errorBox = document.getElementById('validation-error');
       const formView = document.getElementById('form-view');
       const loadingView = document.getElementById('loading-view');
@@ -287,63 +336,80 @@
       const caseIdBox = document.getElementById('display-case-id');
       const verdictText = document.querySelector('.verdict-text');
       const submitBtn = document.getElementById('submit-btn');
+
       const lastJudgementAt = Number(localStorage.getItem('lastJudgementAt') || 0);
       const cooldownRemaining = localCooldownMs - (Date.now() - lastJudgementAt);
+
       if (!nameA || !argA || !nameB || !argB) {
         errorBox.textContent = 'Please enter both names and arguments before slamming the gavel!';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (nameA.length < 2 || nameB.length < 2) {
         errorBox.textContent = 'Please enter names with at least two characters.';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (argA.replace(/[^a-z0-9]/gi, '').length < 9 || argB.replace(/[^a-z0-9]/gi, '').length < 9) {
         errorBox.textContent = 'Please give the judge a little more detail before slamming the gavel.';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (argA.length > 360 || argB.length > 360 || nameA.length > 40 || nameB.length > 40) {
         errorBox.textContent = 'Please keep names and arguments within the character limits.';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (argA.toLowerCase() === argB.toLowerCase()) {
         errorBox.textContent = 'Please give the judge two different sides of the argument.';
         errorBox.classList.remove('hidden');
         return;
       }
+
       if (cooldownRemaining > 0) {
         errorBox.textContent = `The court needs ${Math.ceil(cooldownRemaining / 1000)} more seconds before hearing another case.`;
         errorBox.classList.remove('hidden');
         return;
       }
+
       errorBox.classList.add('hidden');
       localStorage.setItem('lastJudgementAt', Date.now().toString());
+
       formView.classList.add('hidden');
       verdictView.classList.add('hidden');
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
+
       startGavelSequence();
+
       try {
         const response = await fetch('/api/settle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nameA, argA, nameB, argB })
         });
+
         const data = await response.json();
+
         if (!response.ok || !data.success) {
           const message = data.error || 'The court failed to reach a verdict.';
           if (response.status === 429) alert(message);
           throw new Error(message);
         }
+
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
+
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
         currentShareText = `I took a petty dispute to the Supreme Court of Petty Disputes.\n\nCASE NO. #${data.caseId}\n\n${plainVerdict.slice(0, 520)}${plainVerdict.length > 520 ? '...' : ''}\n\nSettle yours here: ${window.location.origin && window.location.origin !== 'null' ? window.location.origin : window.location.href}`;
+
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
+
         document.getElementById('about-section').classList.add('hidden');
         document.getElementById('page-one-popular').classList.add('hidden');
         document.getElementById('page-two-popular').classList.remove('hidden');
@@ -358,27 +424,33 @@
         submitBtn.disabled = false;
       }
     }
+
     function resetForm() {
       document.getElementById('nameA').value = '';
       document.getElementById('argA').value = '';
       document.getElementById('nameB').value = '';
       document.getElementById('argB').value = '';
       document.getElementById('validation-error').classList.add('hidden');
+
       document.getElementById('form-view').classList.remove('hidden');
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('verdict-view').classList.add('hidden');
+
       document.getElementById('about-section').classList.remove('hidden');
       document.getElementById('page-one-popular').classList.remove('hidden');
       document.getElementById('page-two-popular').classList.add('hidden');
       document.getElementById('page-one-examples').classList.remove('hidden');
       document.getElementById('page-two-examples').classList.add('hidden');
+
       gavelScene.classList.remove('strike-now');
       clearGavelTimers();
       gavelSound.pause();
       gavelSound.currentTime = 0;
     }
+
     async function shareCase() {
       const shareText = currentShareText || 'I settled a petty dispute at the Supreme Court of Petty Disputes.';
+
       try {
         if (navigator.share) {
           await navigator.share({ title: 'Who Is Wrong?', text: shareText });
@@ -395,10 +467,14 @@
         }
       }
     }
+
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
     window.shareCase = shareCase;
+
+    applyPrefilledCase();
   </script>
+
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
