@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import { Redis } from '@upstash/redis';
 import OpenAI from 'openai';
+import sanitizeHtml from 'sanitize-html';
 
 const NAME_LIMIT = 40;
 const ARGUMENT_LIMIT = 360;
@@ -62,6 +63,20 @@ function isTooSimpleArgument(text) {
   const normalized = text.toLowerCase().replace(/[^a-z0-9]/g, '');
   const uniqueCharacters = new Set(normalized).size;
   return meaningfulLength(text) < MIN_ARGUMENT_LENGTH || uniqueCharacters < 4;
+}
+
+function sanitizeVerdictHtml(html) {
+  return sanitizeHtml(html, {
+    allowedTags: ['div', 'h3', 'p', 'strong', 'b', 'em', 'br'],
+    allowedAttributes: {
+      div: ['class'],
+    },
+    allowedClasses: {
+      div: ['mb-4', 'p-3'],
+    },
+    disallowedTagsMode: 'discard',
+    allowedSchemes: [],
+  });
 }
 
 async function incrementWindow(key, ttlSeconds) {
@@ -220,12 +235,13 @@ Use exactly these three sections:
     });
 
     const rawHtmlResponse = completion.choices[0]?.message?.content || '';
+    const safeHtmlResponse = sanitizeVerdictHtml(rawHtmlResponse);
     const caseId = Math.random().toString(36).substring(2, 10).toUpperCase();
 
     return res.status(200).json({
       success: true,
       caseId,
-      htmlContent: rawHtmlResponse,
+      htmlContent: safeHtmlResponse,
     });
   } catch (error) {
     console.error('OpenAI Endpoint Failure:', error);
