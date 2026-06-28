@@ -88,9 +88,9 @@
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
     .certificate-preview { position: fixed; inset: 0; z-index: 50; background: rgba(12, 10, 9, 0.94); padding: 1rem; overflow: auto; }
     .certificate-preview-inner { max-width: 46rem; margin: 2rem auto; background: var(--bg-card); border: 1px solid rgba(217, 119, 6, 0.45); border-radius: 0.75rem; padding: 1rem; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65); }
-    .certificate-preview h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; text-transform: uppercase; letter-spacing: 0.07em; font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .certificate-preview h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; text-transform: uppercase; letter-spacing: 0.07em; font-size: 1.15rem; margin: 0.85rem 0 0.5rem; }
     .certificate-preview p { color: #f5f5f4; line-height: 1.6; font-size: 0.94rem; margin-bottom: 1rem; }
-    .certificate-preview img { width: 100%; height: auto; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.5rem; background: #0c0a09; margin-bottom: 1rem; }
+    .certificate-preview img { width: 100%; height: auto; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.5rem; background: #0c0a09; margin-bottom: 0.25rem; }
     .certificate-preview-actions { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     .certificate-preview-actions a { display: block; text-align: center; text-decoration: none; }
     .history-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
@@ -226,12 +226,12 @@
     </div>
     <div id="certificate-preview" class="certificate-preview hidden" role="dialog" aria-modal="true" aria-labelledby="certificate-preview-title">
       <div class="certificate-preview-inner">
-        <h2 id="certificate-preview-title">Certificate Ready</h2>
-        <p id="certificate-preview-text">Your phone browser cannot share this generated certificate directly. Take a screenshot of the certificate below, then share the screenshot from your photos.</p>
         <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
+        <h2 id="certificate-preview-title">Certificate Ready</h2>
+        <p id="certificate-preview-text">Take a screenshot of the certificate above, then share the screenshot from your photos.</p>
         <div class="certificate-preview-actions">
           <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
-          <button id="certificate-preview-close" class="btn-secondary" type="button">Back to the Verdict</button>
+          <button id="certificate-preview-close" class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
         </div>
       </div>
     </div>
@@ -254,8 +254,8 @@
     <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
       <h2>More Cases to Try</h2>
       <div class="keyword-grid">
-        <a class="keyword-panel" href="/everyday-arguments"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of �just having a bite.�</p></a>
-        <a class="keyword-panel" href="/everyday-arguments"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said �turn left� far too late.</p></a>
+        <a class="keyword-panel" href="/everyday-arguments"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of "just having a bite."</p></a>
+        <a class="keyword-panel" href="/everyday-arguments"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said "turn left" far too late.</p></a>
         <a class="keyword-panel" href="/family-arguments"><h3>Holiday Disputes</h3><p>Bring packing chaos, airport timing, souvenir budgets, hotel room claims, family visits, and vacation itinerary drama before the bench.</p></a>
         <a class="keyword-panel" href="/everyday-arguments"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, photo approval, and small social crimes with big opinions.</p></a>
       </div>
@@ -271,7 +271,7 @@
     <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
       <h2>More Argument Ideas</h2>
       <div class="example-list">
-        <p>Who is wrong when one person says �I�m nearly ready� but has not yet chosen an outfit, found their shoes, or accepted reality?</p>
+        <p>Who is wrong when one person says "I am nearly ready" but has not yet chosen an outfit, found their shoes, or accepted reality?</p>
         <p>Settle a debate: is it acceptable to leave one tiny sip of juice in the bottle so you technically did not finish it?</p>
         <p>Am I wrong for saying the person who chooses the movie should not spend twenty minutes scrolling after everyone already agreed?</p>
       </div>
@@ -308,7 +308,7 @@
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isPhoneLikeDevice ? [0, 320, 640] : [0, 430, 860];
+    const gavelHitTimes = isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860];
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
@@ -848,7 +848,7 @@
       openLink.download = certificateFileName(record);
       openLink.classList.toggle('hidden', isPhoneLikeDevice);
       text.textContent = isPhoneLikeDevice
-        ? 'Your phone browser cannot share this generated certificate directly. Take a screenshot of the certificate below, then share the screenshot from your photos.'
+        ? 'Take a screenshot of the certificate above, then share the screenshot from your photos.'
         : 'The certificate image is ready below. You can open it or download it from your browser.';
       preview.classList.remove('hidden');
       preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -887,17 +887,6 @@
           return;
         }
         if (isPhoneLikeDevice) {
-          if (navigator.share) {
-            try {
-              await navigator.share({
-                title: 'Who Is Wrong?',
-                text: `CASE NO. #${record.caseId} from Who Is Wrong. Screenshot the certificate on the page to share the full image.`,
-                url: window.location.origin
-              });
-            } catch (shareError) {
-              if (shareError && shareError.name === 'AbortError') return;
-            }
-          }
           const imageUrl = await certificateDataUrl(record);
           showCertificatePreview(imageUrl, record, 'share');
           return;
