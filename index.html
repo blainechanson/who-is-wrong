@@ -141,6 +141,8 @@
       .gavel-photo { width: 160px; left: 25px; top: 7px; }
       .sound-block { width: 105px; height: 31px; left: 20px; bottom: 21px; }
       .impact-lines { left: 29px; bottom: 80px; }
+      .impact-lines span { width: 38px; height: 5px; margin: 7px 0; }
+      .gavel-scene.strike-now .impact-lines { animation: impactFlash 0.12s linear both; }
       .stationery { padding: 1.25rem; }
       .stationery-art { grid-template-columns: 4.2rem 1fr 4.2rem; gap: 0.6rem; }
       .stationery-photo { width: 4.2rem; height: 3.2rem; }
@@ -177,7 +179,7 @@
           </div>
         </div>
         <button id="submit-btn" class="btn-primary" onclick="slamGavelButton()">Slam the Gavel</button>
-        <a class="btn-generator" href="/funny-argument-generator">Need a Case Idea?</a>
+        <button type="button" class="btn-generator" onclick="scrollToPopularCases()">Need a Case Idea?</button>
         <button type="button" class="btn-generator" onclick="showHistory()">View Case History</button>
         <p class="fine-print">For entertainment only. Do not enter private, sensitive, defamatory, bullying, or identifying information.</p>
         <div id="validation-error" class="error-msg hidden">Please enter both names and arguments before slamming the gavel!</div>
@@ -225,11 +227,11 @@
     <div id="certificate-preview" class="certificate-preview hidden" role="dialog" aria-modal="true" aria-labelledby="certificate-preview-title">
       <div class="certificate-preview-inner">
         <h2 id="certificate-preview-title">Certificate Ready</h2>
-        <p id="certificate-preview-text">Press and hold the certificate image to save it, copy it, or share it from your phone.</p>
+        <p id="certificate-preview-text">Your phone browser cannot share this generated certificate directly. Take a screenshot of the certificate below, then share the screenshot from your photos.</p>
         <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
         <div class="certificate-preview-actions">
           <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
-          <button class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
+          <button id="certificate-preview-close" class="btn-secondary" type="button">Back to the Verdict</button>
         </div>
       </div>
     </div>
@@ -252,10 +254,10 @@
     <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
       <h2>More Cases to Try</h2>
       <div class="keyword-grid">
-        <a class="keyword-panel" href="/funny-argument-generator"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of �just having a bite.�</p></a>
+        <a class="keyword-panel" href="/everyday-arguments"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of �just having a bite.�</p></a>
         <a class="keyword-panel" href="/everyday-arguments"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said �turn left� far too late.</p></a>
         <a class="keyword-panel" href="/family-arguments"><h3>Holiday Disputes</h3><p>Bring packing chaos, airport timing, souvenir budgets, hotel room claims, family visits, and vacation itinerary drama before the bench.</p></a>
-        <a class="keyword-panel" href="/funny-argument-generator"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, photo approval, and small social crimes with big opinions.</p></a>
+        <a class="keyword-panel" href="/everyday-arguments"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, photo approval, and small social crimes with big opinions.</p></a>
       </div>
     </section>
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
@@ -441,6 +443,11 @@
 
     function scrollToPageTop(instant = false) {
       window.scrollTo({ top: 0, left: 0, behavior: instant ? 'auto' : 'smooth' });
+    }
+
+    function scrollToPopularCases() {
+      const target = document.getElementById('page-one-popular');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function slamGavelButton() {
@@ -776,23 +783,45 @@
       return canvas;
     }
 
-    async function certificateBlob(record) {
-      const canvas = await certificateCanvas(record);
+    function scaledCanvas(sourceCanvas, targetWidth) {
+      if (!targetWidth || sourceCanvas.width <= targetWidth) return sourceCanvas;
+      const scale = targetWidth / sourceCanvas.width;
+      const output = document.createElement('canvas');
+      output.width = targetWidth;
+      output.height = Math.round(sourceCanvas.height * scale);
+      const ctx = output.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(sourceCanvas, 0, 0, output.width, output.height);
+      return output;
+    }
+
+    function canvasBlob(canvas, type = 'image/png', quality = 0.95) {
       return new Promise((resolve, reject) => {
         canvas.toBlob(blob => {
           if (blob) resolve(blob);
           else reject(new Error('Certificate image could not be created.'));
-        }, 'image/png', 0.95);
+        }, type, quality);
       });
     }
 
-    async function certificateDataUrl(record) {
+    async function certificateBlob(record) {
       const canvas = await certificateCanvas(record);
-      return canvas.toDataURL('image/png', 0.95);
+      return canvasBlob(canvas, 'image/png', 0.95);
     }
 
-    function certificateFileName(record) {
-      return `who-is-wrong-case-${record.caseId}.png`;
+    async function certificateShareBlob(record) {
+      const canvas = scaledCanvas(await certificateCanvas(record), 900);
+      return canvasBlob(canvas, 'image/jpeg', 0.88);
+    }
+
+    async function certificateDataUrl(record) {
+      const canvas = scaledCanvas(await certificateCanvas(record), 900);
+      return canvas.toDataURL('image/jpeg', 0.88);
+    }
+
+    function certificateFileName(record, extension = 'png') {
+      return `who-is-wrong-case-${record.caseId}.${extension}`;
     }
 
     function downloadBlob(blob, fileName) {
@@ -818,9 +847,9 @@
       openLink.href = certificatePreviewUrl;
       openLink.download = certificateFileName(record);
       openLink.classList.toggle('hidden', isPhoneLikeDevice);
-      text.textContent = mode === 'share'
-        ? 'This phone browser cannot share certificate images directly. Press and hold the certificate image to save it, copy it, or share it.'
-        : 'Press and hold the certificate image to save it to your phone.';
+      text.textContent = isPhoneLikeDevice
+        ? 'Your phone browser cannot share this generated certificate directly. Take a screenshot of the certificate below, then share the screenshot from your photos.'
+        : 'The certificate image is ready below. You can open it or download it from your browser.';
       preview.classList.remove('hidden');
       preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -834,8 +863,8 @@
       certificatePreviewUrl = null;
     }
 
-    function certificateFile(blob, record) {
-      return new File([blob], certificateFileName(record), { type: 'image/png' });
+    function certificateFile(blob, record, extension = 'png', type = 'image/png') {
+      return new File([blob], certificateFileName(record, extension), { type });
     }
 
     function canShareCertificateFile(file) {
@@ -849,13 +878,26 @@
       }
       let blob = null;
       try {
-        blob = await certificateBlob(record);
-        const file = typeof File === 'function' ? certificateFile(blob, record) : null;
+        blob = isPhoneLikeDevice ? await certificateShareBlob(record) : await certificateBlob(record);
+        const file = typeof File === 'function'
+          ? (isPhoneLikeDevice ? certificateFile(blob, record, 'jpg', 'image/jpeg') : certificateFile(blob, record))
+          : null;
         if (canShareCertificateFile(file)) {
           await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
           return;
         }
         if (isPhoneLikeDevice) {
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: 'Who Is Wrong?',
+                text: `CASE NO. #${record.caseId} from Who Is Wrong. Screenshot the certificate on the page to share the full image.`,
+                url: window.location.origin
+              });
+            } catch (shareError) {
+              if (shareError && shareError.name === 'AbortError') return;
+            }
+          }
           const imageUrl = await certificateDataUrl(record);
           showCertificatePreview(imageUrl, record, 'share');
           return;
@@ -936,6 +978,7 @@
 
     window.slamGavelButton = slamGavelButton;
     window.resetForm = resetForm;
+    window.scrollToPopularCases = scrollToPopularCases;
     window.shareCurrentCertificate = shareCurrentCertificate;
     window.downloadCurrentCertificate = downloadCurrentCertificate;
     window.closeCertificatePreview = closeCertificatePreview;
@@ -946,6 +989,7 @@
     window.shareHistoryCertificate = shareHistoryCertificate;
     window.downloadHistoryCertificate = downloadHistoryCertificate;
     applyPrefilledCase();
+    document.getElementById('certificate-preview-close').addEventListener('click', closeCertificatePreview);
   </script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
