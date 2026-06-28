@@ -234,7 +234,7 @@
       <div class="certificate-preview-inner">
         <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
         <h2 id="certificate-preview-title">Certificate Ready</h2>
-        <p id="certificate-preview-text">Take a screenshot of the certificate above, then share the screenshot from your photos.</p>
+        <p id="certificate-preview-text">Take a screenshot of the certificate and share it from your screenshot photos.</p>
         <div class="certificate-preview-actions">
           <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
           <button id="certificate-preview-close" class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
@@ -315,7 +315,7 @@
     const gavelSound = document.getElementById('gavel-sound');
     const isAndroidDevice = /Android/i.test(navigator.userAgent);
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isAndroidDevice ? [0, 410, 820] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
+    const gavelHitTimes = isAndroidDevice ? [0, 260, 520] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
@@ -822,8 +822,8 @@
       return canvasBlob(canvas, 'image/jpeg', 0.88);
     }
 
-    async function certificateDataUrl(record) {
-      const canvas = scaledCanvas(await certificateCanvas(record), 900);
+    async function certificateDataUrl(record, targetWidth = 900) {
+      const canvas = scaledCanvas(await certificateCanvas(record), targetWidth);
       return canvas.toDataURL('image/jpeg', 0.88);
     }
 
@@ -855,7 +855,7 @@
       openLink.download = certificateFileName(record);
       openLink.classList.toggle('hidden', isPhoneLikeDevice);
       text.textContent = isPhoneLikeDevice
-        ? 'Take a screenshot of the certificate above, then share the screenshot from your photos.'
+        ? 'Take a screenshot of the certificate and share it from your screenshot photos.'
         : 'The certificate image is ready below. You can open it or download it from your browser.';
       preview.classList.remove('hidden');
       preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -885,6 +885,21 @@
       }
       let blob = null;
       try {
+        if (isAndroidDevice) {
+          blob = await certificateShareBlob(record);
+          const file = typeof File === 'function' ? certificateFile(blob, record, 'jpg', 'image/jpeg') : null;
+          if (canShareCertificateFile(file)) {
+            try {
+              await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
+              return;
+            } catch (shareError) {
+              if (shareError && shareError.name === 'AbortError') return;
+            }
+          }
+          const imageUrl = await certificateDataUrl(record, 720);
+          showCertificatePreview(imageUrl, record, 'share');
+          return;
+        }
         blob = isPhoneLikeDevice ? await certificateShareBlob(record) : await certificateBlob(record);
         const file = typeof File === 'function'
           ? (isPhoneLikeDevice ? certificateFile(blob, record, 'jpg', 'image/jpeg') : certificateFile(blob, record))
@@ -927,6 +942,11 @@
       }
       let blob = null;
       try {
+        if (isAndroidDevice) {
+          const imageUrl = await certificateDataUrl(record, 720);
+          showCertificatePreview(imageUrl, record, 'download');
+          return;
+        }
         blob = await certificateBlob(record);
         if (isPhoneLikeDevice) {
           const imageUrl = await certificateDataUrl(record);
