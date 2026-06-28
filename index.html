@@ -157,7 +157,7 @@
       .certificate-preview-inner { margin: 0 auto; padding: 0; border: none; border-radius: 0; background: #050505; box-shadow: none; }
       .certificate-preview img { display: block; width: 100%; border: none; border-radius: 0; margin: 0; background: #050505; }
       .certificate-preview h2, .certificate-preview p, .certificate-preview-actions { margin-left: 1rem; margin-right: 1rem; }
-      .certificate-preview h2 { margin-top: 1rem; }
+      .certificate-preview h2 { margin-top: 55vh; }
       .certificate-preview-actions { padding-bottom: 1.25rem; }
       .site-footer { padding: 0 0.85rem 1.5rem; }
     }
@@ -313,8 +313,9 @@
     document.getElementById('loading-gavel').src = gavelImage;
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
+    const isAndroidDevice = /Android/i.test(navigator.userAgent);
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860];
+    const gavelHitTimes = isAndroidDevice ? [0, 410, 820] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
