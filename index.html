@@ -88,9 +88,14 @@
     .history-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
     .history-header h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
     .history-header p { color: #d6d3d1; font-size: 0.92rem; line-height: 1.6; }
-    .history-list { display: grid; gap: 1rem; }
+    .history-index { display: grid; gap: 0.65rem; margin-top: 1rem; }
+    .history-index-link { display: block; width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #f5f5f4; border-radius: 0.5rem; padding: 0.85rem 1rem; text-align: left; text-decoration: none; }
+    .history-index-link:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .history-index-title { display: block; color: #ffffff; font-weight: 800; font-size: 0.95rem; }
+    .history-index-topic { display: block; color: #d6d3d1; font-size: 0.82rem; margin-top: 0.2rem; }
+    .history-list { display: grid; gap: 1rem; margin-top: 1rem; }
     .history-empty { border: 1px solid #292524; border-radius: 0.5rem; padding: 1rem; color: #d6d3d1; text-align: center; }
-    .history-case { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; }
+    .history-case { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; scroll-margin-top: 1rem; }
     .history-case-header { border-bottom: 1px solid #292524; padding-bottom: 0.85rem; text-align: center; margin-bottom: 1rem; }
     .history-certificate-art { display: grid; grid-template-columns: 4.8rem 1fr 4.8rem; align-items: center; gap: 0.85rem; margin-bottom: 0.8rem; }
     .history-certificate-photo { width: 4.8rem; height: 3.6rem; object-fit: cover; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.35rem; background-color: #0c0a09; }
@@ -98,7 +103,6 @@
     .history-case-actions { border-top: 1px solid #292524; padding-top: 0.85rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
     @media (min-width: 560px) { .history-case-actions { grid-template-columns: 1fr 1fr; } }
     .history-controls { background-color: var(--bg-main); border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 1.25rem; margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-    .history-bottom-controls { margin-top: 1rem; display: grid; grid-template-columns: 1fr; }
     @media (min-width: 560px) { .history-controls { grid-template-columns: 1fr 1fr; } }
     .content-section { margin-top: 2rem; color: #d6d3d1; line-height: 1.7; }
     .content-section h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
@@ -150,7 +154,7 @@
       <p class="seo-heading">Settle an Argument Online with a Funny AI Judge</p>
       <p class="subtitle">A ridiculous AI judge for petty arguments, silly debates, and completely unofficial verdicts.</p>
     </header>
-    <div class="card">
+    <div id="judge-card" class="card">
       <div id="form-view">
         <div class="split-grid">
           <div class="party-square">
@@ -203,10 +207,9 @@
           <button class="btn-secondary" onclick="clearHistory()">Clear History</button>
           <button class="btn-secondary" onclick="backToJudgeFromHistory()">Back to the Judge</button>
         </div>
+        <div id="history-index" class="history-index hidden"></div>
         <div id="history-list" class="history-list"></div>
-        <div id="history-bottom-controls" class="history-bottom-controls hidden">
-          <button class="btn-secondary" onclick="backToTopFromHistory()">Back to Top</button>
-        </div>
+
       </div>
     </div>
     <section id="about-section" class="content-section" aria-label="About this argument judge">
@@ -361,8 +364,36 @@
       saveHistory(history);
     }
 
-    function createCaseRecord(caseId, htmlContent, plainText) {
-      return { caseId, htmlContent, plainText, createdAt: new Date().toISOString() };
+    function createCaseRecord(caseId, htmlContent, plainText, details = {}) {
+      return {
+        caseId,
+        htmlContent,
+        plainText,
+        nameA: details.nameA || 'Person A',
+        nameB: details.nameB || 'Person B',
+        argA: details.argA || '',
+        argB: details.argB || '',
+        createdAt: new Date().toISOString(),
+      };
+    }
+
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>"]/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+      }[character]));
+    }
+
+    function shortTopic(record) {
+      const source = record.argA || record.argB || record.plainText || 'Case details';
+      const words = String(source).replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+      return words.slice(0, 5).join(' ') + (words.length > 5 ? '...' : '');
+    }
+
+    function caseAnchorId(record) {
+      return `history-case-${String(record.caseId || '').replace(/[^a-z0-9_-]/gi, '')}`;
     }
 
     function hideContentSections() {
@@ -387,6 +418,13 @@
       document.getElementById('page-two-popular').classList.remove('hidden');
       document.getElementById('page-one-examples').classList.add('hidden');
       document.getElementById('page-two-examples').classList.remove('hidden');
+    }
+
+    function scrollToJudgeCard(instant = false) {
+      document.getElementById('judge-card').scrollIntoView({
+        behavior: instant ? 'auto' : 'smooth',
+        block: 'start',
+      });
     }
 
     async function slamGavelButton() {
@@ -442,6 +480,7 @@
       loadingView.classList.remove('hidden');
       submitBtn.disabled = true;
       hideContentSections();
+      scrollToJudgeCard(true);
       startGavelSequence();
       try {
         const response = await fetch('/api/settle', {
@@ -458,11 +497,12 @@
         caseIdBox.textContent = `CASE NO. #${data.caseId}`;
         verdictText.innerHTML = data.htmlContent;
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
-        currentCaseRecord = createCaseRecord(data.caseId, data.htmlContent, plainVerdict);
+        currentCaseRecord = createCaseRecord(data.caseId, data.htmlContent, plainVerdict, { nameA, nameB, argA, argB });
         addToHistory(currentCaseRecord);
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
         showVerdictContentSections();
+        scrollToJudgeCard(true);
       } catch (error) {
         loadingView.classList.add('hidden');
         formView.classList.remove('hidden');
@@ -485,6 +525,7 @@
       document.getElementById('verdict-view').classList.add('hidden');
       document.getElementById('history-view').classList.add('hidden');
       showFormContentSections();
+      scrollToJudgeCard(true);
       gavelScene.classList.remove('strike-now');
       clearGavelTimers();
       gavelSound.pause();
@@ -502,17 +543,24 @@
     }
 
     function renderHistory() {
+      const historyIndex = document.getElementById('history-index');
       const historyList = document.getElementById('history-list');
       const history = getHistory();
-      const bottomControls = document.getElementById('history-bottom-controls');
       if (!history.length) {
+        historyIndex.classList.add('hidden');
+        historyIndex.innerHTML = '';
         historyList.innerHTML = '<div class="history-empty">No case history yet. Hear a case first, then the latest verdicts will appear here.</div>';
-        bottomControls.classList.add('hidden');
         return;
       }
-      bottomControls.classList.remove('hidden');
+      historyIndex.classList.remove('hidden');
+      historyIndex.innerHTML = history.map(record => `
+        <a class="history-index-link" href="#${caseAnchorId(record)}">
+          <span class="history-index-title">${escapeHtml(record.nameA || 'Person A')} vs ${escapeHtml(record.nameB || 'Person B')}</span>
+          <span class="history-index-topic">${escapeHtml(shortTopic(record))}</span>
+        </a>
+      `).join('');
       historyList.innerHTML = history.map(record => `
-        <article class="history-case">
+        <article id="${caseAnchorId(record)}" class="history-case">
           <div class="history-case-header">
             <div class="history-certificate-art">
               <img src="${headerGavelImage}" alt="" class="history-certificate-photo">
@@ -524,11 +572,11 @@
           <div class="history-case-actions">
             <button class="btn-secondary" onclick="shareHistoryCertificate('${record.caseId}')">Share Certificate</button>
             <button class="btn-secondary" onclick="downloadHistoryCertificate('${record.caseId}')">Download Certificate</button>
+            <button class="btn-secondary" onclick="backToTopFromHistory()">Back to Top</button>
           </div>
         </article>
       `).join('');
     }
-
     function showHistory() {
       const verdictWasVisible = !document.getElementById('verdict-view').classList.contains('hidden');
       historyReturnView = verdictWasVisible ? 'verdict' : 'form';
@@ -538,6 +586,7 @@
       document.getElementById('history-view').classList.remove('hidden');
       hideContentSections();
       renderHistory();
+      scrollToJudgeCard(true);
     }
 
     function backToJudgeFromHistory() {
@@ -547,7 +596,7 @@
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('form-view').classList.remove('hidden');
       showFormContentSections();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToJudgeCard(false);
     }
 
     function backToTopFromHistory() {
