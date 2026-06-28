@@ -85,6 +85,13 @@
     .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
     .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
+    .certificate-preview { position: fixed; inset: 0; z-index: 50; background: rgba(12, 10, 9, 0.94); padding: 1rem; overflow: auto; }
+    .certificate-preview-inner { max-width: 46rem; margin: 2rem auto; background: var(--bg-card); border: 1px solid rgba(217, 119, 6, 0.45); border-radius: 0.75rem; padding: 1rem; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65); }
+    .certificate-preview h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; text-transform: uppercase; letter-spacing: 0.07em; font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .certificate-preview p { color: #f5f5f4; line-height: 1.6; font-size: 0.94rem; margin-bottom: 1rem; }
+    .certificate-preview img { width: 100%; height: auto; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.5rem; background: #0c0a09; margin-bottom: 1rem; }
+    .certificate-preview-actions { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .certificate-preview-actions a { display: block; text-align: center; text-decoration: none; }
     .history-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
     .history-header h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
     .history-header p { color: #d6d3d1; font-size: 0.92rem; line-height: 1.6; }
@@ -213,6 +220,17 @@
 
       </div>
     </div>
+    <div id="certificate-preview" class="certificate-preview hidden" role="dialog" aria-modal="true" aria-labelledby="certificate-preview-title">
+      <div class="certificate-preview-inner">
+        <h2 id="certificate-preview-title">Certificate Ready</h2>
+        <p id="certificate-preview-text">Press and hold the certificate image to save it, copy it, or share it from your phone.</p>
+        <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
+        <div class="certificate-preview-actions">
+          <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
+          <button class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
+        </div>
+      </div>
+    </div>
     <section id="about-section" class="content-section" aria-label="About this argument judge">
       <h2>Settle Funny Arguments Online</h2>
       <p>Who Is Wrong is a parody dispute judge for petty arguments, relationship debates, roommate disputes, family disagreements, friend group drama, and workplace nonsense. Enter both sides, slam the gavel, and receive a short, ridiculous court-style verdict.</p>
@@ -285,12 +303,14 @@
     document.getElementById('loading-gavel').src = gavelImage;
     const gavelScene = document.getElementById('gavel-scene');
     const gavelSound = document.getElementById('gavel-sound');
-    const gavelHitTimes = [0, 430, 860];
+    const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
+    const gavelHitTimes = isPhoneLikeDevice ? [0, 320, 640] : [0, 430, 860];
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
     let currentCaseRecord = null;
     let historyReturnView = 'form';
+    let certificatePreviewUrl = null;
 
     function updateCount(textareaId, counterId) {
       document.getElementById(counterId).textContent = document.getElementById(textareaId).value.length;
@@ -775,6 +795,32 @@
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     }
 
+    function showCertificatePreview(blob, record, mode) {
+      if (certificatePreviewUrl) URL.revokeObjectURL(certificatePreviewUrl);
+      certificatePreviewUrl = URL.createObjectURL(blob);
+      const preview = document.getElementById('certificate-preview');
+      const image = document.getElementById('certificate-preview-image');
+      const openLink = document.getElementById('certificate-preview-open');
+      const text = document.getElementById('certificate-preview-text');
+      image.src = certificatePreviewUrl;
+      openLink.href = certificatePreviewUrl;
+      openLink.download = certificateFileName(record);
+      text.textContent = mode === 'share'
+        ? 'This phone browser cannot share certificate images directly. Press and hold the certificate image to save it, copy it, or share it.'
+        : 'Press and hold the certificate image to save it to your phone. If that does not appear, tap Open Certificate Image first.';
+      preview.classList.remove('hidden');
+      preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeCertificatePreview() {
+      document.getElementById('certificate-preview').classList.add('hidden');
+      document.getElementById('certificate-preview-image').removeAttribute('src');
+      if (certificatePreviewUrl) {
+        URL.revokeObjectURL(certificatePreviewUrl);
+        certificatePreviewUrl = null;
+      }
+    }
+
     function certificateFile(blob, record) {
       return new File([blob], certificateFileName(record), { type: 'image/png' });
     }
@@ -796,16 +842,21 @@
           await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
           return;
         }
-        if (navigator.share) {
-          await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId} - Certificate image download will start now.` });
+        if (isPhoneLikeDevice) {
+          showCertificatePreview(blob, record, 'share');
+          return;
         }
         downloadBlob(blob, certificateFileName(record));
         alert('This browser cannot share certificate images directly, so the certificate was downloaded instead.');
       } catch (error) {
         if (error && error.name === 'AbortError') return;
         if (blob) {
-          downloadBlob(blob, certificateFileName(record));
-          alert('Sharing was blocked by this device, so the certificate image was downloaded instead.');
+          if (isPhoneLikeDevice) {
+            showCertificatePreview(blob, record, 'share');
+          } else {
+            downloadBlob(blob, certificateFileName(record));
+            alert('Sharing was blocked by this device, so the certificate image was downloaded instead.');
+          }
         } else {
           alert('The certificate could not be prepared. Please try again.');
         }
@@ -820,10 +871,15 @@
       let blob = null;
       try {
         blob = await certificateBlob(record);
+        if (isPhoneLikeDevice) {
+          showCertificatePreview(blob, record, 'download');
+          return;
+        }
         downloadBlob(blob, certificateFileName(record));
       } catch (error) {
         if (blob) {
-          downloadBlob(blob, certificateFileName(record));
+          if (isPhoneLikeDevice) showCertificatePreview(blob, record, 'download');
+          else downloadBlob(blob, certificateFileName(record));
         } else {
           alert('The certificate could not be prepared. Please try again.');
         }
@@ -854,6 +910,7 @@
     window.resetForm = resetForm;
     window.shareCurrentCertificate = shareCurrentCertificate;
     window.downloadCurrentCertificate = downloadCurrentCertificate;
+    window.closeCertificatePreview = closeCertificatePreview;
     window.showHistory = showHistory;
     window.backToJudgeFromHistory = backToJudgeFromHistory;
     window.backToTopFromHistory = backToTopFromHistory;
