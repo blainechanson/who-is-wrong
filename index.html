@@ -109,7 +109,8 @@
     .content-section p { font-size: 0.95rem; margin-bottom: 0.9rem; }
     .keyword-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-top: 1rem; }
     @media (min-width: 768px) { .keyword-grid { grid-template-columns: 1fr 1fr; } }
-    .keyword-panel { border: 1px solid #292524; border-radius: 0.5rem; padding: 1rem; background: rgba(255,255,255,0.02); }
+    .keyword-panel { display: block; color: #f5f5f4; text-decoration: none; border: 1px solid rgba(245, 158, 11, 0.48); border-radius: 0.5rem; padding: 1rem; background: rgba(255,255,255,0.02); box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.10); }
+    .keyword-panel:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.35), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
     .keyword-panel h3 { color: #f59e0b; font-size: 0.9rem; margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.04em; }
     .example-list, .faq-list { display: grid; gap: 0.75rem; margin-top: 1rem; }
     .example-list p, .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
@@ -220,19 +221,21 @@
     <section id="page-one-popular" class="content-section" aria-label="Popular petty disputes">
       <h2>Popular Cases</h2>
       <div class="keyword-grid">
-        <div class="keyword-panel"><h3>Couple Debates</h3><p>Settle harmless arguments about dinner choices, forgotten chores, TV show betrayal, texting tone, and who started the nonsense.</p></div>
-        <div class="keyword-panel"><h3>Friend Group Drama</h3><p>Bring group chat disputes, late arrivals, unpaid coffee debts, bad playlist crimes, and suspiciously selective memory before the court.</p></div>
-        <div class="keyword-panel"><h3>Household Disputes</h3><p>Judge dishes in the sink, lights left on, mystery crumbs, laundry piles, missing snacks, and other domestic emergencies of great importance.</p></div>
-        <div class="keyword-panel"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, and the tiny injustices people refuse to let go.</p></div>
+        <a class="keyword-panel" href="/relationship-argument-judge"><h3>Relationship Debates</h3><p>Settle harmless couple arguments about dinner choices, forgotten chores, TV show betrayal, texting tone, outfit feedback, and who started the nonsense.</p></a>
+        <a class="keyword-panel" href="/funny-argument-generator"><h3>Friend Group Drama</h3><p>Bring group chat disputes, late arrivals, unpaid coffee debts, bad playlist crimes, screenshot etiquette, and suspiciously selective memory before the court.</p></a>
+        <a class="keyword-panel" href="/roommate-dispute-judge"><h3>Household Disputes</h3><p>Judge dishes in the sink, lights left on, mystery crumbs, laundry piles, borrowed snacks, bathroom timing, and other domestic emergencies.</p></a>
+        <a class="keyword-panel" href="/family-argument-judge"><h3>Family Arguments</h3><p>Settle sibling squabbles, holiday plans, leftovers, parenting jokes, family group-chat debates, and who really said what years ago.</p></a>
+        <a class="keyword-panel" href="/settle-an-argument"><h3>Workplace Nonsense</h3><p>Judge meeting crimes, lunchroom disputes, strong coffee opinions, desk etiquette, reply-all disasters, and questions that should have been one sentence.</p></a>
+        <a class="keyword-panel" href="/settle-an-argument"><h3>Everyday Arguments</h3><p>Resolve silly debates about manners, queues, driving habits, food opinions, borrowed items, toilet paper direction, and tiny injustices people refuse to let go.</p></a>
       </div>
     </section>
     <section id="page-two-popular" class="content-section hidden" aria-label="More popular petty disputes">
       <h2>More Cases to Try</h2>
       <div class="keyword-grid">
-        <div class="keyword-panel"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of “just having a bite.”</p></div>
-        <div class="keyword-panel"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said “turn left” far too late.</p></div>
-        <div class="keyword-panel"><h3>Holiday Disputes</h3><p>Bring packing chaos, airport timing, souvenir budgets, hotel room claims, and vacation itinerary drama before the bench.</p></div>
-        <div class="keyword-panel"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, and other small social crimes with big opinions.</p></div>
+        <a class="keyword-panel" href="/funny-argument-generator"><h3>Food Court Crimes</h3><p>Judge pizza topping scandals, takeaway theft, last-chip disputes, loud chewing allegations, and the eternal crime of “just having a bite.”</p></a>
+        <a class="keyword-panel" href="/settle-an-argument"><h3>Car Ride Debates</h3><p>Settle arguments about navigation, music control, parking choices, mystery dashboard lights, and who said “turn left” far too late.</p></a>
+        <a class="keyword-panel" href="/family-argument-judge"><h3>Holiday Disputes</h3><p>Bring packing chaos, airport timing, souvenir budgets, hotel room claims, family visits, and vacation itinerary drama before the bench.</p></a>
+        <a class="keyword-panel" href="/funny-argument-generator"><h3>Petty Etiquette</h3><p>Resolve debates about replying to messages, borrowing things, holding doors, queue behaviour, photo approval, and small social crimes with big opinions.</p></a>
       </div>
     </section>
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
@@ -265,11 +268,6 @@
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
     <p class="footer-links">
-      <a href="/settle-an-argument">Settle an Argument</a> |
-      <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
-      <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
-      <a href="/family-argument-judge">Family Argument Judge</a><br>
-      <a href="/funny-argument-generator">Funny Argument Generator</a><br>
       <a href="/privacy">Privacy</a> |
       <a href="/terms">Terms</a> |
       <a href="/contact">Contact</a>
