@@ -238,11 +238,8 @@
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
       <h2>Example Argument Prompts</h2>
       <div class="example-list">
-        <p>Am I wrong for being annoyed that my partner says “I do not mind” and then rejects every dinner suggestion?</p>
-        <p>Who is at fault when a roommate keeps using the last of the milk and putting the empty carton back?</p>
-        <p>Am I overreacting because my friend is always late but calls it “being spontaneous”?</p>
+        <p>Toilet paper orientation: should the flap hang over the front versus tucked against the wall?</p>
         <p>Does putting an unrinsed plate into the dishwasher make you lazy, or does rinsing it beforehand defeat the entire purpose of owning a $1,000 dishwasher?</p>
-        <p>Settle a debate: is it rude to watch the next episode without the person you started the show with?</p>
         <p>Who is wrong at work when someone books a meeting for a question that could have been answered with one sentence?</p>
       </div>
     </section>
@@ -252,9 +249,6 @@
         <p>Who is wrong when one person says “I’m nearly ready” but has not yet chosen an outfit, found their shoes, or accepted reality?</p>
         <p>Settle a debate: is it acceptable to leave one tiny sip of juice in the bottle so you technically did not finish it?</p>
         <p>Am I wrong for saying the person who chooses the movie should not spend twenty minutes scrolling after everyone already agreed?</p>
-        <p>Who is at fault when someone borrows a charger and returns it to a mysterious location known only to ancient spirits?</p>
-        <p>How many days can a container of leftovers sit in the fridge before it legally changes status from "tomorrow's lunch" to "a biohazard nobody wants to touch"?</p>
-        <p>Am I overreacting because someone keeps saying “we should catch up soon” while making no attempt to catch, up, or soon?</p>
       </div>
     </section>
     <section class="content-section" aria-label="Frequently asked questions">
@@ -274,10 +268,8 @@
       <a href="/settle-an-argument">Settle an Argument</a> |
       <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
       <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
-      <a href="/family-argument-judge">Family Argument Judge</a>
-    </p>
-    <p class="footer-links">
-      <a href="/funny-argument-generator">Funny Argument Generator</a> |
+      <a href="/family-argument-judge">Family Argument Judge</a><br>
+      <a href="/funny-argument-generator">Funny Argument Generator</a><br>
       <a href="/privacy">Privacy</a> |
       <a href="/terms">Terms</a> |
       <a href="/contact">Contact</a>
@@ -421,10 +413,14 @@
     }
 
     function scrollToJudgeCard(instant = false) {
-      document.getElementById('judge-card').scrollIntoView({
-        behavior: instant ? 'auto' : 'smooth',
-        block: 'start',
-      });
+      const judgeCard = document.getElementById('judge-card');
+      if (judgeCard) {
+        judgeCard.scrollIntoView({ behavior: instant ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+
+    function scrollToPageTop(instant = false) {
+      window.scrollTo({ top: 0, left: 0, behavior: instant ? 'auto' : 'smooth' });
     }
 
     async function slamGavelButton() {
@@ -525,7 +521,7 @@
       document.getElementById('verdict-view').classList.add('hidden');
       document.getElementById('history-view').classList.add('hidden');
       showFormContentSections();
-      scrollToJudgeCard(true);
+      scrollToPageTop(true);
       gavelScene.classList.remove('strike-now');
       clearGavelTimers();
       gavelSound.pause();
@@ -596,7 +592,7 @@
       document.getElementById('loading-view').classList.add('hidden');
       document.getElementById('form-view').classList.remove('hidden');
       showFormContentSections();
-      scrollToJudgeCard(false);
+      scrollToPageTop(false);
     }
 
     function backToTopFromHistory() {
@@ -775,6 +771,14 @@
       URL.revokeObjectURL(url);
     }
 
+    function certificateFile(blob, record) {
+      return new File([blob], certificateFileName(record), { type: 'image/png' });
+    }
+
+    function canShareCertificateFile(file) {
+      return Boolean(navigator.share && navigator.canShare && navigator.canShare({ files: [file] }));
+    }
+
     async function shareCertificate(record) {
       if (!record) {
         alert('No certificate is ready to share yet.');
@@ -783,14 +787,15 @@
       let blob = null;
       try {
         blob = await certificateBlob(record);
-        const file = new File([blob], certificateFileName(record), { type: 'image/png' });
-        if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+        const file = certificateFile(blob, record);
+        if (canShareCertificateFile(file)) {
           await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
-        } else {
-          downloadBlob(blob, certificateFileName(record));
-          alert('Certificate image downloaded. You can now attach it to a message, email, or social post.');
+          return;
         }
+        downloadBlob(blob, certificateFileName(record));
+        alert('This browser cannot open the share sheet for certificate images, so the certificate was downloaded instead.');
       } catch (error) {
+        if (error && error.name === 'AbortError') return;
         if (blob) {
           downloadBlob(blob, certificateFileName(record));
           alert('Sharing was blocked by this device, so the certificate image was downloaded instead.');
@@ -805,8 +810,23 @@
         alert('No certificate is ready to download yet.');
         return;
       }
-      const blob = await certificateBlob(record);
-      downloadBlob(blob, certificateFileName(record));
+      let blob = null;
+      try {
+        blob = await certificateBlob(record);
+        const file = certificateFile(blob, record);
+        if (canShareCertificateFile(file)) {
+          await navigator.share({ title: 'Save Certificate', text: `CASE NO. #${record.caseId}`, files: [file] });
+          return;
+        }
+        downloadBlob(blob, certificateFileName(record));
+      } catch (error) {
+        if (error && error.name === 'AbortError') return;
+        if (blob) {
+          downloadBlob(blob, certificateFileName(record));
+        } else {
+          alert('The certificate could not be prepared. Please try again.');
+        }
+      }
     }
 
     function findHistoryRecord(caseId) {
