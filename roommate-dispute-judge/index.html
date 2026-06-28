@@ -33,11 +33,14 @@
     .side p { color: #f5f5f4; margin-bottom: 0; }
     .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
     .secondary { background: #1c1917; color: #f5f5f4; border: 1px solid #444; }
     .secondary:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    button:disabled:hover { border-color: #444; color: #f5f5f4; box-shadow: none; }
     .note { color: #e7e5e4; font-size: 1rem; line-height: 1.7; margin-top: 1rem; }
     .site-footer { max-width: 48rem; width: 100%; margin: 0 auto; padding: 0 1rem 2rem; color: #a8a29e; font-size: 0.78rem; line-height: 1.6; text-align: center; }
     .site-footer .footer-links { color: #d6d3d1; }
@@ -58,9 +61,9 @@
         <div class="side"><p id="sideA">Side A - The court awaits a complaint.</p></div>
         <div class="side"><p id="sideB">Side B - The defence is currently pretending to be reasonable.</p></div>
       </div>
-
-      <div class="button-row two-buttons">
+      <div class="button-row three-buttons">
         <button class="primary" type="button" onclick="newCase()">New Case</button>
+        <button id="previous-case-btn" class="secondary" type="button" onclick="previousCase()" disabled>Previous Case</button>
         <button class="secondary" type="button" onclick="useCase()">Use This Case</button>
       </div>
 
@@ -74,11 +77,6 @@
   <footer class="site-footer">
     <p><strong>Disclaimer:</strong> This website is for fun, parody, and entertainment only. AI-generated judgements are not legal advice, professional advice, mediation, counselling, or statements of fact.</p>
     <p class="footer-links">
-      <a href="/settle-an-argument">Settle an Argument</a> |
-      <a href="/relationship-argument-judge">Relationship Argument Judge</a> |
-      <a href="/roommate-dispute-judge">Roommate Dispute Judge</a> |
-      <a href="/family-argument-judge">Family Argument Judge</a><br>
-      <a href="/funny-argument-generator">Funny Argument Generator</a><br>
       <a href="/privacy">Privacy</a> |
       <a href="/terms">Terms</a> |
       <a href="/contact">Contact</a>
@@ -137,6 +135,7 @@
     const sideA = document.getElementById('sideA');
     const sideB = document.getElementById('sideB');
     let currentCase = null;
+    let viewedCaseIndexes = [];
 
     function cleanSideText(text) {
       const cleaned = String(text || '').replace(/^Side [AB]\s*(says|-)\s*/i, '').trim();
@@ -156,6 +155,18 @@
       localStorage.setItem('seenRoommateCases', JSON.stringify(seen));
     }
 
+    function displayCase(index) {
+      currentCase = cases[index];
+      caseTitle.textContent = currentCase.title;
+      sideA.textContent = `Side A - ${cleanSideText(currentCase.sideA)}`;
+      sideB.textContent = `Side B - ${cleanSideText(currentCase.sideB)}`;
+    }
+
+    function updatePreviousButton() {
+      const previousButton = document.getElementById('previous-case-btn');
+      if (previousButton) previousButton.disabled = viewedCaseIndexes.length < 2;
+    }
+
     function newCase() {
       let seen = getSeenCases();
       if (seen.length >= cases.length) seen = [];
@@ -163,10 +174,16 @@
       const nextIndex = unseenIndexes[Math.floor(Math.random() * unseenIndexes.length)];
       seen.push(nextIndex);
       saveSeenCases(seen);
-      currentCase = cases[nextIndex];
-      caseTitle.textContent = currentCase.title;
-      sideA.textContent = `Side A - ${cleanSideText(currentCase.sideA)}`;
-      sideB.textContent = `Side B - ${cleanSideText(currentCase.sideB)}`;
+      viewedCaseIndexes.push(nextIndex);
+      displayCase(nextIndex);
+      updatePreviousButton();
+    }
+
+    function previousCase() {
+      if (viewedCaseIndexes.length < 2) return;
+      viewedCaseIndexes.pop();
+      displayCase(viewedCaseIndexes[viewedCaseIndexes.length - 1]);
+      updatePreviousButton();
     }
 
     function useCase() {
@@ -180,6 +197,7 @@
 
     newCase();
     window.newCase = newCase;
+    window.previousCase = previousCase;
     window.useCase = useCase;
   </script>
   <script>
