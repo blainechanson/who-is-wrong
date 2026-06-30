@@ -314,13 +314,14 @@
     const gavelSound = document.getElementById('gavel-sound');
     const isAndroidDevice = /Android/i.test(navigator.userAgent);
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isAndroidDevice ? [0, 320, 640] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
+    const gavelHitTimes = isAndroidDevice ? [0, 380, 760] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
     let currentCaseRecord = null;
     let historyReturnView = 'form';
     let certificatePreviewUrl = null;
+    const certificateAssetCache = new Map();
 
     function updateCount(textareaId, counterId) {
       document.getElementById(counterId).textContent = document.getElementById(textareaId).value.length;
@@ -527,6 +528,7 @@
         verdictText.innerHTML = data.htmlContent;
         const plainVerdict = verdictText.innerText.replace(/\s+/g, ' ').trim();
         currentCaseRecord = createCaseRecord(data.caseId, data.htmlContent, plainVerdict, { nameA, nameB, argA, argB });
+        warmCertificateAssets(currentCaseRecord);
         addToHistory(currentCaseRecord);
         loadingView.classList.add('hidden');
         verdictView.classList.remove('hidden');
@@ -811,28 +813,41 @@
       });
     }
 
+    function certificateAssetKey(record, targetWidth, type) {
+      return [record?.caseId || 'current', targetWidth || 'full', type].join(':');
+    }
+
     async function certificateBlob(record) {
+      const key = certificateAssetKey(record, 'full', 'png');
+      if (certificateAssetCache.has(key)) return certificateAssetCache.get(key).blob;
       const canvas = await certificateCanvas(record);
-      return canvasBlob(canvas, 'image/png', 0.95);
-    }
-
-    async function certificateShareBlob(record) {
-      const canvas = scaledCanvas(await certificateCanvas(record), 900);
-      return canvasBlob(canvas, 'image/jpeg', 0.88);
-    }
-
-    async function certificateDataUrl(record, targetWidth = 900) {
-      const canvas = scaledCanvas(await certificateCanvas(record), targetWidth);
-      return canvas.toDataURL('image/jpeg', 0.88);
+      const blob = await canvasBlob(canvas, 'image/png', 0.95);
+      certificateAssetCache.set(key, { blob });
+      return blob;
     }
 
     async function certificatePreviewAssets(record, targetWidth = 720) {
+      const key = certificateAssetKey(record, targetWidth, 'jpeg');
+      if (certificateAssetCache.has(key)) return certificateAssetCache.get(key);
       const canvas = scaledCanvas(await certificateCanvas(record), targetWidth);
+      const imageUrl = canvas.toDataURL('image/jpeg', 0.88);
       const blob = await canvasBlob(canvas, 'image/jpeg', 0.88);
-      return {
-        blob,
-        imageUrl: canvas.toDataURL('image/jpeg', 0.88),
-      };
+      const assets = { blob, imageUrl };
+      certificateAssetCache.set(key, assets);
+      return assets;
+    }
+
+    function warmCertificateAssets(record) {
+      if (!record) return;
+      certificatePreviewAssets(record, isAndroidDevice ? 640 : 900).catch(() => {});
+    }
+
+    async function certificateShareBlob(record) {
+      return (await certificatePreviewAssets(record, 900)).blob;
+    }
+
+    async function certificateDataUrl(record, targetWidth = 900) {
+      return (await certificatePreviewAssets(record, targetWidth)).imageUrl;
     }
 
     function certificateFileName(record, extension = 'png') {
@@ -894,7 +909,7 @@
       let blob = null;
       try {
         if (isAndroidDevice) {
-          const assets = await certificatePreviewAssets(record, 720);
+          const assets = await certificatePreviewAssets(record, 640);
           blob = assets.blob;
           const file = typeof File === 'function' ? certificateFile(blob, record, 'jpg', 'image/jpeg') : null;
           if (canShareCertificateFile(file)) {
@@ -951,9 +966,8 @@
       let blob = null;
       try {
         if (isAndroidDevice) {
-          const assets = await certificatePreviewAssets(record, 720);
+          const assets = await certificatePreviewAssets(record, 640);
           blob = assets.blob;
-          downloadBlob(blob, certificateFileName(record, 'jpg'));
           showCertificatePreview(assets.imageUrl, record, 'download');
           return;
         }
