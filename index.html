@@ -234,7 +234,7 @@
       <div class="certificate-preview-inner">
         <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
         <h2 id="certificate-preview-title">Certificate Ready</h2>
-        <p id="certificate-preview-text">Take a screenshot of the certificate and share it from your screenshot photos.</p>
+        <p id="certificate-preview-text">Take a screenshot of the certificate and share it from your screenshot captures.</p>
         <div class="certificate-preview-actions">
           <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
           <button id="certificate-preview-close" class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
@@ -286,8 +286,7 @@
       <h2>FAQ</h2>
       <div class="faq-list">
         <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
-        <div class="faq-item"><h3>Can I use it for relationship arguments?</h3><p>Yes, if the argument is harmless and low-stakes. It is best for funny couple debates, roommate disputes, family squabbles, friend drama, and workplace nonsense.</p></div>
-        <div class="faq-item"><h3>Can I share my verdict?</h3><p>Yes. After the judgement appears, use Share Certificate to send or download a certificate-style image of the verdict.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
         <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
         <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
       </div>
@@ -306,7 +305,7 @@
   <script>
     const headerGavelImage = 'header-gavel.png?v=1';
     const justiceScalesImage = 'justice-scales.png?v=2';
-    const gavelImage = 'gavel-web.svg?v=2';
+    const gavelImage = 'header-gavel.png?v=1';
     document.getElementById('header-gavel').src = headerGavelImage;
     document.getElementById('decree-gavel').src = headerGavelImage;
     document.getElementById('decree-scales').src = justiceScalesImage;
@@ -315,7 +314,7 @@
     const gavelSound = document.getElementById('gavel-sound');
     const isAndroidDevice = /Android/i.test(navigator.userAgent);
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isAndroidDevice ? [0, 260, 520] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
+    const gavelHitTimes = isAndroidDevice ? [0, 320, 640] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
     let gavelTimers = [];
@@ -827,6 +826,15 @@
       return canvas.toDataURL('image/jpeg', 0.88);
     }
 
+    async function certificatePreviewAssets(record, targetWidth = 720) {
+      const canvas = scaledCanvas(await certificateCanvas(record), targetWidth);
+      const blob = await canvasBlob(canvas, 'image/jpeg', 0.88);
+      return {
+        blob,
+        imageUrl: canvas.toDataURL('image/jpeg', 0.88),
+      };
+    }
+
     function certificateFileName(record, extension = 'png') {
       return `who-is-wrong-case-${record.caseId}.${extension}`;
     }
@@ -855,7 +863,7 @@
       openLink.download = certificateFileName(record);
       openLink.classList.toggle('hidden', isPhoneLikeDevice);
       text.textContent = isPhoneLikeDevice
-        ? 'Take a screenshot of the certificate and share it from your screenshot photos.'
+        ? 'Take a screenshot of the certificate and share it from your screenshot captures.'
         : 'The certificate image is ready below. You can open it or download it from your browser.';
       preview.classList.remove('hidden');
       preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -886,7 +894,8 @@
       let blob = null;
       try {
         if (isAndroidDevice) {
-          blob = await certificateShareBlob(record);
+          const assets = await certificatePreviewAssets(record, 720);
+          blob = assets.blob;
           const file = typeof File === 'function' ? certificateFile(blob, record, 'jpg', 'image/jpeg') : null;
           if (canShareCertificateFile(file)) {
             try {
@@ -896,8 +905,7 @@
               if (shareError && shareError.name === 'AbortError') return;
             }
           }
-          const imageUrl = await certificateDataUrl(record, 720);
-          showCertificatePreview(imageUrl, record, 'share');
+          showCertificatePreview(assets.imageUrl, record, 'share');
           return;
         }
         blob = isPhoneLikeDevice ? await certificateShareBlob(record) : await certificateBlob(record);
@@ -943,8 +951,10 @@
       let blob = null;
       try {
         if (isAndroidDevice) {
-          const imageUrl = await certificateDataUrl(record, 720);
-          showCertificatePreview(imageUrl, record, 'download');
+          const assets = await certificatePreviewAssets(record, 720);
+          blob = assets.blob;
+          downloadBlob(blob, certificateFileName(record, 'jpg'));
+          showCertificatePreview(assets.imageUrl, record, 'download');
           return;
         }
         blob = await certificateBlob(record);
@@ -1013,5 +1023,3 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
-
-
