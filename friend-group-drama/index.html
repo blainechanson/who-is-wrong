@@ -17,27 +17,27 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2, h3 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    h3 { font-size: 0.88rem; margin-bottom: 0.3rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -49,6 +49,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -79,6 +101,13 @@
 
 
       <p class="note">For harmless friend group drama only. Use as is or reword to suit your particular situation. Avoid private, identifying, bullying, harmful, or serious personal content. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
   <footer class="site-footer">
@@ -91,57 +120,41 @@
   </footer>
   <script>
     const caseLines = [
-      "The Photo Retake Limit|Requesting twelve photo retakes crossed a romantic boundary.|One good couple photo is worth reasonable suffering.",
-      "The Borrowed Hoodie|The borrowed hoodie should return home immediately.|The hoodie has emotionally bonded and cannot be safely relocated.",
-      "The Group Chat Delay|Ignoring plans until every useful option is gone ruins the whole mission.|Replying when emotionally available should still count as participation.",
-      "The Late Arrival|Always being late and calling it spontaneity is not a personality.|Arriving when the event becomes interesting is a gift.",
-      "The K Reply|Replying with only k is emotionally suspicious and possibly hostile.|K is efficient communication and not every letter needs a parade.",
-      "The Message Avalanche|Six tiny messages should have been one normal message.|Each thought deserved its own dramatic entrance.",
-      "The Read Receipt Evidence|Reading the message and not replying is documented neglect.|Reading is not the same as being emotionally ready to reply.",
-      "The Playlist Coup|Skipping songs every thirty seconds ruins the entire playlist.|A playlist is a living democracy and bad songs can be voted out.",
-      "The Last-Minute Invite|Inviting someone at the last minute makes them feel like a backup plan.|A late invite is still an invite and should be honoured.",
-      "The Holiday Playlist Dispute|Playing the same holiday song repeatedly was unreasonable.|Seasonal joy requires repetition until everyone submits.",
-      "The Seen Message Dispute|Leaving someone on seen for hours caused needless drama.|Seen means seen, not sentenced to immediate reply.",
-      "The Emoji Tone Trial|Using a thumbs-up emoji felt passive aggressive.|A thumbs-up emoji is efficient approval with a tiny hand.",
-      "The Social Media Tag Case|Tagging someone in a bad photo was reckless.|The photo captured authentic joy and questionable angles are part of life.",
-      "The Voice Message Length|Sending a five-minute voice message was inconsiderate.|Important stories need room to breathe.",
-      "The Unfollow Suspicion|Unfollowing someone without warning was dramatic.|The feed needed peace and no public hearing was required.",
-      "The Group Chat Name Change|Changing the group chat name caused confusion.|Group chat names should evolve with the nonsense.",
-      "The Meme Overload Trial|Sending too many memes in a row overwhelmed the chat.|The memes were time-sensitive cultural documents.",
-      "The Screenshot Share Case|Sharing a screenshot without context caused misunderstanding.|The screenshot was evidence and context could arrive later.",
-      "The Typing Then Vanishing Charge|Typing for ages and sending nothing was suspicious.|Drafting a message and retreating is emotional editing.",
-      "The Late Night Message|Sending a non-urgent message at midnight was unnecessary.|Phones have silent mode and thoughts have expiry dates.",
-      "The Hashtag Debate|Using too many hashtags made the post look desperate.|Hashtags are tiny signposts for lost attention.",
-      "The Profile Photo Trial|Keeping an ancient profile photo is misleading.|A good photo earns long-term public service.",
-      "The Reaction Only Reply|Reacting to a message instead of answering was evasive.|A reaction is a complete emotional response in miniature.",
-      "The Screenshot Evidence|Bringing screenshots into a petty argument escalated the matter.|Receipts prevent history from becoming creative.",
-      "The Online Status Case|Being online but not replying looked suspicious.|Online status is not a courtroom summons.",
-      "The Story Viewer Charge|Watching every story but not replying feels rude.|Viewing is support, and not every story requires a speech.",
-      "The Autocorrect Blame|Blaming autocorrect for a strange message is too convenient.|Autocorrect has a long criminal record.",
-      "The Group Poll Drama|Ignoring the poll and complaining about the choice is unfair.|Polls are flawed instruments and complaints improve democracy.",
-      "The Birthday Card Delay|Giving a birthday card late made it feel forgotten.|A late card extends the celebration season.",
-      "The Early Goodbye Case|Leaving the party early looked rude.|Leaving early prevents tired small talk and preserves dignity.",
-      "The K Reply Hearing|Replying with only k is emotionally suspicious.|K is efficient approval and not every reply needs decoration.",
-      "The Group Chat Silence|Reading every message but replying to none created planning chaos.|Observation is still participation when the chat is moving too fast.",
-      "The Late Arrival Defence|Arriving late again treated friendship like a flexible appointment.|Being late allowed everyone else to build anticipation.",
-      "The Playlist Takeover|Skipping songs without permission was social audio theft.|The playlist needed emergency quality control.",
-      "The Coffee Debt Case|Forgetting to repay coffee money weakened public trust.|Coffee debts live in vibes until formally invoiced.",
-      "The Screenshot Permission Trial|Sharing a screenshot without warning was group chat misconduct.|The screenshot preserved important history for the public record.",
-      "The Bad Photo Tag|Tagging an unapproved photo was reckless friendship behaviour.|The photo was funny, honest, and too good for deletion.",
-      "The Ride Home Assumption|Assuming a lift home without asking was bold logistics.|Friends with cars are part of the social transport ecosystem.",
-      "The Inside Joke Overuse|Repeating the same joke too often exhausted the group.|A strong joke deserves a long and noisy retirement plan.",
-      "The Dinner Split Debate|Splitting the bill evenly was unfair to the person who ordered lightly.|Math should not ruin dinner friendships.",
-      "The Plan Cancellation Case|Cancelling after everyone got ready caused unnecessary effort.|Social energy disappeared suddenly and should be respected.",
-      "The Selective Memory Hearing|Forgetting your own idea when it went wrong was suspicious.|Memory protects the mind from planning consequences.",
-      "The Event Invite Omission|Forgetting to invite one friend created diplomatic tension.|The invite list was managed under emotional pressure.",
-      "The Borrowed Outfit Case|Keeping a borrowed outfit too long became textile custody.|The outfit was safe, appreciated, and spiritually thriving.",
-      "The Queue Saving Trial|Saving places in line for late friends was controversial.|Friendship sometimes requires strategic queue diplomacy.",
-      "The Social Battery Exit|Leaving early without proper goodbye created confusion.|Quiet exits prevent a twenty-minute farewell ceremony.",
-      "The Movie Spoiler Charge|Dropping a spoiler in casual conversation caused cultural damage.|The film had been out long enough to enter public law.",
-      "The Weekend Plan Switch|Changing plans at the last minute caused outfit and mood confusion.|Better ideas arrived late but still deserved consideration.",
-      "The Group Chat Reply Trial|Ignoring the family group chat caused unnecessary suspense.|Not every message with twelve replies requires a thirteenth.",
-      "The Birthday Plan Fog|Refusing to choose birthday plans made everyone guess.|A birthday person deserves mystery and options.",
-      "The Table Booking Blame|Nobody booking a table caused public hunger.|Everyone had equal opportunity to become the responsible adult."
+      "The Chronic Latecomer Feud|Saying I am five minutes away when you have not even left your house is incredibly disrespectful.|There is no point in me arriving on time just to sit by myself while everyone else gets ready.",
+      "The Bad Photo Post Incident|Group chat approval is required before you post a photo where my eyes are half-closed.|You look fine, it is a funny memory, and nobody is looking at you that closely anyway.",
+      "The Bill Splitting Stand-off|I am not splitting the bill evenly when you ordered three cocktails and a steak while I had a side salad.|Whipping out your calculator to split the bill down to the exact dollar completely ruins the vibe.",
+      "The Voice Note Hostage Situation|Sending a seven-minute voice note instead of a quick text is forcing me to listen to your personal podcast.|I was actively processing my thoughts in real time, and you are supposed to be my friend.",
+      "The Group Chat Ghosting Drama|Leaving the group plan on read without saying yes or no makes it impossible to book anything.|If the details are already sorted, I do not need to spam the chat with another thumbs-up emoji.",
+      "The Message Avalanche|Sending six separate messages for one thought makes every phone in the group explode.|I was typing as I thought of things, which is how conversation works.",
+      "The Playlist Skipping Fight|Skipping every song after eight seconds means nobody actually gets to hear music.|If a song starts badly, we should not all suffer through it.",
+      "The Last-Minute Invite Debate|Inviting me at the last minute makes me feel like the backup plan.|A late invite is still an invite, and I thought you would want to come.",
+      "The Seen Message Dispute|Leaving the message on seen for hours made it look like you were ignoring everyone.|Seeing a message does not mean I am ready to answer it right now.",
+      "The Thumbs-Up Emoji Argument|Replying with only a thumbs-up feels passive aggressive.|A thumbs-up means yes, fine, approved, and please stop making this complicated.",
+      "The Screenshot Permission Debate|Sharing a screenshot of our funny typo without asking was not acceptable.|You are completely overreacting to a harmless image of a funny typo; it really isn't that deep.",
+      "The Typing Then Vanishing Mystery|Typing for ages and then sending nothing is suspicious behaviour.|I started replying, overthought it, and decided silence was safer.",
+      "The Late Night Message Debate|Sending a non-urgent message at midnight is just inconsiderate.|Phones have silent mode, and I needed to send it before I forgot.",
+      "The Emoji Only Reply|Attaching an emoji to a message instead of answering the actual question does not count.|An emoji is a complete answer when the question is not that serious.",
+      "The Online But Not Replying Dispute|You were clearly online, so ignoring the message looked deliberate.|Turning my phone screen on to check the time updates that status automatically; you are over-analyzing this.",
+      "The Story Watching Argument|Watching every story but never replying feels rude.|Watching is support, and not every photo needs a written review.",
+      "The Group Poll Complaint|You ignored the poll and then complained about the restaurant everyone picked.|The poll options were bad, and complaining is how democracy improves.",
+      "The Coffee Money Reminder|Forgetting to pay back coffee money three times makes it awkward for everyone.|It was a tiny amount and I honestly thought we were still in casual friend mode.",
+      "The Ride Home Assumption|Assuming you can get a lift home without asking is not acceptable.|We were going the same way, so it felt obvious enough.",
+      "The Inside Joke Overuse|Repeating the same joke every time we meet has officially drained the life out of it.|A good joke deserves to come back until everyone stops laughing completely.",
+      "The Plan Cancellation Argument|Cancelling after everyone is dressed and ready is deeply annoying.|My social energy disappeared, and forcing it would have been worse.",
+      "The Selective Memory Dispute|You forgot it was your idea the second the plan went badly.|I remember suggesting it, not forcing everyone to agree to it.",
+      "The Event Invite Omission|Forgetting to invite one person makes the whole group look messy.|Instead of treating an accidental oversight like a massive conspiracy, you could have just told me to add them.",
+      "The Borrowed Outfit Argument|Keeping a borrowed outfit for months is no longer borrowing.|It is safe at my place, I wore it once, and I was going to return it soon.",
+      "The Queue Saving Fight|Saving spots in line for people who are nowhere near the line is unfair.|You are completely overreacting to a harmless situation; it's a queue, not a high-security border crossing.",
+      "The Quiet Exit Debate|Leaving without saying goodbye makes everyone wonder where you went.|Saying goodbye to everyone turns leaving into a twenty-minute ceremony.",
+      "The Movie Spoiler Argument|Dropping a spoiler in casual conversation ruined it for people who had not seen it.|It has been out for ages, and at some point society has to move on.",
+      "The Weekend Plan Switch|Changing plans at the last minute caused outfit, money, and mood problems.|The better idea arrived late, but it was still the better idea.",
+      "The Birthday Plan Fog|Refusing to choose birthday plans makes everyone else guess wrong.|It is my birthday, so I am allowed to want options without managing a committee.",
+      "The Table Booking Blame|Nobody booked a table, and now everyone is hungry and pretending to be relaxed.|Everyone had the same chance to be the responsible adult.",
+      "The Group Photo Marathon|Taking twenty group photos is excessive when everyone looked fine ten photos ago.|The perfect photo always happens right after someone says we are done.",
+      "The Shared Popcorn Border|Reaching across the whole popcorn bowl is aggressive snack behaviour.|Popcorn does not have assigned seating.",
+      "The Bad Seat Saving Debate|Putting a jacket on three chairs before people arrive is too much.|If they are coming, the seats should be protected before strangers take them.",
+      "The Restaurant Split Calculator|Bringing out the calculator at dinner makes the table feel like tax season.|I am not paying for drinks I did not order just to protect the vibe.",
+      "The Group Chat Name Change|Changing the group chat name confused everyone for no reason.|The old name was boring, and the new name matches the current chaos."
     ];
 
     const cases = caseLines.map(line => {

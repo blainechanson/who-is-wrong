@@ -17,27 +17,27 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2, h3 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    h3 { font-size: 0.88rem; margin-bottom: 0.3rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -49,6 +49,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -79,6 +101,13 @@
 
 
       <p class="note">For harmless everyday arguments only. Use as is or reword to suit your particular situation. Avoid private, identifying, bullying, unlawful, harmful, or serious content. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
   <footer class="site-footer">
@@ -91,155 +120,81 @@
   </footer>
   <script>
     const caseLines = [
-      "The Hotel Air Conditioner War|Setting hotel air conditioning to arctic levels was unreasonable.|Hotels are for sleeping under blankets with confidence.",
-      "The Queue Chat Delay|Chatting at the counter held up everyone behind.|Friendly service interactions keep society from becoming robots.",
-      "The Leftover Expiry Debate|The leftovers have become suspicious and should leave the fridge.|Leftovers deserve due process before being declared a biohazard.",
-      "The Loud Typing Complaint|Typing like the keyboard owes money is disturbing the peace.|Productivity has sound effects and some people should respect ambition.",
-      "The Early Morning Noise|Making breakfast loudly before everyone is awake is kitchen thunder.|Breakfast has natural sound and silence is not a menu item.",
-      "The Dinner Plate Balance|Carrying one plate at a time wastes valuable dinner logistics.|Carrying too much risks tragedy and floor pasta.",
-      "The Sink Spoon Scandal|Leaving one spoon in the sink after cleaning up is unfinished business.|One spoon is not a mess, it is a footnote.",
-      "The Leftover Label Trial|Unlabelled leftovers should not be assumed available to everyone.|Anything unlabelled in the fridge enters the public domain.",
-      "The Grocery Substitute Case|Buying the wrong brand changed the entire snack experience.|A substitute is better than an empty cupboard.",
-      "The Dessert Before Dinner Case|Eating dessert before dinner undermined household order.|Dessert before dinner is efficient morale management.",
-      "The Good Pen Dispute|Taking the good pen and returning a disappointing pen is office betrayal.|All pens are temporary citizens of the desk community.",
-      "The Holiday Photo Trial|Taking too many photos interrupted the actual holiday.|Photos are proof that the holiday existed and outfits worked.",
-      "The Gym Music Debate|Playing workout music too loud at home was too much.|Motivation needs volume and ordinary silence cannot lift weights.",
-      "The Last Sip Incident|Leaving one tiny sip in the bottle is just avoiding responsibility for finishing it.|The bottle was technically not empty, so the complaint is dramatic.",
-      "The Five-Minute Lie|Five minutes should not mean a full historical era of waiting.|Time is flexible when shoes, keys, and personal readiness are involved.",
-      "The Missing Remote|The person who had the remote last must answer for its disappearance.|The couch is clearly the true suspect and should be searched first.",
-      "The Thermostat War|The room is freezing and basic human survival is at stake.|Jumpers exist, and the thermostat should not be treated like a campfire.",
-      "The Speakerphone Trial|Speakerphone in a shared room is a public nuisance.|Hands were busy, and everyone else received a bonus conversation.",
-      "The Shortcut Disaster|The shortcut added fourteen minutes and three new regrets.|Adventure is part of travel and maps are too controlling.",
-      "The Hot Water Scandal|Using all the hot water left everyone else in punishment mode.|Self-care requires commitment and the water heater should try harder.",
-      "The Chair Storage Defence|A chair covered in clothes is no longer a chair.|The chair has been promoted to wardrobe assistant.",
-      "The Grocery List Gamble|Forgetting the list and buying vibes instead of ingredients is shopping chaos.|Shopping requires instinct and the pantry should be more welcoming.",
-      "The Shoes At The Door|Shoes at the front door create a domestic obstacle course.|Shoes by the door are efficient, honest, and ready for action.",
-      "The Coffee Pot Symbolism|Leaving three drops of coffee in the pot is not sharing.|Three drops prove generosity and prevent the pot from feeling abandoned.",
-      "The Passenger Seat DJ|Changing the music before the song had a chance to live is rude.|Eight seconds is enough time to identify a musical mistake.",
-      "The One More Errand|A quick errand became a tour of four shops and one emotional detour.|Efficiency means doing nearby tasks while destiny has provided parking.",
-      "The Alarm Snooze Trial|Six snoozes punished everyone in the house.|Waking up is a gradual negotiation and the alarm knew the risks.",
-      "The Phone Charger Relocation|Borrowing a charger and returning it to a mystery realm is unacceptable.|The charger was placed somewhere safe, which is different from remembered.",
-      "The Parking Commentary|Narrating the parking attempt made everything worse.|Helpful passenger observations are a public service.",
-      "The Last Slice Claim|The last slice should not be claimed without public consultation.|Thinking about it first means mental dibs should count.",
-      "The Unmade Bed Theory|Making the bed is basic civilization.|The bed will be used again and should not be lied to.",
-      "The Birthday Reminder Credit|Remembering after two reminders does not deserve full credit.|The final remembering is what matters to history.",
-      "The Packing Emergency|Packing for a weekend like fleeing the country is excessive.|Preparedness is not a flaw just because the suitcase has ambition.",
-      "The Recipe Freestyle|Ignoring the recipe created dinner uncertainty.|Recipes are suggestions and confidence is an ingredient.",
-      "The Tiny Favour Expansion|A tiny favour secretly had seven steps and a ladder.|The favour revealed itself naturally and nobody could have predicted the ladder.",
-      "The Shopping Cart Near Miss|The shopping cart should have been returned properly.|The cart was close enough to the bay to understand the assignment.",
-      "The Left Turn Debate|Saying turn here at the last second is navigation sabotage.|The driver should have sensed the turning energy earlier.",
-      "The Window Open Conflict|Opening the window without warning turned the room into a wind tunnel.|Fresh air is not an attack and stale rooms need courage.",
-      "The Ice Cube Neglect|Taking the last ice cubes and not refilling the tray is beverage cruelty.|Ice trays are optional infrastructure and patience builds character.",
-      "The Car Snack Rule|Eating crunchy snacks in the car creates crumbs with no escape plan.|Road snacks are essential morale equipment.",
-      "The Two-Minute Phone Call|Saying it will be a quick call and vanishing for forty minutes is false advertising.|Time behaves differently during important gossip.",
-      "The Sofa Cushion Court|Not fixing the sofa cushions after sitting down is visual disorder.|Cushions are meant to look lived on, not museum-ready.",
-      "The Sauce Placement War|Putting sauce on the side after being asked for it on top ruined the meal vision.|Side sauce gives the eater freedom and prevents condiment dictatorship.",
-      "The Parking Spot Claim|Pointing at a parking spot first should reserve it morally.|Parking spots cannot be claimed by finger-based declarations.",
-      "The Morning Alarm Volume|The alarm volume shook the room awake against its will.|A weak alarm cannot defeat a strong sleeper.",
-      "The Car Temperature Split|One person cannot demand tropical heat while the other person melts.|The cold passenger had senior suffering rights.",
-      "The Queue Position Debate|Wandering away from the queue should forfeit the place.|A visible representative maintained the queue position in spirit.",
-      "The Voice Note Burden|Sending a three-minute voice note instead of typing is an audio assignment.|Voice notes carry tone, emotion, and valuable hand-free wisdom.",
-      "The Door Holding Confusion|Walking too slowly after someone holds the door creates awkward hallway theatre.|The door holder started the ceremony too early.",
-      "The Loud Video Charge|Watching videos out loud in a quiet room is social vandalism.|The volume was low and everyone received free content.",
-      "The Cart Checkout Delay|Rechecking the cart twelve times before ordering is commerce hesitation.|Online orders are permanent enough to require ceremony.",
-      "The Weather App Dispute|Ignoring the weather app and then complaining about rain is poor planning.|Weather apps are guesses wearing official clothing.",
-      "The Phone Brightness Trial|Using full brightness in a dark room is visual aggression.|The screen needed to be seen and nobody appointed a darkness committee.",
-      "The First Bite Claim|Asking for a bite and taking the best bite is snack treason.|The first bite is statistically the most informative sample.",
-      "The Unanswered Knock|Ignoring a knock while clearly being home is suspicious.|Being home does not mean being available to answer doors.",
-      "The Birthday Cake Slice|Cutting uneven cake slices created dessert inequality.|Cake geometry is difficult under party pressure.",
+      "The Grocery Bag Strength Test|Every single bag must be carried from the car to the kitchen in one single trip.|Taking two or more trips is a sign of intelligence, not physical weakness.",
+      "The Quick Look Shopping Trap|You said you just wanted to look at one thing, but we have been walking around this store for forty minutes.|Wandering down the aisles and looking at things is literally how people relax.",
+      "The Self-Checkout Standoff|Using the self-checkout machine just means you are doing the supermarket's job for them for free.|I would rather scan my own items than stand in a fifteen-minute queue to talk to a stranger.",
+      "The Airport Arrival Debate|We need to get to the airport three hours early because you never know what the traffic or security lines will be like.|Arriving that early means we are just sitting at a gate for two hours staring at the wall.",
+      "The Pizza Crust Debate|You cannot just eat the middle of the pizza and leave a pile of crust discarded on the plate.|The crust is just the handle you use to hold the pizza; you do not eat the handle.",
+      "The Last Sip Argument|Leaving one tiny sip in the bottle is just avoiding responsibility for finishing it.|The bottle was technically not empty, so the complaint is dramatic.",
+      "The Five-Minute Promise|Five minutes should not mean still choosing shoes twenty minutes later.|Getting ready has invisible stages that outsiders do not understand.",
+      "The Missing Remote Argument|The person who had the remote last should know where it is.|The couch eats remotes and everyone knows that.",
+      "The Thermostat Fight|The room is freezing and basic comfort is at stake.|Jumpers exist, and the thermostat should not be treated like a campfire.",
+      "The Speakerphone Argument|Using speakerphone in a shared room forces everyone into the call.|If you don't want to hear it, just put your own headphones in.",
+      "The Shortcut Disaster|Your shortcut added fourteen minutes and three new regrets.|Getting slightly lost is all part of the adventure.",
+      "The Hot Water Argument|Using all the hot water leaves everyone else in punishment mode.|I am unwinding from a stressful day; you cannot put a stopwatch on a shower.",
+      "The Grocery List Gamble|Forgetting the list and shopping from memory causes chaos.|The important things were obvious, and the shop might inspire better ideas.",
+      "The Shoes By The Door|Shoes at the front door create an obstacle course.|Shoes by the door are efficient because that is where shoes are used.",
+      "The Coffee Pot Argument|Leaving three drops of coffee in the pot is not sharing.|Three drops means it was not empty, which is technically considerate.",
+      "The Passenger DJ Dispute|Changing the song after eight seconds is rude to the song and everyone in the car.|Eight seconds is enough time to know a song is wrong.",
+      "The One More Errand Trap|A quick stop should not become four shops and a side quest.|If we are already out, doing nearby errands is responsible.",
+      "The Alarm Snooze Argument|Six snoozes punish everyone who does not need to wake up yet.|Waking up is a process, and the alarm understands that.",
+      "The Charger Disappearance|Borrowing a charger and returning it to nowhere is unacceptable.|I put it somewhere safe; remembering where is a separate issue.",
+      "The Parking Commentary Fight|Narrating every move while someone parks makes it worse.|Helpful warnings are cheaper than explaining a dent later.",
+      "The Last Slice Debate|The last slice should not be taken without asking the room.|If everyone looked at it for ten minutes, the bravest person earns it.",
+      "The Unmade Bed Argument|Making the bed starts the day properly.|The bed is going to be used again, so pretending it is finished is pointless.",
+      "The Birthday Reminder Debate|Remembering after two reminders does not deserve full credit.|The final remembering is what matters to the birthday person.",
+      "The Weekend Packing Argument|Packing for a weekend like you are fleeing the country is excessive.|Every extra item solves a possible future problem.",
+      "The Recipe Freestyle Debate|Ignoring the recipe is how dinner becomes unpredictable.|Recipes are suggestions, and confidence is part of cooking.",
+      "The Tiny Favour Expansion|A tiny favour should not secretly have seven steps and a ladder.|The favour revealed itself gradually, which nobody could have predicted.",
+      "The Trolley Return Debate|Return the shopping trolley properly after using it.|Leaving it near the bay is close enough for the next person to use.",
+      "The Last-Second Direction Argument|Saying turn here when the turn is already happening is not useful.|The driver should have sensed the turning energy earlier.",
+      "The Window Open Debate|Opening the window without warning turns the room into a wind tunnel.|Fresh air fixes stale rooms and should not need a committee.",
+      "The Ice Cube Tray Argument|If you take the last ice cubes, refill the tray.|Future thirst can be handled by future people.",
+      "The Car Snack Crumbs|Eating chips in the car creates crumbs forever.|Road trips require snacks, and vacuum cleaners exist.",
+      "The Quick Phone Call Lie|Saying it will be a quick call and disappearing for forty minutes is false advertising.|Time moves differently when a story needs background.",
+      "The Sofa Cushion Argument|Fix the sofa cushions after sitting down.|Cushions are for sitting on, not restoring like a hotel lobby.",
+      "The Sauce Placement Dispute|Putting sauce on the side after being asked for it on top ruins the meal.|Side sauce gives control and prevents sauce regret.",
+      "The Parking Spot Claim|Pointing at a parking spot first does not reserve it.|Calling it early should count for something in a crowded car park.",
+      "The Morning Alarm Volume|The alarm should wake the sleeper, not everyone nearby.|A gentle alarm cannot defeat a committed sleeper.",
+      "The Car Temperature Fight|One person cannot demand tropical heat while the other person is melting.|The cold passenger is suffering more and should get priority.",
+      "The Queue Spot Argument|Wandering away from the queue should forfeit the place.|One visible person can hold the place for the group.",
+      "The Voice Note Burden|Sending a long voice note instead of typing makes people listen to homework.|Talking is way faster, and I needed to give you the full dramatic context.",
+      "The Door Holding Distance|Holding the door from too far away forces an awkward little jog.|I was trying to be polite, and you chose to speed up.",
+      "The Loud Video Argument|Watching videos out loud in a quiet room is rude.|The volume was low and everyone got free entertainment.",
+      "The Online Cart Delay|Rechecking the cart twelve times before ordering is too much.|Online orders feel permanent and deserve a final inspection.",
+      "The Weather App Debate|Ignoring the weather app and then complaining about rain is poor planning.|Weather apps guess for a living and still get it wrong.",
+      "The Phone Brightness Argument|Full phone brightness in a dark room is too much.|The screen needed to be seen, and darkness is not in charge.",
+      "The Best Bite Dispute|Asking for one bite and taking the best bite is snack betrayal.|The first bite is the only way to properly test the food.",
+      "The Doorbell Panic|Ignoring the door because nobody was expected is dramatic.|Unexpected doorbells are suspicious and nobody should have to pretend otherwise.",
+      "The Cake Slice Debate|Cutting uneven cake slices creates obvious dessert inequality.|Cake is hard to divide perfectly while people are staring.",
       "The Shopping Speed Clash|Walking too fast through shops makes browsing impossible.|Shopping should have purpose, not museum pacing.",
-      "The Trolley Steering Charge|Bad trolley steering caused aisle disruption and public embarrassment.|Trolleys have their own ideas and cannot be fully controlled.",
-      "The Bedtime Scroll|Saying one more minute and scrolling for half an hour is bedtime fraud.|The scroll had momentum and stopping suddenly would be unsafe.",
-      "The Snack Noise Trial|Opening a packet during a quiet movie scene was unnecessary thunder.|Snack access should not pause for dramatic dialogue.",
-      "The Airport Timing Debate|Arriving at the airport three hours early is excessive.|Airports punish optimism, and early is the only sane defence.",
-      "The Packing Light Myth|Claiming to pack light while bringing four bags is misleading.|Every bag served a specific possible future.",
-      "The Seat Recline Dispute|Reclining the seat without warning was a personal space invasion.|The seat has a recline button and buttons imply permission.",
-      "The Map Reader Charge|The passenger failed the simple duty of reading directions aloud.|The driver asked while also ignoring half the instructions.",
-      "The Suitcase Weight Case|Packing heavy items in someone else's suitcase was luggage smuggling.|Shared travel means shared burden and stronger wheels.",
-      "The Souvenir Budget Clash|Buying another souvenir mug was unnecessary.|A mug is a memory with a handle.",
-      "The Itinerary Overload|Scheduling every holiday minute made relaxation impossible.|An itinerary prevents wandering into expensive confusion.",
-      "The Window Seat Claim|Calling the window seat first should settle the matter.|Seat claims require fairness, not volume.",
-      "The Road Trip Snack Vote|Buying strange road trip snacks without group approval was reckless.|Road trips are the proper place for snack experiments.",
-      "The Boarding Queue Debate|Standing up before boarding was called achieved nothing.|Being upright showed readiness and spiritual commitment.",
-      "The Board Game Rule Fight|Inventing rule interpretations mid-game corrupted the result.|Rules should adapt when victory is within reach.",
-      "The Old Photo Posting Case|Posting an unflattering old photo was a public relations incident.|The photo was funny, historic, and technically accurate.",
-      "The Gift Receipt Debate|Keeping the gift receipt visible made the gift feel conditional.|The receipt was practical backup, not emotional doubt.",
-      "The Game Night Cheating Charge|Looking up trivia answers too quickly was suspicious.|Knowledge arrived naturally and the phone was merely nearby.",
-      "The Cake Cutting Authority|Cutting the cake without the host was a ceremonial offence.|Cake was present, plates were present, and leadership was required.",
-      "The Lunch Break Timing|Taking lunch at the busiest moment abandoned the team.|Lunch hunger follows its own executive schedule.",
-      "The Pizza Topping War|Putting pineapple on the shared pizza was a reckless group decision.|Pineapple is a valid topping and deserves equal citizenship.",
-      "The Crispy Bacon Case|Cooking bacon too crispy ruined breakfast.|Crispy bacon is the highest form of bacon confidence.",
-      "The Cereal Milk Order|Pouring milk before cereal is deeply unsettling.|Milk first prevents splash and shows advanced planning.",
-      "The Sauce Ratio Trial|Drowning food in sauce hides the actual meal.|Sauce is joy and dry food should not dominate.",
-      "The Last Biscuit Claim|Taking the last biscuit without asking was snack selfishness.|The biscuit was unattended and destiny moved quickly.",
-      "The Spicy Food Argument|Ordering food too spicy for everyone else was inconsiderate.|Spice tolerance is personal growth served hot.",
-      "The Pizza Crust Debate|Leaving pizza crusts behind wastes the handle of the food.|Crust is optional architecture, not mandatory dinner.",
-      "The Breakfast For Dinner Case|Breakfast for dinner is not a real dinner plan.|Breakfast foods become dinner when served after sunset.",
-      "The Shared Appetizer Speed|Eating the shared appetizer too quickly ruined fairness.|Appetizers are timed contests with plates.",
-      "The Restaurant Choice Loop|Rejecting three restaurants without suggesting one is unfair.|Knowing what is wrong is the first step to finding what is right.",
-      "The Coffee Order Complexity|The coffee order had too many instructions for one cup.|Precision prevents beverage disappointment.",
-      "The Cake Corner Claim|Taking the corner piece without discussion was bold.|Corners reward decisive dessert leadership.",
-      "The Ice Cream Lid Crime|Putting an almost-empty ice cream tub back is emotional fraud.|There was enough left for a respectful spoonful.",
-      "The Takeaway Sharing Debate|Refusing to share takeaway after ordering extra was unreasonable.|Extra food was future food, not public food.",
-      "The Soup Slurp Trial|Slurping soup loudly disturbed the table.|Hot soup requires practical sound effects.",
-      "The Toast Darkness Case|Serving burnt toast and calling it well done is suspicious.|Dark toast has character and structural strength.",
-      "The Chip Bowl Placement|Placing the chips closer to one person created unfair access.|Anyone could have moved closer to the chip zone.",
-      "The Salad Dressing Dispute|Putting dressing on the whole salad removed everyone's choice.|Undressed salad is just leaves waiting for leadership.",
-      "The Read Later Promise|Saying I will read it later and never reading it was false hope.|Later is a broad jurisdiction with no fixed deadline.",
-      "The Phone At Dinner Case|Checking the phone during dinner was rude.|One quick check prevented a lifetime of curiosity.",
-      "The Bed Sheet Schedule|Bedsheets should be changed on a regular schedule.|Sheets do not come with a courtroom clock.",
-      "The Borrowed Book Trial|Keeping a borrowed book for months is suspicious.|Books move at the speed of intention.",
-      "The Game Controller Charge|Handing over the bad controller was unfair.|Skill should overcome minor button personality issues.",
-      "The Birthday Dinner Bill|Splitting the birthday dinner equally punished light eaters.|Shared celebration means shared arithmetic pain.",
-      "The Umbrella Sharing Case|Walking under the umbrella unevenly left one person soaked.|Umbrella geometry is complicated under pressure.",
-      "The Doorbell Panic|Not answering the door because nobody was expected was unreasonable.|Unexpected doorbells are naturally suspicious.",
-      "The Birthday Reminder App|Relying entirely on reminders made the birthday feel less remembered.|The reminder assisted memory but did not replace affection.",
-      "The Pen Lid Missing|Returning a pen without its lid was careless.|The lid chose independence and cannot be blamed on the borrower.",
-      "The Rain Jacket Lecture|Saying I told you so about rain was unnecessary.|Weather warnings deserve recognition when proven correct.",
-      "The Elevator Button Trial|Pressing the elevator button repeatedly achieved nothing.|Repeated pressing shows leadership and urgency.",
-      "The Shopping Bag Refusal|Refusing to take an extra shopping bag caused carrying chaos.|Extra bags multiply clutter and confidence should carry groceries.",
-      "The Cinema Whisper Case|Whispering during the movie was distracting.|Clarifying the plot prevents confusion and improves cinema value.",
-      "The Jacket Borrowing Trial|Borrowing a jacket and keeping it too long is wardrobe theft.|The jacket was being appreciated properly.",
-      "The Public Directions Debate|Stopping in the middle of the path to check directions blocked traffic.|Stopping prevented walking confidently in the wrong direction.",
-      "The Escalator Side Case|Standing on the walking side of the escalator was inconsiderate.|Escalators already move and extra walking is optional.",
-      "The Neighbourly Parcel Hold|Taking too long to collect a held parcel was awkward.|Parcel pickup requires the right window of social courage.",
-      "The Appointment Reminder|Reminding someone three times was annoying.|Forgetting once created the reminder department.",
-      "The Gift Bag Reuse Trial|Reusing the same gift bag again was obvious.|A strong gift bag deserves a long career.",
-      "The Weather Complaint Loop|Complaining about weather nobody controls became exhausting.|Weather complaints are a basic human bonding ritual.",
-      "The Borrowed Tool Return|Returning a tool dirty showed poor borrowing manners.|A used tool proves the favour was real.",
-      "The Queue Cutter Suspicion|Standing beside the queue looked like attempted queue theft.|They were merely researching the queue before joining.",
-      "The Elevator Hold Debate|Holding the elevator too long inconvenienced everyone inside.|Leaving someone behind would have been colder than the elevator music.",
-      "The Phone Map Confidence|Ignoring the phone map and guessing caused confusion.|Local instincts sometimes outrank blue dots.",
-      "The Card Game Gloating|Celebrating a card game win too much was poor sportsmanship.|A rare victory deserves a short parade.",
-      "The Text Back Speed|Expecting instant replies created unnecessary pressure.|A phone is not a leash with notifications.",
-      "The Shared Drive Folder|Renaming shared files without warning caused chaos.|The new names were clearer to anyone with vision.",
-      "The Jacket On Chair|Putting a jacket on the best chair reserved it unfairly.|A jacket is a recognized placeholder in casual society.",
-      "The Shared Password Confusion|Changing the password without telling anyone caused chaos.|Password updates protect the household from digital embarrassment.",
-      "The Online Cart Abandonment|Building a cart and never ordering wasted everyone's excitement.|Cart building is research, not a signed contract.",
-      "The Spare Charger Claim|Calling the spare charger yours defeated the meaning of spare.|Spare means currently available to the best prepared person.",
-      "The Delivery Tracking Obsession|Checking delivery tracking every five minutes changed nothing.|The package deserved emotional supervision.",
-      "The Weekend Chore Timing|Starting chores right when plans were made felt suspicious.|Chores appear when the conscience finally boots up.",
-      "The Car Radio Preset|Changing radio presets without permission was unacceptable.|Bad presets needed reform and the dashboard deserved better.",
-      "The Five-Minute Promise|Five minutes should not mean still choosing shoes twenty minutes later.|Getting ready involves invisible stages outsiders cannot understand.",
-      "The Shared Bill Reminder|Waiting for three reminders to pay a bill was stressful.|The bill was always going to be paid before civilization collapsed.",
-      "The Car Seat Rotation|Claiming the best car seat every trip was unfair.|Car seating follows ancient seniority rules nobody wrote down.",
-      "The Birthday Card Pressure|Passing around a card too late created panic signatures.|Spontaneous birthday messages have more heart.",
-      "The Queue Gap Debate|Leaving a huge gap in the line caused public confusion.|Personal space should not be punished by queue anxiety.",
-      "The Trolley Return Case|Not returning the trolley was a small civic failure.|The trolley bay was far away and the trolley looked independent.",
-      "The Loud Phone Call|Taking a loud call in public made everyone unwilling witnesses.|Important calls sometimes require public volume.",
-      "The Door Holding Distance|Holding the door from too far away forced an awkward jog.|Courtesy should not become cardio.",
-      "The Escalator Standing Trial|Standing on the walking side caused silent public outrage.|Escalators move by themselves and that is their job.",
-      "The Last Bite Debate|Taking the last bite without asking broke snack etiquette.|The last bite was abandoned and needed closure.",
-      "The Shopping Cart Blockade|Blocking the aisle with a trolley caused traffic court conditions.|Shopping requires contemplation and aisle space is shared.",
-      "The Movie Talking Case|Whispering through the movie disrupted public peace.|Clarifying the plot protects everyone from confusion.",
-      "The Elevator Button Case|Pressing the button repeatedly showed no trust in machinery.|Repeated pressing communicates urgency to the elevator technology.",
-      "The Public Speakerphone Trial|Using speakerphone in public was a social disturbance.|Hands were busy and the call needed air.",
-      "The Borrowed Pen Mystery|Borrowing a pen and keeping it forever is quiet theft.|Pens travel naturally and cannot always return home.",
-      "The Restaurant Table Claim|Hovering near a table before people left was uncomfortable.|Efficient seating requires tactical readiness.",
-      "The Walking Speed Case|Walking too slowly in a busy path caused traffic tension.|Not every sidewalk trip needs racing energy.",
-      "The Shared Armrest Trial|Taking the whole armrest was territorial conduct.|Armrests belong to whoever establishes elbow presence first.",
-      "The Takeaway Cutlery Case|Forgetting cutlery turned lunch into a survival exercise.|Hands and creativity remain available in emergencies.",
-      "The Text Reply Timing|Waiting all day to reply was socially suspicious.|Not every message requires immediate courtroom attention."
+      "The Trolley Steering Argument|Your terrible trolley steering is actively causing absolute chaos in the supermarket aisles.|Shopping trolleys have one bad wheel and a mind of their own.",
+      "The Bedtime Scroll Debate|One more minute on the phone becomes half an hour.|I am unwinding, and the phone is how the day leaves my brain.",
+      "The Snack Noise Argument|Opening a packet during a quiet movie scene is unnecessarily loud.|Snacks should not have to wait for the movie to stop whispering.",
+      "The Packing Light Myth|Claiming to pack light while bringing four bags is misleading.|Every bag has a different possible emergency inside it.",
+      "The Seat Recline Argument|Reclining a seat without warning invades the space behind you.|The seat has a recline button, and buttons imply permission.",
+      "The Map Reader Argument|The passenger is supposed to read out the directions before the turn, not while we are actively driving past it.|I told you the exit was coming up, but you kept asking questions while completely ignoring half the instructions.",
+      "The Suitcase Weight Dispute|Putting heavy items in someone else's suitcase is luggage smuggling.|Shared travel means shared weight and stronger wheels.",
+      "The Souvenir Budget Debate|Buying another souvenir mug is unnecessary.|A mug is useful, cheap, and proves the trip happened.",
+      "The Holiday Itinerary Fight|Planning every hour of the holiday makes it feel like work.|An itinerary stops everyone wandering into expensive confusion.",
+      "The Board Game Rule Fight|Rules should be read before the game starts.|Learning while playing is more exciting and keeps the night interesting.",
+      "The Old Photo Posting Argument|Posting an unflattering old photo without warning is unfair.|It was funny, accurate, and from long enough ago to be safe.",
+      "The Gift Receipt Debate|Leaving the gift receipt visible makes the gift feel less thoughtful.|The receipt is practical backup, not a personal attack.",
+      "The Pizza Topping Fight|Putting a controversial topping on the shared pizza is reckless.|If it is on half the pizza, everyone still has options.",
+      "The Cereal Milk Order|Pouring milk before cereal is deeply unsettling.|Milk first prevents splash and shows advanced breakfast planning.",
+      "The Sauce Ratio Debate|Drowning food in sauce hides the actual meal.|Sauce is the best part and dry food should not win.",
+      "The Last Biscuit Claim|Taking the last biscuit without asking is selfish.|The biscuit was sitting there abandoned until someone showed courage.",
+      "The Restaurant Choice Loop|Rejecting restaurants without suggesting one is unfair.|Knowing what I do not want is still part of choosing.",
+      "The Coffee Order Delay|Know your coffee order before reaching the counter.|The menu looks different once the pressure is real.",
+      "The Ice Cream Tub Argument|Putting an almost-empty ice cream tub back in the freezer is emotional fraud.|There was enough left for one respectful spoonful.",
+      "The Phone At Dinner Debate|Checking the phone during dinner is rude.|One quick check prevents a whole evening of curiosity.",
+      "The Movie Whisper Argument|Whispering through the movie ruins the quiet parts.|Asking questions prevents me from being confused for two hours.",
+      "The Elevator Button Debate|Pressing the elevator button repeatedly does not make it arrive faster.|Repeated pressing shows urgency and commitment.",
+      "The Public Speakerphone Argument|Using speakerphone in public makes strangers part of the call.|My hands were full and the call was not that interesting anyway.",
+      "The Walking Speed Argument|Walking too slowly on a busy path causes chaos.|Not every walk needs race energy.",
+      "The Shared Armrest Debate|Taking the whole armrest is unfair.|Armrests belong to whoever gets the elbow there first.",
+      "The Takeaway Cutlery Problem|Forgetting cutlery turns lunch into a survival challenge.|Someone who is truly resourceful can always find a creative way to eat their food.",
+      "The Text Reply Timing|Waiting all day to reply looks suspicious.|Not every message needs an instant response just because phones exist."
     ];
 
     const cases = caseLines.map(line => {

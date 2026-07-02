@@ -28,6 +28,8 @@
     body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
     .font-serif-court { font-family: 'Cinzel', 'Georgia', serif; }
     .sponsor-slot { width: 100%; background-color: var(--bg-card); padding: 12px; text-align: center; font-size: 12px; color: var(--text-dark); letter-spacing: 0.15em; border-bottom: 1px solid #292524; }
+    .sponsor-slot a { color: #a8a29e; text-decoration: none; }
+    .sponsor-slot a:hover { color: #f5f5f4; text-decoration: underline; text-underline-offset: 0.18rem; }
     .sponsor-slot.bottom { border-bottom: none; border-top: 1px solid #292524; padding: 16px; }
     main { max-width: 48rem; width: 100%; margin: 0 auto; padding: 3rem 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
     header { text-align: center; margin-bottom: 2.5rem; }
@@ -71,6 +73,7 @@
     .stationery-header { border-bottom: 1px solid #292524; padding-bottom: 1rem; text-align: center; margin-bottom: 1.5rem; }
     .stationery-art { display: grid; grid-template-columns: 5.4rem 1fr 5.4rem; align-items: center; gap: 1rem; }
     .stationery-photo { width: 5.4rem; height: 4rem; object-fit: cover; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.35rem; background-color: #0c0a09; }
+    .stationery-brand { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.22rem; }
     .stationery-header h2 { font-size: 1.5rem; color: var(--accent-hover); text-transform: uppercase; letter-spacing: 0.1em; }
     .case-id { font-family: monospace; font-size: 11px; color: var(--text-dark); margin-top: 0.25rem; }
     .verdict-text { color: #fafaf9; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; line-height: 1.8; font-weight: 500; letter-spacing: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
@@ -83,15 +86,18 @@
     .verdict-text .p-3 strong, .verdict-text .p-3 b { font-weight: 500; }
     .stationery-footer { border-top: 1px solid #292524; padding-top: 1rem; margin-top: 1.5rem; text-align: center; display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     @media (min-width: 560px) { .stationery-footer { grid-template-columns: repeat(2, 1fr); } }
-    .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
+    .btn-secondary { width: 100%; background-color: var(--bg-main); border: 1px solid #444; color: #e7e5e4; padding: 0.85rem; border-radius: 0.5rem; font-family: inherit; font-size: 0.95rem; font-weight: 750; line-height: 1.2; letter-spacing: 0; text-transform: none; cursor: pointer; }
     .btn-secondary:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .stationery-footer .btn-primary, .stationery-footer .btn-secondary, .history-controls .btn-primary, .history-controls .btn-secondary, .history-case-actions .btn-primary, .history-case-actions .btn-secondary, .certificate-preview-actions .btn-primary, .certificate-preview-actions .btn-secondary { min-height: 3.1rem; margin-top: 0; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .stationery-footer .btn-secondary, .history-controls .btn-secondary, .history-case-actions .btn-secondary, .certificate-preview-actions .btn-secondary { font-size: 0.95rem; font-weight: 750; letter-spacing: 0; text-transform: none; }
     .error-msg { color: #ef4444; text-align: center; margin-top: 1rem; font-size: 0.875rem; }
     .certificate-preview { position: fixed; inset: 0; z-index: 50; background: rgba(12, 10, 9, 0.94); padding: 1rem; overflow: auto; }
     .certificate-preview-inner { max-width: 46rem; margin: 2rem auto; background: var(--bg-card); border: 1px solid rgba(217, 119, 6, 0.45); border-radius: 0.75rem; padding: 1rem; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65); }
     .certificate-preview h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; text-transform: uppercase; letter-spacing: 0.07em; font-size: 1.15rem; margin: 0.85rem 0 0.5rem; }
-    .certificate-preview p { color: #f5f5f4; line-height: 1.6; font-size: 0.94rem; margin-bottom: 1rem; }
+    .certificate-preview p { color: #f5f5f4; line-height: 1.45; font-size: 0.96rem; margin-bottom: 0.8rem; }
     .certificate-preview img { width: 100%; height: auto; border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 0.5rem; background: #0c0a09; margin-bottom: 0.25rem; }
     .certificate-preview-actions { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .certificate-preview-actions button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .certificate-preview-actions a { display: block; text-align: center; text-decoration: none; }
     .history-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
     .history-header h2 { color: var(--accent-hover); font-family: 'Cinzel', 'Georgia', serif; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
@@ -142,10 +148,12 @@
       .sound-block { width: 105px; height: 31px; left: 20px; bottom: 21px; }
       .impact-lines { left: 29px; bottom: 80px; }
       .impact-lines span { width: 38px; height: 5px; margin: 7px 0; }
-      .gavel-scene.strike-now .impact-lines { animation: impactFlash 0.12s linear both; }
+      .gavel-scene.strike-now .gavel-photo { animation: gavelStrike 0.28s ease-out both; }
+      .gavel-scene.strike-now .impact-lines { animation: impactFlash 0.22s linear both; }
       .stationery { padding: 1.25rem; }
       .stationery-art { grid-template-columns: 4.2rem 1fr 4.2rem; gap: 0.6rem; }
       .stationery-photo { width: 4.2rem; height: 3.2rem; }
+      .stationery-brand { font-size: 0.68rem; margin-bottom: 0.16rem; }
       .stationery-header h2 { font-size: 1.05rem; }
       .verdict-text, .verdict-text p, .verdict-text .p-3 p { font-size: 0.98rem; line-height: 1.7; }
       .content-section { margin-top: 1.6rem; }
@@ -156,15 +164,43 @@
       .certificate-preview { padding: 0; background: #050505; }
       .certificate-preview-inner { margin: 0 auto; padding: 0; border: none; border-radius: 0; background: #050505; box-shadow: none; }
       .certificate-preview img { display: block; width: 100%; border: none; border-radius: 0; margin: 0; background: #050505; }
-      .certificate-preview h2, .certificate-preview p, .certificate-preview-actions { margin-left: 1rem; margin-right: 1rem; }
-      .certificate-preview h2 { margin-top: 55vh; }
+      .certificate-preview h2 { display: none; }
+      .certificate-preview p, .certificate-preview-actions { margin-left: 0.75rem; margin-right: 0.75rem; }
+      .certificate-preview p { margin-top: 0.65rem; margin-bottom: 0.5rem; font-size: 0.92rem; line-height: 1.35; }
       .certificate-preview-actions { padding-bottom: 1.25rem; }
       .site-footer { padding: 0 0.85rem 1.5rem; }
+    }
+    :where(a, button, input, textarea) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .sponsor-slot { padding: 0.25rem 0.75rem; }
+    .sponsor-slot a { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 0.35rem; border-radius: 0.4rem; }
+    input, textarea { border-color: rgba(245, 158, 11, 0.68); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.18), 0 0 0 1px rgba(217, 119, 6, 0.08); transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+    input::placeholder, textarea::placeholder { color: #a8a29e; opacity: 1; }
+    input:focus, textarea:focus { border-color: var(--accent-hover); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.34), inset 0 0 0 1px rgba(245, 158, 11, 0.24); }
+    .btn-primary, .btn-generator, .btn-secondary, .history-index-link, .keyword-panel, .site-footer a, .sponsor-slot a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .btn-primary { border: 1px solid rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .btn-generator, .btn-secondary, .history-index-link, .site-footer a { border-color: rgba(245, 158, 11, 0.52); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .keyword-panel { border-color: rgba(245, 158, 11, 0.58); box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.14); }
+    :where(.btn-primary, .btn-generator, .btn-secondary, .history-index-link, .keyword-panel, .site-footer a, .sponsor-slot a):focus-visible,
+    :where(input, textarea):focus-visible { outline: none; border-color: var(--accent-hover); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.2); }
+    @media (hover: hover) {
+      :where(.btn-primary, .btn-generator, .btn-secondary, .history-index-link, .keyword-panel, .site-footer a, .sponsor-slot a):hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .btn-primary:hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    @media (max-width: 480px) {
+      main { padding: 1.35rem 0.85rem 2rem; }
+      header { margin-bottom: 1.2rem; }
+      .gavel-icon-box { width: 4.7rem; height: 4.7rem; margin-bottom: 0.75rem; }
+      h1 { font-size: 1.82rem; margin-bottom: 0.35rem; }
+      .seo-heading { margin-bottom: 0.35rem; }
+      .card { padding: 0.9rem; }
+      .party-square { padding: 0.9rem; }
+      .btn-primary, .btn-generator, .btn-secondary { min-height: 3.15rem; }
+      .site-footer a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
     }
   </style>
 </head>
 <body>
-  <div class="sponsor-slot">SPONSOR SPACE</div>
+  <div class="sponsor-slot"><a href="/contact">COURT SPONSORSHIP AVAILABLE</a></div>
   <main>
     <header>
       <div class="gavel-icon-box"><img id="header-gavel" src="/header-gavel.png?v=1" alt="" class="header-gavel-photo" fetchpriority="high" decoding="async"></div>
@@ -202,7 +238,7 @@
         <div class="stationery-header">
           <div class="stationery-art">
             <img id="decree-gavel" alt="" class="stationery-photo">
-            <div><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
+            <div><div class="stationery-brand">Who Is Wrong</div><h2>Official Decree</h2><div class="case-id" id="display-case-id">CASE NO. #00000</div></div>
             <img id="decree-scales" alt="" class="stationery-photo">
           </div>
         </div>
@@ -222,11 +258,14 @@
           </div>
         </div>
         <div class="history-controls">
+          <button class="btn-primary" onclick="backToJudgeFromHistory()">Return to Judge</button>
           <button class="btn-secondary" onclick="clearHistory()">Clear History</button>
-          <button class="btn-secondary" onclick="backToJudgeFromHistory()">Back to the Judge</button>
         </div>
         <div id="history-index" class="history-index hidden"></div>
         <div id="history-list" class="history-list"></div>
+        <div id="history-bottom-controls" class="history-controls hidden">
+          <button class="btn-secondary" onclick="backToTopFromHistory()">Back to Top</button>
+        </div>
 
       </div>
     </div>
@@ -234,10 +273,10 @@
       <div class="certificate-preview-inner">
         <img id="certificate-preview-image" alt="Who Is Wrong certificate preview">
         <h2 id="certificate-preview-title">Certificate Ready</h2>
-        <p id="certificate-preview-text">Take a screenshot of the certificate and share it from your screenshot captures.</p>
+        <p id="certificate-preview-text">Take a screenshot of the certificate to share.</p>
         <div class="certificate-preview-actions">
-          <a id="certificate-preview-open" class="btn-secondary" href="#" target="_blank" rel="noopener">Open Certificate Image</a>
-          <button id="certificate-preview-close" class="btn-secondary" type="button" onclick="closeCertificatePreview()">Back to the Verdict</button>
+          <button id="certificate-preview-close" class="btn-primary" type="button" onclick="closeCertificatePreview()">Return to Judge</button>
+          <button class="btn-secondary" type="button" onclick="closeCertificatePreview(); showHistory();">History Page</button>
         </div>
       </div>
     </div>
@@ -269,17 +308,19 @@
     <section id="page-one-examples" class="content-section" aria-label="Example argument prompts">
       <h2>Example Argument Prompts</h2>
       <div class="example-list">
-        <p>Toilet paper orientation: should the flap hang over the front versus tucked against the wall?</p>
-        <p>Does putting an unrinsed plate into the dishwasher make you lazy, or does rinsing it beforehand defeat the entire purpose of owning a $1,000 dishwasher?</p>
-        <p>Who is wrong at work when someone books a meeting for a question that could have been answered with one sentence?</p>
+        <p>If you use the last square of toilet paper, do you have to slide the new roll onto the holder, or does balancing it on top count?</p>
+        <p>Is drinking straight from the juice or milk bottle inconsiderate, or is it saving dishes and protecting the planet?</p>
+        <p>If someone says they do not want fries, do they still get to steal three from your plate?</p>
+        <p>Should "almost ready" mean shoes on and ready to leave, or just that someone has started thinking about getting ready?</p>
       </div>
     </section>
     <section id="page-two-examples" class="content-section hidden" aria-label="More funny argument prompts">
       <h2>More Argument Ideas</h2>
       <div class="example-list">
-        <p>Who is wrong when one person says "I am nearly ready" but has not yet chosen an outfit, found their shoes, or accepted reality?</p>
-        <p>Settle a debate: is it acceptable to leave one tiny sip of juice in the bottle so you technically did not finish it?</p>
-        <p>Am I wrong for saying the person who chooses the movie should not spend twenty minutes scrolling after everyone already agreed?</p>
+        <p>Is asking for dinner ideas and rejecting every option unfair, or do bad dinner ideas deserve to be rejected?</p>
+        <p>Does one more episode mean harmless fun, or does it mean everyone will hate themselves at 6:00 AM tomorrow?</p>
+        <p>Should plates be rinsed before going into the dishwasher, or does that defeat the whole point of owning one?</p>
+        <p>Could this meeting have been one chat message, or does a quick call save an hour of back-and-forth?</p>
       </div>
     </section>
     <section class="content-section" aria-label="Frequently asked questions">
@@ -300,7 +341,7 @@
       <a href="/contact">Contact</a>
     </p>
   </footer>
-  <div class="sponsor-slot bottom">SPONSOR SPACE</div>
+  <div class="sponsor-slot bottom"><a href="/contact">COURT SPONSORSHIP AVAILABLE</a></div>
   <audio id="gavel-sound" src="gavel-hit.mp3?v=1" preload="auto"></audio>
   <script>
     const headerGavelImage = 'header-gavel.png?v=1';
@@ -314,9 +355,18 @@
     const gavelSound = document.getElementById('gavel-sound');
     const isAndroidDevice = /Android/i.test(navigator.userAgent);
     const isPhoneLikeDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 820);
-    const gavelHitTimes = isAndroidDevice ? [0, 380, 760] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
+    const gavelHitTimes = isAndroidDevice ? [120, 620, 1120] : (isPhoneLikeDevice ? [0, 380, 760] : [0, 430, 860]);
     const localCooldownMs = 10000;
     const historyKey = 'whoIsWrongSessionHistory';
+    const blockedCasePatterns = [
+      /\b(suicide|self[-\s]?harm|kill myself|hurt myself)\b/i,
+      /\b(assault|domestic violence|rape|sexual assault|abuse|stalking|blackmail)\b/i,
+      /\b(divorce|custody|lawsuit|sued|suing|sue me|sue them|sue him|sue her|lawyer|police report|restraining order|eviction|lease dispute)\b/i,
+      /\b(diagnosis|medical|medication|pregnant|pregnancy|therapy|therapist|counsell?ing)\b/i,
+      /\b(election|politics|political|religion|church|mosque|synagogue)\b/i,
+      /\b(sex|nude|nudes|porn|onlyfans)\b/i,
+      /\b(racist|racial slur|homophobic|transphobic|slur|hate speech)\b/i,
+    ];
     let gavelTimers = [];
     let currentCaseRecord = null;
     let historyReturnView = 'form';
@@ -329,6 +379,11 @@
 
     document.getElementById('argA').addEventListener('input', () => updateCount('argA', 'argA-count'));
     document.getElementById('argB').addEventListener('input', () => updateCount('argB', 'argB-count'));
+
+    function hasBlockedCaseContent(...values) {
+      const combined = values.join(' ');
+      return blockedCasePatterns.some(pattern => pattern.test(combined));
+    }
 
     function applyPrefilledCase() {
       const params = new URLSearchParams(window.location.search);
@@ -497,6 +552,11 @@
         errorBox.classList.remove('hidden');
         return;
       }
+      if (hasBlockedCaseContent(argA, argB)) {
+        errorBox.textContent = 'The court only hears harmless petty disputes. Please keep serious, unsafe, private, sexual, legal, medical, political, religious, or bullying issues out of the case.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
       if (cooldownRemaining > 0) {
         errorBox.textContent = `The court needs ${Math.ceil(cooldownRemaining / 1000)} more seconds before hearing another case.`;
         errorBox.classList.remove('hidden');
@@ -581,16 +641,18 @@
         historyIndex.classList.add('hidden');
         historyIndex.innerHTML = '';
         historyList.innerHTML = '<div class="history-empty">No case history yet. Hear a case first, then the latest verdicts will appear here.</div>';
+        document.getElementById('history-bottom-controls').classList.add('hidden');
         return;
       }
       historyIndex.classList.remove('hidden');
+      document.getElementById('history-bottom-controls').classList.remove('hidden');
       historyIndex.innerHTML = history.map(record => `
         <a class="history-index-link" href="#${caseAnchorId(record)}">
           <span class="history-index-title">${escapeHtml(record.nameA || 'Person A')} vs ${escapeHtml(record.nameB || 'Person B')}</span>
           <span class="history-index-topic">${escapeHtml(shortTopic(record))}</span>
         </a>
       `).join('');
-      historyList.innerHTML = history.map(record => `
+      historyList.innerHTML = history.map((record, index) => `
         <article id="${caseAnchorId(record)}" class="history-case">
           <div class="history-case-header">
             <div class="history-certificate-art">
@@ -603,7 +665,8 @@
           <div class="history-case-actions">
             <button class="btn-secondary" onclick="shareHistoryCertificate('${record.caseId}')">Share Certificate</button>
             <button class="btn-secondary" onclick="downloadHistoryCertificate('${record.caseId}')">Download Certificate</button>
-            <button class="btn-secondary" onclick="backToTopFromHistory()">Back to Top</button>
+            ${history.length > 1 && index > 0 ? `<button class="btn-secondary" onclick="goToAdjacentHistoryCase('${record.caseId}', -1)">Previous Certificate</button>` : ''}
+            ${history.length > 1 && index < history.length - 1 ? `<button class="btn-secondary" onclick="goToAdjacentHistoryCase('${record.caseId}', 1)">Next Certificate</button>` : ''}
           </div>
         </article>
       `).join('');
@@ -632,6 +695,16 @@
 
     function backToTopFromHistory() {
       document.getElementById('history-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function goToAdjacentHistoryCase(caseId, offset) {
+      const history = getHistory();
+      if (history.length < 2) return;
+      const index = history.findIndex(record => record.caseId === caseId);
+      const target = history[index + offset];
+      if (!target) return;
+      const targetElement = document.getElementById(caseAnchorId(target));
+      if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function clearHistory() {
@@ -674,14 +747,40 @@
       ctx.closePath();
     }
 
-    function calculateCertificateHeight(record) {
+    const certificateLayout = {
+      width: 900,
+      margin: 62,
+      topLineY: 206,
+      contentStartY: 258,
+      headingFont: '700 28px Georgia, serif',
+      bodyFont: '32px Inter, Arial, sans-serif',
+      headingGap: 40,
+      lineHeight: 43,
+      sectionGap: 30,
+      footerGap: 46,
+      footerHeight: 132,
+      bottomPadding: 42,
+    };
+
+    function measureCertificateContentHeight(record) {
+      const canvas = document.createElement('canvas');
+      canvas.width = certificateLayout.width;
+      const ctx = canvas.getContext('2d');
       const sections = parseCertificateSections(record);
-      let height = 310;
-      sections.forEach(section => {
-        const words = section.body.split(/\s+/).filter(Boolean).length;
-        height += 78 + Math.ceil(words / 12) * 38;
+      let y = certificateLayout.contentStartY;
+      sections.forEach((section, index) => {
+        ctx.font = certificateLayout.headingFont;
+        y += certificateLayout.headingGap;
+        ctx.font = certificateLayout.bodyFont;
+        y = wrapCanvasText(ctx, section.body, certificateLayout.margin, y, certificateLayout.width - (certificateLayout.margin * 2), certificateLayout.lineHeight);
+        if (index < sections.length - 1) y += certificateLayout.sectionGap;
       });
-      return Math.max(980, Math.min(1800, height + 145));
+      return y;
+    }
+
+    function calculateCertificateHeight(record) {
+      const contentEndY = measureCertificateContentHeight(record);
+      return Math.ceil(contentEndY + certificateLayout.footerGap + certificateLayout.footerHeight + certificateLayout.bottomPadding);
     }
 
     function loadCertificateImage(src) {
@@ -722,7 +821,7 @@
     }
 
     async function certificateCanvas(record) {
-      const width = 1200;
+      const width = certificateLayout.width;
       const height = calculateCertificateHeight(record);
       const canvas = document.createElement('canvas');
       canvas.width = width;
@@ -737,56 +836,59 @@
       ctx.fillStyle = '#0c0a09';
       ctx.fillRect(0, 0, width, height);
       ctx.fillStyle = '#1c1917';
-      drawRoundedRect(ctx, 42, 42, width - 84, height - 84, 18);
+      drawRoundedRect(ctx, 32, 32, width - 64, height - 64, 18);
       ctx.fill();
       ctx.strokeStyle = 'rgba(217, 119, 6, 0.75)';
       ctx.lineWidth = 4;
       ctx.stroke();
 
-      drawCertificatePhoto(ctx, gavelIcon, 96, 82, 150, 108);
-      drawCertificatePhoto(ctx, scalesIcon, width - 246, 82, 150, 108);
+      drawCertificatePhoto(ctx, gavelIcon, 62, 78, 120, 86);
+      drawCertificatePhoto(ctx, scalesIcon, width - 182, 78, 120, 86);
 
       ctx.textAlign = 'center';
       ctx.fillStyle = '#f59e0b';
-      ctx.font = '700 44px Georgia, serif';
-      ctx.fillText('OFFICIAL DECREE', width / 2, 130);
+      ctx.font = '700 26px Georgia, serif';
+      ctx.fillText('WHO IS WRONG', width / 2, 70);
+      ctx.font = '700 46px Georgia, serif';
+      ctx.fillText('OFFICIAL DECREE', width / 2, 126);
       ctx.fillStyle = '#a8a29e';
-      ctx.font = '20px Consolas, monospace';
-      ctx.fillText(`CASE NO. #${record.caseId}`, width / 2, 168);
+      ctx.font = '22px Consolas, monospace';
+      ctx.fillText(`CASE NO. #${record.caseId}`, width / 2, 164);
 
       ctx.strokeStyle = '#292524';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(96, 205);
-      ctx.lineTo(width - 96, 205);
+      ctx.moveTo(62, certificateLayout.topLineY);
+      ctx.lineTo(width - 62, certificateLayout.topLineY);
       ctx.stroke();
 
       ctx.textAlign = 'left';
-      let y = 275;
-      sections.forEach(section => {
+      let y = certificateLayout.contentStartY;
+      sections.forEach((section, index) => {
         ctx.fillStyle = '#f59e0b';
-        ctx.font = '700 27px Georgia, serif';
-        ctx.fillText(section.heading.toUpperCase(), 96, y);
-        y += 50;
+        ctx.font = certificateLayout.headingFont;
+        ctx.fillText(section.heading.toUpperCase(), certificateLayout.margin, y);
+        y += certificateLayout.headingGap;
         ctx.fillStyle = '#f5f5f4';
-        ctx.font = '28px Inter, Arial, sans-serif';
-        y = wrapCanvasText(ctx, section.body, 96, y, width - 192, 42);
-        y += 46;
+        ctx.font = certificateLayout.bodyFont;
+        y = wrapCanvasText(ctx, section.body, certificateLayout.margin, y, width - (certificateLayout.margin * 2), certificateLayout.lineHeight);
+        if (index < sections.length - 1) y += certificateLayout.sectionGap;
       });
 
       ctx.strokeStyle = '#292524';
       ctx.beginPath();
-      ctx.moveTo(96, height - 145);
-      ctx.lineTo(width - 96, height - 145);
+      const footerTop = Math.round(y + certificateLayout.footerGap);
+      ctx.moveTo(certificateLayout.margin, footerTop);
+      ctx.lineTo(width - certificateLayout.margin, footerTop);
       ctx.stroke();
 
       ctx.textAlign = 'center';
       ctx.fillStyle = '#f59e0b';
-      ctx.font = '700 24px Georgia, serif';
-      ctx.fillText('WHO IS WRONG', width / 2, height - 96);
-      ctx.fillStyle = '#d6d3d1';
-      ctx.font = '22px Inter, Arial, sans-serif';
-      ctx.fillText('whoiswrong.ai  |  For entertainment only', width / 2, height - 60);
+      ctx.font = '800 38px Inter, Arial, sans-serif';
+      ctx.fillText('whoiswrong.ai', width / 2, footerTop + 56);
+      ctx.fillStyle = '#f5f5f4';
+      ctx.font = '500 28px Inter, Arial, sans-serif';
+      ctx.fillText('For entertainment only', width / 2, footerTop + 96);
 
       return canvas;
     }
@@ -866,20 +968,40 @@
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     }
 
+    function updateCertificatePreviewNavigation(record) {
+      return;
+    }
+
+    async function showCertificatePreviewByOffset(offset) {
+      const history = getHistory();
+      const index = history.findIndex(item => item.caseId === certificatePreviewRecordId);
+      const record = history[index + offset];
+      if (!record) return;
+      const assets = await certificatePreviewAssets(record, isAndroidDevice ? 640 : 900);
+      showCertificatePreview(assets.imageUrl, record, certificatePreviewMode);
+    }
+
+    function showPreviousCertificatePreview() {
+      showCertificatePreviewByOffset(1);
+    }
+
+    function showNextCertificatePreview() {
+      showCertificatePreviewByOffset(-1);
+    }
+
     function showCertificatePreview(imageUrl, record, mode) {
       if (certificatePreviewUrl && certificatePreviewUrl.startsWith('blob:')) URL.revokeObjectURL(certificatePreviewUrl);
       certificatePreviewUrl = imageUrl;
+      certificatePreviewRecordId = record?.caseId || null;
+      certificatePreviewMode = mode || certificatePreviewMode;
       const preview = document.getElementById('certificate-preview');
       const image = document.getElementById('certificate-preview-image');
-      const openLink = document.getElementById('certificate-preview-open');
       const text = document.getElementById('certificate-preview-text');
       image.src = certificatePreviewUrl;
-      openLink.href = certificatePreviewUrl;
-      openLink.download = certificateFileName(record);
-      openLink.classList.toggle('hidden', isPhoneLikeDevice);
       text.textContent = isPhoneLikeDevice
-        ? 'Take a screenshot of the certificate and share it from your screenshot captures.'
+        ? 'Take a screenshot of the certificate to share.'
         : 'The certificate image is ready below. You can open it or download it from your browser.';
+      updateCertificatePreviewNavigation(record);
       preview.classList.remove('hidden');
       preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -891,10 +1013,15 @@
         URL.revokeObjectURL(certificatePreviewUrl);
       }
       certificatePreviewUrl = null;
+      certificatePreviewRecordId = null;
     }
 
     function certificateFile(blob, record, extension = 'png', type = 'image/png') {
       return new File([blob], certificateFileName(record, extension), { type });
+    }
+
+    function certificateShareText(record) {
+      return `Official decree from Who Is Wrong: CASE NO. #${record.caseId} - whoiswrong.ai`;
     }
 
     function canShareCertificateFile(file) {
@@ -914,7 +1041,7 @@
           const file = typeof File === 'function' ? certificateFile(blob, record, 'jpg', 'image/jpeg') : null;
           if (canShareCertificateFile(file)) {
             try {
-              await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
+              await navigator.share({ title: 'Who Is Wrong?', text: certificateShareText(record), files: [file] });
               return;
             } catch (shareError) {
               if (shareError && shareError.name === 'AbortError') return;
@@ -928,7 +1055,7 @@
           ? (isPhoneLikeDevice ? certificateFile(blob, record, 'jpg', 'image/jpeg') : certificateFile(blob, record))
           : null;
         if (canShareCertificateFile(file)) {
-          await navigator.share({ title: 'Who Is Wrong?', text: `CASE NO. #${record.caseId}`, files: [file] });
+          await navigator.share({ title: 'Who Is Wrong?', text: certificateShareText(record), files: [file] });
           return;
         }
         if (isPhoneLikeDevice) {
@@ -1022,9 +1149,12 @@
     window.shareCurrentCertificate = shareCurrentCertificate;
     window.downloadCurrentCertificate = downloadCurrentCertificate;
     window.closeCertificatePreview = closeCertificatePreview;
+    window.showPreviousCertificatePreview = showPreviousCertificatePreview;
+    window.showNextCertificatePreview = showNextCertificatePreview;
     window.showHistory = showHistory;
     window.backToJudgeFromHistory = backToJudgeFromHistory;
     window.backToTopFromHistory = backToTopFromHistory;
+    window.goToAdjacentHistoryCase = goToAdjacentHistoryCase;
     window.clearHistory = clearHistory;
     window.shareHistoryCertificate = shareHistoryCertificate;
     window.downloadHistoryCertificate = downloadHistoryCertificate;

@@ -35,6 +35,22 @@ The answer should feel decisive, theatrical, and unserious in the best way.
 
 The tone should be funny without being mean. The judge can be dramatic, but the product should never punch down or encourage bullying.
 
+## Case Example Style Criteria
+
+Case examples should sound like real, low-stakes arguments people would overhear in a kitchen, car, lounge room, supermarket, group chat, restaurant, or workplace.
+
+Use this rule going forward:
+
+- Real argument in, ridiculous decree out.
+- The user's example prompts should sound conversational, specific, and lived-in.
+- The AI verdict can provide the mock-serious courtroom theatre after the user submits the case.
+- Prefer concrete behaviours: someone ate the fries, left the empty roll, said five minutes, ignored the clean dishwasher, flipped the phone face down, or gave directions too late.
+- Give both sides a believable position, even when one side is clearly using silly real-world logic.
+- Avoid formal or academic phrasing in case examples, such as "relationship law", "emotional texture", "transitional storage", "historically important", or "unpaid promotion".
+- Avoid overusing courtroom labels in case titles. Use plain argument words like Debate, Argument, Dispute, Stand-off, or Showdown. Use Trial, Hearing, Appeal, or Case only when it is clearly the funniest title.
+- Keep each side short enough to scan on a phone.
+- The best examples should make people think, "we have had this exact argument."
+
 ## Main User Flow
 
 1. User lands on the homepage.

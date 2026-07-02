@@ -1,0 +1,5 @@
+.vercel
+.env*
+_backups/
+_docx_render_case_examples/
+node_modules/

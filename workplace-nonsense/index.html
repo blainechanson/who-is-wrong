@@ -17,27 +17,27 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2, h3 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    h3 { font-size: 0.88rem; margin-bottom: 0.3rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -49,6 +49,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -79,6 +101,13 @@
 
 
       <p class="note">For harmless workplace nonsense only. Use as is or reword to suit your particular situation. Do not submit private workplace details, identifying information, bullying, harassment, legal, safety, or employment matters. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
   <footer class="site-footer">
@@ -91,50 +120,39 @@
   </footer>
   <script>
     const caseLines = [
-      "The Meeting That Could Have Been A Message|Booking a meeting for a one-sentence question is calendar vandalism.|Tone matters, and calendars exist to be filled bravely.",
-      "The Calendar Reminder Argument|Forgetting after a calendar reminder means the calendar was ignored with intent.|The calendar reminded the device, not the soul.",
-      "The Desk Mess Defence|The desk is too messy to function as a workspace.|The desk is an active thinking landscape with zones.",
-      "The Shared Calendar Blindness|The event was on the shared calendar and still got forgotten.|A shared calendar is only useful if someone remembers to look at it.",
-      "The Office Microwave Trial|Heating strong-smelling lunch in the office microwave affected morale.|Lunch has cultural rights and the microwave is public infrastructure.",
-      "The Reply All Offence|Replying all to a simple message created inbox pollution.|Transparency matters and everyone deserved closure.",
-      "The Desk Fan War|Pointing the desk fan at everyone created a climate incident.|Airflow is shared prosperity.",
-      "The Meeting Snack Noise|Opening snacks during a meeting was distracting.|Snacks helped maintain attention during slide-based hardship.",
-      "The Printer Queue Case|Sending a huge print job before someone else's one page was selfish.|The printer accepts jobs in order and should not be emotionally judged.",
-      "The Office Mug Claim|Leaving a mug in the sink for days is not workplace culture.|The mug was soaking with professional intent.",
-      "The Lunch Theft Suspicion|The missing lunch points strongly toward workplace betrayal.|The lunch may have been moved, mislabeled, or absorbed by office chaos.",
-      "The Calendar Invite Ambush|Sending a meeting invite without context was alarming.|Mystery meetings build suspense and encourage attendance.",
-      "The Keyboard Volume Complaint|Typing too loudly in an open office is disruptive.|Important work deserves a confident soundtrack.",
-      "The Coffee Refill Duty|Taking the last coffee and not making more is workplace negligence.|The next person is equally capable of pressing the button.",
-      "The Desk Temperature Complaint|Opening the office window made everyone cold.|Fresh air prevents spreadsheet sadness.",
-      "The Meeting Overrun Case|Running ten minutes over ignored every calendar after it.|Important thoughts do not always respect the hour.",
-      "The Office Light Debate|Turning off the lights made the office feel like a cave.|Soft lighting improves morale and reduces spreadsheet glare.",
-      "The Conference Room Squat|Staying in a meeting room after the booking ended was unfair.|Packing up takes time and chairs resist transitions.",
-      "The Email Greeting Trial|Starting an email with just the name sounded cold.|The email was efficient and did not need a warm blanket.",
-      "The Shared Desk Mess|Leaving crumbs at a shared desk is unacceptable.|The crumbs were microscopic and the desk survived.",
-      "The Teams Status Case|Showing available while not answering messages is misleading.|Available does not mean instantly ready for every thought.",
-      "The Office Fridge Archaeology|Old food in the office fridge should be removed.|No one can prove ownership, and fridge history is delicate.",
-      "The Meeting Camera Debate|Keeping the camera off in a small meeting seemed suspicious.|Camera off protects everyone from tired facial weather.",
-      "The Meeting That Could Be One Sentence|Booking a meeting for a tiny question was calendar vandalism.|Tone matters, and calendars exist to be used bravely.",
-      "The Reply All Disaster|Replying all to a simple message disturbed the entire workplace.|Transparency is important, even when mildly annoying.",
-      "The Mystery Calendar Invite|Sending a meeting invite without context was alarming.|Mystery meetings build suspense and encourage attendance.",
-      "The Keyboard Volume Trial|Typing loudly turned the office into a percussion section.|Productivity sometimes has a soundtrack.",
-      "The Lunchroom Microwave Case|Leaving food smells in the microwave was a shared-space offence.|Lunch has aromas and aromas have rights.",
-      "The Printer Blame Hearing|Blaming the printer before checking the tray wasted time.|The printer has earned suspicion through years of misconduct.",
-      "The Slack Ping Storm|Sending five messages instead of one created notification weather.|Each thought arrived separately and deserved its own entrance.",
-      "The Chair Borrowing Case|Taking someone's chair without asking disrupted office balance.|An empty chair in a workplace is a public resource.",
-      "The Meeting Overrun Trial|Running ten minutes over stole time from everyone.|Important thoughts do not always fit inside rectangles.",
-      "The Email Subject Crime|Using vague email subjects created unnecessary detective work.|Curiosity improves engagement and open rates.",
-      "The Desk Snack Dispute|Eating loud snacks near focused people was reckless.|Crunching is natural and morale requires texture.",
-      "The Strong Coffee Opinion|Declaring everyone else's coffee weak was unnecessary workplace theatre.|Standards matter, especially before 10 am.",
-      "The Office Thermostat War|Changing the thermostat without consent started a climate dispute.|Someone had to act before productivity froze.",
-      "The File Naming Case|Saving files with vague names created chaos.|The file made sense at the time and future people should adapt.",
-      "The Desk Etiquette Trial|Leaving crumbs on a shared desk was suspiciously careless.|Crumbs are minor evidence and should not trigger a workplace inquiry.",
-      "The Calendar Colour War|Changing the shared calendar colours caused visual chaos across the office.|Colour coding is personal productivity art and should not be policed.",
-      "The Mystery Desk Visitor|Leaving random papers on someone else desk created administrative fog.|The desk looked available and the papers needed temporary citizenship.",
-      "The Lunch Fridge Territory|Taking the best fridge shelf without discussion created lunchroom tension.|Early arrival earns cold storage privileges.",
-      "The Meeting Camera Pressure|Demanding cameras on for a routine update felt unnecessarily theatrical.|Seeing faces keeps the meeting alive and prevents suspicious multitasking.",
-      "The Office Birthday Contribution|Requesting money for every birthday became an unofficial subscription service.|Small birthday contributions protect office morale and cake access.",
-      "The Printer Paper Trial|Walking away after the printer ran out of paper abandoned the next person to chaos.|Printer maintenance was never assigned by fate or job title."
+      "The Meeting That Should Never Have Happened|You could have typed this exact question into a single chat message instead of hijacking thirty minutes of my life.|Sending a text takes an hour of back-and-forth messaging, whereas a quick video call gets it sorted in two minutes.",
+      "The Reply All Disaster|Replying all to a simple message made the whole office receive inbox confetti.|Everyone was included in the original email, so everyone deserved closure.",
+      "The Mystery Calendar Invite|Sending a meeting invite with no title or context is terrifying.|If the calendar says meeting, people can simply attend and find out.",
+      "The Meeting Overrun Argument|Running ten minutes over makes everyone late for the next meeting.|Important thoughts do not always fit neatly inside a half-hour box.",
+      "The Camera On Debate|Keeping the camera off in a small video meeting feels suspicious.|Camera off protects everyone from my tired face and questionable lighting.",
+      "The Available But Silent Dispute|Showing as available while ignoring messages is misleading.|Available does not mean ready to answer every thought the second it appears.",
+      "The Office Microwave Argument|Heating strong-smelling lunch in the shared microwave affects the whole room.|Lunch smells like lunch, and the microwave is not a private fragrance-free zone.",
+      "The Keyboard Volume Fight|Typing that loudly makes the whole desk area sound stressed.|This is just how my keyboard sounds when work is actually happening.",
+      "The Coffee Refill Argument|Taking the last coffee and not making more means the next person gets nothing.|The next person is just as capable of pressing the same button.",
+      "The Desk Crumbs Dispute|Leaving crumbs at a shared desk is gross for the next person.|They were tiny crumbs, and the desk survived the incident.",
+      "The Office Mug Argument|Cleaning your own mug after use is basic office survival.|It was soaking, which is the first step of cleaning.",
+      "The Calendar Reminder Argument|Forgetting something after a calendar reminder means you ignored the reminder.|The calendar reminded the laptop, not my actual brain.",
+      "The Desk Mess Debate|That desk is too messy to work at properly.|I know where everything is, and cleaning it would ruin the system.",
+      "The Shared Calendar Argument|It was on the shared calendar, so forgetting it is not an excuse.|A shared calendar only works if someone remembers to actually look at it.",
+      "The Desk Fan Fight|Setting your desk fan to oscillate means you are aggressively forcing your draft onto people who never asked for it.|If I lock it in a stationary position, it blows directly into my eyes and dries out my contact lenses.",
+      "The Meeting Snack Noise|Opening loud snacks during a meeting is distracting.|Snacks are how I survive slide decks that should have been shorter.",
+      "The Printer Queue Argument|Sending a giant print job before someone's one-page document is rude.|The printer takes jobs in order and I don't want to upset the machine's feelings.",
+      "The Lunch Fridge Territory|Taking the best fridge shelf every day without asking is selfish.|Early arrival earns cold storage privileges.",
+      "The Conference Room Squat|Staying in the meeting room after your booking ends blocks the next group.|Packing up takes time, and meetings do not evaporate at the exact minute.",
+      "The Email Greeting Debate|Starting an email with just someone's name sounds cold.|It is an email, not a handwritten birthday card.",
+      "The Office Fridge Cleanout|Old food in the office fridge should be thrown out.|No one can prove whose container it is, and throwing it away might start drama.",
+      "The Printer Blame Argument|Blaming the printer before checking the paper tray wastes time.|This specific printer has a well-documented history, and immediate suspicion is entirely reasonable.",
+      "The Chat Ping Storm|Sending five separate chat messages instead of one creates notification chaos.|Each thought arrived separately and I sent them as they came.",
+      "The Chair Borrowing Argument|Taking someone's chair without asking messes with their whole desk setup.|The chair was empty, had wheels, and asked for a new owner.",
+      "The Email Subject Debate|Using vague email subjects makes everyone open detective files.|If the subject told the whole story, nobody would open the email.",
+      "The Loud Snack Argument|Eating crunchy snacks beside people trying to focus is rude.|Crunchy snacks keep morale alive during long afternoons.",
+      "The Strong Coffee Opinion|Calling everyone else's coffee weak before 10 AM is unnecessary.|Some standards matter more before 10 AM.",
+      "The Office Thermostat Fight|Changing the thermostat without asking starts a room-wide argument.|Someone had to act before we all froze or melted.",
+      "The File Name Argument|Saving files with names like final-final-new-new creates chaos.|The file made sense when I saved it, and that should count.",
+      "The Calendar Colour Debate|Changing shared calendar colours without warning makes everything look wrong.|Colour coding is personal productivity and should not be judged.",
+      "The Random Desk Papers|Leaving papers on someone else's desk creates instant confusion.|Their desk had space, and the papers only needed somewhere to sit for a minute.",
+      "The Birthday Collection Debate|Collecting money for every office birthday starts feeling like a subscription.|Tiny birthday contributions are how cake appears and morale survives.",
+      "The Printer Paper Argument|If the warning light flashes \"Tray Empty,\" you need to walk over to the supply cupboard and grab a new ream.|I was printing one thing, not volunteering to become the printer manager."
     ];
 
     const cases = caseLines.map(line => {

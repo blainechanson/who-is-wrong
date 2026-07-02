@@ -7,12 +7,22 @@ const NAME_LIMIT = 40;
 const ARGUMENT_LIMIT = 360;
 const MIN_NAME_LENGTH = 2;
 const MIN_ARGUMENT_LENGTH = 9;
+const SAFETY_ERROR = 'The court only hears harmless petty disputes. Please keep serious, unsafe, private, sexual, legal, medical, political, religious, or bullying issues out of the case.';
 const COOLDOWN_SECONDS = 10;
 const HOURLY_LIMIT = 40;
 const DAILY_LIMIT = 60;
 const SITE_DAILY_LIMIT = 5000;
 const HOUR_SECONDS = 60 * 60;
 const DAY_SECONDS = 24 * HOUR_SECONDS;
+const BLOCKED_CASE_PATTERNS = [
+  /\b(suicide|self[-\s]?harm|kill myself|hurt myself)\b/i,
+  /\b(assault|domestic violence|rape|sexual assault|abuse|stalking|blackmail)\b/i,
+  /\b(divorce|custody|lawsuit|sued|suing|sue me|sue them|sue him|sue her|lawyer|police report|restraining order|eviction|lease dispute)\b/i,
+  /\b(diagnosis|medical|medication|pregnant|pregnancy|therapy|therapist|counsell?ing)\b/i,
+  /\b(election|politics|political|religion|church|mosque|synagogue)\b/i,
+  /\b(sex|nude|nudes|porn|onlyfans)\b/i,
+  /\b(racist|racial slur|homophobic|transphobic|slur|hate speech)\b/i,
+];
 
 function getRedis() {
   const url =
@@ -63,6 +73,11 @@ function isTooSimpleArgument(text) {
   const normalized = text.toLowerCase().replace(/[^a-z0-9]/g, '');
   const uniqueCharacters = new Set(normalized).size;
   return meaningfulLength(text) < MIN_ARGUMENT_LENGTH || uniqueCharacters < 4;
+}
+
+function hasBlockedCaseContent(...values) {
+  const combined = values.join(' ');
+  return BLOCKED_CASE_PATTERNS.some((pattern) => pattern.test(combined));
 }
 
 function sanitizeVerdictHtml(html) {
@@ -176,6 +191,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: 'Please give the judge two different sides of the argument.' });
     }
 
+    if (hasBlockedCaseContent(argA, argB)) {
+      return res.status(400).json({ success: false, error: SAFETY_ERROR });
+    }
+
     const quota = await checkQuota(getClientIp(req));
     if (!quota.allowed) {
       return res.status(quota.status).json({ success: false, error: quota.error });
@@ -212,15 +231,15 @@ Rules:
 - Do not mention that you are an AI.
 
 Length:
-- Keep the full judgement between 190 and 240 words.
+- Keep the full judgement between 160 and 205 words.
 - Use three short sections that are easy to read on a phone.
 - Do not ramble. Every sentence should either explain the dispute, make a joke, or deliver the verdict.
 
 Return clean HTML only. Do not use markdown or code fences.
 Use exactly these three sections:
 1. <div class="mb-4"><h3>I. The Indictment</h3><p>Two punchy sentences summarising the dispute using the people's names.</p></div>
-2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Four or five funny sentences explaining the ridiculous court logic using the people's names.</p></div>
-3. <div class="p-3"><h3>III. The Absolute Decree</h3><p>Three sentences declaring the winner by name, explaining why, and giving the loser by name a harmless silly punishment.</p></div>`;
+2. <div class="mb-4"><h3>II. The Judicial Opinion</h3><p>Three or four funny sentences explaining the ridiculous court logic using the people's names.</p></div>
+3. <div class="p-3"><h3>III. The Absolute Decree</h3><p>Two or three sentences declaring the winner by name, explaining why, and giving the loser by name a harmless silly punishment.</p></div>`;
 
     const userPrompt = `Party A: "${nameA}" argues: "${argA}"\nParty B: "${nameB}" argues: "${argB}"`;
 
@@ -231,7 +250,7 @@ Use exactly these three sections:
         { role: 'user', content: userPrompt },
       ],
       temperature: 0.85,
-      max_tokens: 520,
+      max_tokens: 460,
     });
 
     const rawHtmlResponse = completion.choices[0]?.message?.content || '';

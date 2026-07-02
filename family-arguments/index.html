@@ -17,25 +17,25 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -47,6 +47,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -73,6 +95,13 @@
 
 
       <p class="note">For harmless family arguments only. Use as is or reword to suit your particular situation. Avoid private, serious, sensitive, bullying, harmful, legal, safety, or personal crisis situations. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
 
@@ -86,48 +115,40 @@
   </footer>
   <script>
     const caseLines = [
-      "The Family Recipe Trial|Changing the family recipe without warning was culinary disrespect.|Tradition can survive one brave seasoning choice.",
-      "The Holiday Arrival Promise|Saying we will leave early and leaving late again was predictable betrayal.|Family departures require diplomacy, delays, and missing shoes.",
-      "The Family Group Chat Silence|Reading family messages without replying created unnecessary suspicion.|Not every message about dinner needs a formal statement.",
-      "The Birthday Song Volume|Singing too loudly turned the birthday song into a performance.|A birthday deserves enthusiasm, not shy humming.",
-      "The Holiday Dish Duty|Disappearing when dishes began was strategic cowardice.|Someone had to supervise the couch and protect leftovers.",
-      "The Family Remote Control War|One person should not control the remote for the whole visit.|Seniority and couch position create natural remote authority.",
-      "The Family Photo Smile|Refusing to smile properly ruined the family photo.|The expression was authentic and history should handle it.",
-      "The Leftovers Allocation Case|Taking the best leftovers without asking was unfair.|Speed matters when leftovers enter the fridge arena.",
-      "The Uncle Chair Claim|Claiming the same chair every gathering is outdated privilege.|Chair tradition provides stability in uncertain family times.",
-      "The School Pickup Timing|Arriving too early created waiting without purpose.|Early pickup avoids panic and earns responsible adult points.",
-      "The Family Visit Length|A quick visit lasting four hours was misleading.|Time with family expands because doors are hard to exit.",
-      "The Family Advice Dispute|Giving advice nobody asked for caused tension.|Unrequested advice is a family tradition and therefore protected.",
-      "The Birthday Candle Count|Using random candle numbers was low effort.|Fire quantity is symbolic and cake remains cake.",
-      "The Holiday Arrival Trial|Arriving late to family lunch disrupted the entire potato schedule.|Family time is flexible and potatoes should show patience.",
-      "The Leftover Ownership Case|Taking the best leftovers without asking was family fridge piracy.|Leftovers become communal once they enter the fridge arena.",
-      "The Remote Control Heritage Claim|The eldest family member claimed automatic remote control rights.|Age grants wisdom, not unlimited channel authority.",
-      "The Family Recipe Argument|Changing the recipe betrayed generations of dinner history.|Recipes evolve, and extra garlic is progress.",
-      "The Holiday Packing Debate|Packing too much slowed the entire family operation.|Preparedness is not a crime just because the suitcase is heavy.",
-      "The Sibling Borrowing Case|Borrowing without asking was a classic sibling offence.|Family property has always operated on flexible borders.",
-      "The Parenting Joke Trial|The joke was repeated too many times to remain funny.|A proven joke deserves respect and occasional revival.",
-      "The Family Visit Timing|Staying too long turned a visit into a residency.|Leaving early would have looked suspiciously unfriendly.",
-      "The Photo Album Embarrassment|Showing old photos without warning was a public family ambush.|History should be shared, especially when haircuts were brave.",
-      "The Chore Memory Case|Forgetting assigned chores created family courtroom evidence.|The chore system was communicated with insufficient ceremony.",
-      "The Dinner Seat Tradition|Changing the usual dinner seats disrupted family order.|A chair cannot become family property through habit alone.",
-      "The Story Retelling Charge|Retelling the same family story again tested public patience.|A classic story becomes richer with every dramatic retelling.",
-      "The Holiday Seating Chart|Changing the seating plan without warning disturbed the delicate peace of dinner diplomacy.|Someone had to stop the same three people from arguing beside the potatoes again.",
-      "The Family Group Chat Mute|Muting the family chat caused important news to be discovered three days late.|A constantly buzzing family chat is not news, it is weather.",
-      "The Leftover Container Claim|Taking the good container home without returning it damaged family trust.|Containers travel during family meals and sometimes choose a new life.",
-      "The Sibling Remote Treaty|Grabbing the remote first does not create lifelong broadcasting authority.|Possession of the remote has always been the oldest family law.",
-      "The Birthday Cake Slice Size|Cutting uneven cake slices created obvious dessert injustice.|Cake slices are art, not engineering.",
-      "The Holiday Arrival Time|Arriving late to family lunch disrupted the entire food schedule.|Family lunch times are always aspirational and nobody truly starts on time.",
-      "The Childhood Story Retelling|Repeating an embarrassing childhood story at every gathering is unnecessary evidence tampering.|Classic family stories deserve annual preservation.",
-      "The Parent Advice Loop|Giving advice after being asked not to turned dinner into a life coaching seminar.|Concerned advice is part of the family subscription package.",
-      "The Sibling Borrowed Charger|Borrowing a charger and forgetting to return it created household power chaos.|Chargers are communal survival equipment in a modern family.",
-      "The Leftover Labelling Trial|Labelling leftovers by name was necessary after repeated fridge disappearances.|Family food does not need passport control.",
-      "The Holiday Cleanup Escape|Leaving before cleanup began was a suspiciously timed departure.|Early departure was scheduled before the sink became a courtroom.",
-      "The Grandparent Tech Support Case|Asking for phone help during dessert turned the evening into a help desk.|Family members with technical skills are morally required to rescue the group.",
-      "The Family Recipe Change|Changing the recipe without permission offended generations of kitchen tradition.|Recipes improve when brave people question the sacred amount of salt.",
-      "The Sibling Seat Claim|Claiming the same seat every visit is not a constitutional right.|That seat has been earned through years of consistent sitting.",
-      "The Holiday Music Volume|Turning holiday music up too loud made conversation impossible.|Holiday music must be heard by the walls, the street, and possibly history.",
-      "The Cousin Comparison Complaint|Comparing cousins during dinner created avoidable family courtroom tension.|A harmless comparison was meant as motivation, not a legal indictment.",
-      "The Family Dessert Timing|Serving dessert too early undermined the dignity of the main meal.|Dessert has never needed permission from vegetables."
+      "The Family Remote Fight|One person should not control the remote for the whole visit.|The person already holding the remote should not have to reopen negotiations every ten minutes.",
+      "The Leftover Ownership Argument|Taking the best leftovers without asking is unfair.|Once food enters the family fridge, speed and confidence matter.",
+      "The Old Photo Ambush|Showing old photos without warning is a public family ambush.|History should be shared, especially when the haircuts were that brave.",
+      "The We Are Leaving Countdown|When someone says we are leaving now, that should mean walking to the car.|Every family exit needs three extra conversations and one missing shoe.",
+      "The Holiday Cleanup Escape|Leaving right when the dishes appear is suspicious timing.|The departure was planned before the sink became everyone else's problem.",
+      "The Family Group Chat Argument|Reading the family group chat and never replying makes everyone wonder if you saw it.|Not every message about lunch needs a formal press conference.",
+      "The Birthday Singing Debate|Everyone should sing Happy Birthday loudly enough to prove they mean it.|Quiet singing still counts, and nobody needs a solo performance.",
+      "The Board Game Rules Fight|Rules should be followed exactly, even if someone is losing.|House rules are half the fun and make the game less boring.",
+      "The Family Photo Timing|Take the family photo before everyone gets hungry and annoyed.|Natural smiles only happen after people have eaten.",
+      "The Birthday Cake Slice Argument|Cutting uneven cake slices creates obvious dessert injustice.|Cake geometry is hard when twelve people are watching.",
+      "The Holiday Arrival Debate|Arriving late to family lunch throws off the whole food schedule.|Family lunch times are always optimistic and nobody actually arrives on time.",
+      "The Family Recipe Change|Changing the recipe without telling anyone messes with tradition.|Recipes improve when someone is brave enough to add more garlic.",
+      "The Borrowed Charger Argument|Borrowing a charger and not returning it creates family chaos.|Chargers move around in families because everyone is always on three percent.",
+      "The Repeated Story Debate|Telling the same family story again tests everyone's patience.|A classic story deserves to be retold until the next generation learns it.",
+      "The Dinner Seat Argument|Taking someone's usual seat at family dinner causes unnecessary confusion.|A chair cannot belong to someone just because they sat there last time.",
+      "The Family Advice Debate|Giving advice nobody asked for turns dinner into a seminar.|If you mention a problem near family, advice is going to happen.",
+      "The Quick Visit Argument|Calling it a quick visit and staying for four hours is misleading.|Family visits stretch because leaving requires emotional effort.",
+      "The Holiday Packing Debate|Packing for every possible scenario slows everyone down.|If the weather changes, the person who packed extra wins.",
+      "The Sibling Borrowing Argument|Borrowing without asking is still taking something.|Family stuff has always moved around without a full application process.",
+      "The Same Joke Argument|Repeating the same parent joke every gathering does not make it funnier.|A proven joke deserves another chance with a new audience member.",
+      "The Seating Chart Argument|Changing the holiday seating plan without warning creates confusion.|Someone had to stop the same three people sitting together and starting the same debate.",
+      "The Muted Family Chat|Muting the family chat means important details get missed.|A buzzing family chat is not breaking news, it is background weather.",
+      "The Container Return Dispute|Taking the good food container home and never returning it damages trust.|Containers travel after family meals and sometimes take a while to come back.",
+      "The Birthday Candle Debate|Random candle numbers on the cake look lazy.|The candles are symbolic and the cake still tastes the same.",
+      "The Dessert Timing Argument|Serving dessert too early makes the main meal feel unfinished.|Dessert does not need permission from vegetables.",
+      "The Family Movie Pause|You need to pause the movie the exact second someone leaves the room for any reason.|The movie cannot grind to a halt every single time one person decides to wander off.",
+      "The Family Photo Smile|Refusing to smile properly ruins the photo everyone will keep forever.|That was my real face at the time and history should accept it.",
+      "The Leftover Label Argument|Writing names on leftovers should not be necessary in a family fridge.|If it matters that much, label it before someone gets hungry.",
+      "The Holiday Music Volume|The holiday music is too loud for anyone to have a normal conversation.|Holiday music should be loud enough for the kitchen, the hallway, and the memories.",
+      "The Tech Help Timing|Asking for phone help during dessert turns the evening into a help desk.|You were already looking at your own phone, so I figured you were already in the right mindset to fix mine.",
+      "The Sibling Seat Claim|Claiming the same seat every visit is not a real rule.|That seat has been earned through years of consistent sitting.",
+      "The Family Thermostat Argument|One person should not change the temperature for the whole house.|Temperature is a democracy until someone is freezing.",
+      "The Last Biscuit Showdown|If the biscuit sits there for ten minutes, whoever takes it has earned it.|You are supposed to ask if anyone wants it before shoving it into your mouth.",
+      "The Family Souvenir Magnet|Every trip does not need another fridge magnet.|A magnet is small, cheap, and proves the trip happened."
     ];
 
     const cases = caseLines.map(line => {

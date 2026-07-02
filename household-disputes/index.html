@@ -17,25 +17,25 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -47,6 +47,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -73,6 +95,13 @@
 
 
       <p class="note">For harmless household disputes only. Use as is or reword to suit your particular situation. Serious rental, safety, bullying, harassment, damage, or legal matters need real-world help, not a parody judge. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
 
@@ -86,75 +115,49 @@
   </footer>
   <script>
     const caseLines = [
-      "The Laundry Chair|Clean clothes belong in drawers, not living rent-free on a chair.|The chair is a temporary textile management system with excellent airflow.",
-      "The Dishwashing Philosophy|Dishes should be rinsed before going into the dishwasher.|Rinsing dishes defeats the purpose of owning a machine with one job.",
-      "The Empty Carton Trap|Putting an empty milk carton back is a crime against breakfast.|There was a symbolic splash left, and hope is important.",
-      "The Kitchen Clean Claim|The kitchen was not clean because the counter was still telling stories.|The major landmarks were clean and perfection is exhausting.",
-      "The Shared Snack Boundary|The snack became shared only after someone else opened it.|Snacks in a common area enter society and must participate.",
-      "The Bin Full Theory|The bin was clearly full and needed taking out.|There was theoretical space if everyone believed harder.",
-      "The Decorative Towel Incident|Using the good towel for a suspicious cleanup mission was reckless.|Emergencies do not pause to check towel hierarchy.",
-      "The Secret Snack Shelf|Hiding the good snacks undermines household trust.|The high shelf is a security measure against snack chaos.",
-      "The Bathroom Time Inquiry|Taking forever in the bathroom during rush hour is a household emergency.|Personal grooming cannot be rushed by impatient hallway commentary.",
-      "The Fridge Door Lecture|Leaving the fridge door open while thinking is cold-air theft.|Food decisions require visual research.",
-      "The Overfilled Dishwasher|Loading the dishwasher like a puzzle disaster prevents anything from getting clean.|Creative stacking shows engineering talent and saves a second load.",
-      "The Bathroom Light Trial|Leaving the bathroom light on all day is a tiny utility scandal.|The light was providing emotional support to the hallway.",
-      "The Towel On The Bed|Leaving a damp towel on the bed is a soft-furnishing betrayal.|The towel was briefly resting before returning to duty.",
-      "The Unclaimed Laundry|Leaving laundry in the machine blocks the entire system.|The laundry was marinating in cleanliness for improved freshness.",
-      "The Door Slam Charge|Closing doors with dramatic force creates unnecessary household tension.|The door was heavy and the drama is being exaggerated.",
-      "The Carton In The Sink|Leaving an empty carton in the sink makes no logistical sense.|The carton was on its way to recycling and took a scenic pause.",
-      "The Fridge Refill Duty|Finishing the cold water and not refilling it is hydration sabotage.|The next person could refill it and feel useful.",
-      "The Fridge Shelf Treaty|Putting things on the wrong fridge shelf causes food border conflict.|Fridge shelves are guidelines, not international boundaries.",
-      "The Car Cleanliness Case|Leaving receipts and wrappers in the car turns it into a rolling bin.|The car is a transitional space and receipts prove history.",
-      "The Kitchen Sponge Horror|Using the kitchen sponge on the floor crossed a serious boundary.|A sponge can be rinsed and should not be judged by one difficult mission.",
-      "The Hotel Towel Mystery|Using every hotel towel on day one was excessive.|Hotel towels are provided to create luxury, not restraint.",
-      "The Fridge Smell Complaint|Leaving strong-smelling food in the fridge affected everyone.|Good food announces itself with confidence.",
-      "The Vacuum Timing Trial|Vacuuming during someone's show was hostile scheduling.|Dust does not wait for season finales.",
-      "The Bin Bag Leak|Overfilling the bin bag created a risky removal mission.|The bag had not officially surrendered.",
-      "The Floor Sock Charge|Leaving socks on the floor created a trail of neglect.|Socks were resting between journeys.",
-      "The Bathroom Shelf War|Taking over the whole bathroom shelf was unfair.|Good products need space to stand proudly.",
-      "The Tidy Pile Defence|A pile of stuff is not the same as cleaning.|The pile was organized by memory and instinct.",
-      "The Mop Avoidance Case|Sweeping without mopping left the job half done.|Sweeping removed the visible problem and morale improved.",
-      "The Vacuum Cord Complaint|Leaving the vacuum plugged in created a hallway trap.|The vacuum was paused, not abandoned.",
-      "The Rubbish Day Forgetting|Forgetting bin day caused a full week of consequences.|Bin day comes too often and with too little ceremony.",
-      "The Sponge Replacement Debate|The sponge should have been replaced days ago.|The sponge still had one final act of service.",
-      "The Clean Laundry Basket|Using the clean laundry basket for random clutter was wrong.|The basket was empty and volunteered for logistics.",
-      "The Fridge Wipe Trial|Spills in the fridge should be cleaned immediately.|Cold spills move slowly and can wait their turn.",
-      "The Vacuum Lines Pride|Walking on freshly vacuumed carpet ruined the lines.|Floors are for walking and carpet fame is temporary.",
-      "The Door Mat Neglect|Ignoring the doormat brought outside dirt inside.|The doormat was decorative and gave no clear instructions.",
-      "The Dish Rack Overload|Stacking the dish rack too high created a ceramic landslide risk.|The dish rack can hold more if everyone stays calm.",
-      "The Bathroom Mirror Splash|Leaving toothpaste splashes on the mirror is visual chaos.|Tiny splashes are evidence of dental commitment.",
-      "The Shoe Pile Problem|The shoe pile by the door became a tripping hazard.|The shoe pile is a practical launch station.",
-      "The Clean As You Go Argument|Cooking should include cleaning as you go.|Creativity makes mess first and apologies later.",
-      "The Dusting Standard|Ignoring dust until it becomes visible is not a cleaning system.|Invisible dust is not a real problem yet.",
-      "The Cup Collection Case|Collecting cups around the house created a mug migration crisis.|Hydration requires stations in multiple rooms.",
-      "The Host Cleanup Trial|Guests should help clean up after dinner.|Guests should not interfere with the host's mysterious kitchen system.",
-      "The Door Lock Check|Asking if the door is locked five times was excessive.|Security questions become valid again after ten seconds.",
-      "The Wet Floor Warning|Mopping without warning created a surprise skating rink.|The floor looked wet enough to explain itself.",
-      "The Window Blind Angle|Leaving blinds half open compromised privacy.|Half-open blinds balance daylight and mystery.",
-      "The Coat Rack Overload|Adding one more coat turned the rack into a leaning tower.|The coat rack was designed to face challenges.",
-      "The Nail Clipping Location|Clipping nails in a shared room was unacceptable.|The task was brief, practical, and not worth a tribunal.",
-      "The Cupboard Organisation Case|Moving everything in the cupboard without warning caused confusion.|The cupboard finally made sense to someone.",
-      "The Spare Blanket Claim|Keeping the spare blanket permanently was selfish.|Cold people create permanent relationships with blankets.",
-      "The Table Wobble Fix|Ignoring the wobbly table made every meal stressful.|The folded napkin solution was a respected engineering choice.",
-      "The Fridge Magnet Clutter|Too many fridge magnets made the kitchen look chaotic.|Each magnet represents culture, travel, and mild sentiment.",
-      "The Laundry Machine Blockade|Leaving laundry in the machine blocked the entire household system.|The laundry was marinating in cleanliness for improved freshness.",
-      "The Dish Sink Exhibit|Leaving dishes in the sink created a visual confession.|The dishes were resting before their final rinse.",
-      "The Good Mug Dispute|Taking the best mug every morning shows a pattern of mug privilege.|Mug preference is personal chemistry and cannot be legislated.",
-      "The Toilet Paper Succession|Using the last roll without replacing it was a household crisis.|The next person is equally capable of royal paper replacement.",
-      "The Light Switch Case|Leaving lights on treated electricity like a decorative waterfall.|The room might have needed welcoming energy later.",
-      "The Guest Notice Case|Inviting people over without warning ambushed the household.|A casual visit does not require a diplomatic briefing.",
-      "The Noise After Ten|Making noise after everyone went quiet was inconsiderate.|Ten o'clock is not a universal bedtime law.",
-      "The Bin Night Dispute|Forgetting bin night created a full-week household sentence.|The bin schedule is unnecessarily mysterious and should send alerts.",
-      "The Shared Snack Mystery|The missing snacks point to household betrayal.|Snacks left in public territory accept certain risks.",
-      "The Wi-Fi Blame Hearing|Blaming the router before checking devices wasted household energy.|The router has a suspicious history and deserves scrutiny.",
-      "The Floor Cleaning Debate|The floor was overdue for a mop and everyone knew it.|A floor with character should not be punished for living.",
-      "The Dishwasher Stacking Case|The dishwasher was loaded like a puzzle nobody could solve.|Creative stacking saves space and should be celebrated.",
-      "The Toilet Paper Direction|The flap should hang over the front, not hide against the wall.|The wall side is neat, quiet, and unfairly judged.",
-      "The Open Cabinet Situation|Leaving cabinet doors open makes the kitchen look chaotic.|Open cabinets improve workflow and create visual inventory.",
-      "The Carton Recycling Pause|Leaving recycling near the bin instead of inside it was unfinished work.|It was clearly on a journey toward the bin.",
-      "The Mystery Crumbs|Leaving crumbs on the counter and fleeing the scene is domestic evidence.|Crumbs are tiny and should not be treated like structural damage.",
-      "The Mirror Time Complaint|Using the mirror for too long caused a household traffic jam.|Accuracy in appearance prevents future regret.",
-      "The Spare Room Mess|Treating the spare room like a storage cave is unacceptable.|The spare room exists so clutter can have a private life."
+      "The Empty Dishwasher Myth|If the dishwasher cycle is done and clean, you should empty it.|If I pretend I did not see that, someone else will eventually.",
+      "The Laundry Chair Debate|You need to actually fold your clothes and put them away instead of piling them on the bedroom chair.|Those clothes are not dirty enough for the wash, but they are not clean enough for the wardrobe.",
+      "The Tupperware Lid Crisis|Stop shoving plastic containers into the cupboard without matching them to their actual lids first.|Life is too short to spend ten minutes organizing plastic squares that are just going to get mixed up anyway.",
+      "The Bin Bag Gamble|Stop stuffing rubbish into an obviously full bin.|If I can press it down and fit one more item on top, the bin is technically not full yet.",
+      "The Toothpaste Cap Battle|Put the cap back on the tube so the toothpaste does not dry out into a crusty block.|Leaving the cap off saves three seconds every morning, and a little bit of dried toothpaste never killed anyone.",
+      "The Empty Toilet Roll Debate|If you use the last square, you slide the new roll onto the holder.|Balancing the new roll on top of the empty cardboard counts as a replacement.",
+      "The Dishwasher Pre-Rinse Debate|Plates should be rinsed before going into the dishwasher.|Rinsing the plates defeats the whole point of owning a dishwasher.",
+      "The Fridge Door Inspection|Standing with the fridge door open while deciding what to eat wastes electricity.|Important food decisions require seeing every shelf at once.",
+      "The Empty Cereal Box Argument|Leaving the empty cereal box in the pantry is lazy.|There was still one bowl if you shook the bag properly.",
+      "The Bottle Drinking Debate|Drinking straight from the juice or milk bottle is inconsiderate.|It saves a glass, saves washing up, and nobody needs to make it dramatic.",
+      "The Clean Or Dirty Dishwasher|Flip the magnet so people know whether the dishwasher is clean or dirty.|Opening the dishwasher and looking inside takes two seconds.",
+      "The Cabinet Door Argument|Leaving every cabinet door open makes the kitchen look like it was searched by the police.|Open cabinets make it easier to grab what you need next.",
+      "The Fridge Water Refill|Whoever empties the cold water bottle should refill it.|The tap is right there, so the next person can refill it just as easily.",
+      "The Empty Ice Cube Tray|If you use the last ice cubes, refill the tray.|Future thirst is not my problem right now.",
+      "The Damp Towel On The Bed|Leaving a damp towel on the bed is unacceptable.|It was there for two minutes, it's not the end of the world.",
+      "The Laundry Machine Blockade|Leaving clean laundry in the machine blocks everyone else.|If you needed the machine so badly, you could have just moved my pile into a basket instead of fuming.",
+      "The Floor Socks Argument|Leaving socks on the floor makes the room look messy.|They are not lost, they are exactly where my feet stopped needing them.",
+      "The Bathroom Shelf Takeover|One person cannot take up the entire bathroom shelf.|Those bottles all do different things, even if they look the same.",
+      "The Tidy Pile Debate|A pile of stuff is not the same as cleaning.|It is all in one place now, which is clearly an improvement.",
+      "The Mop Avoidance Argument|Sweeping without mopping leaves the job half done.|The visible dirt is gone, and that was the urgent part.",
+      "The Sponge Replacement Debate|That sponge should have been thrown out days ago.|It still has a few useful washes left in it.",
+      "The Laundry Basket Takeover|Using the clean laundry basket for random clutter means nobody can use it for laundry.|The basket was empty, nearby, and doing nothing.",
+      "The Bathroom Mirror Splash|Wipe the toothpaste spots off the mirror after brushing.|It is a bathroom mirror, not a museum exhibit.",
+      "The Shoe Pile By The Door|The shoe pile by the door is becoming a tripping hazard.|Shoes by the door are practical because that is where feet leave the house.",
+      "The Clean As You Go Argument|Cooking should include cleaning as you go.|Cooking first and cleaning later is how food actually gets made.",
+      "The Cup Collection Argument|There are cups in every room and none left in the kitchen.|Hydration requires backup stations around the house.",
+      "The Guest Cleanup Debate|Guests should help clean up after dinner.|Guests helping just get in the way as they ask where everything goes.",
+      "The Door Lock Check|Checking the door once is enough.|Checking it again costs nothing and stops my brain making a whole movie about it.",
+      "The Wet Floor Warning|You need to warn people after mopping the floor.|The floor looked wet, so the warning was already on the floor.",
+      "The Bathroom Counter Fight|One toothbrush holder should be enough bathroom counter space.|Personal space applies to skincare, toothpaste, and tiny bottles.",
+      "The Cupboard Rearranging Argument|Moving everything in the cupboard without telling anyone creates chaos.|The cupboard finally makes sense now, even if everyone has to learn it.",
+      "The Spare Blanket Dispute|Keeping the spare blanket permanently is selfish.|Cold people form emotional bonds with blankets very quickly.",
+      "The Good Mug Argument|Taking the best mug every morning is unfair.|Everyone has a favorite mug, and I simply wake up first.",
+      "The Light Switch Debate|Leaving lights on in empty rooms wastes money.|I was coming back soon, and the room looked less depressing with the light on.",
+      "The Guest Notice Argument|Inviting people over without warning ambushes everyone else in the house.|It was casual, and not every visit needs a press release.",
+      "The Noise After Ten Debate|Making noise after everyone has gone quiet is inconsiderate.|Ten o'clock is not a universal bedtime, and I was barely making noise.",
+      "The Bin Night Argument|Forgetting bin night punishes the whole house for a week.|Bin night moves through time like a mystery and someone else could remember too.",
+      "The Shared Snack Mystery|The missing snacks did not disappear by themselves.|Snacks in a shared cupboard are taking a risk by being delicious.",
+      "The Wi-Fi Blame Debate|Stop blaming the router before checking whether your own device is the problem.|The router has betrayed us before and deserves to be questioned first.",
+      "The Floor Cleaning Argument|The floor needs mopping and everyone can see it.|The floor is not dirty enough to deserve a full production.",
+      "The Open Recycling Pause|Leaving recycling next to the bin instead of inside it is unfinished work.|It was clearly on its way to the bin and only stopped briefly.",
+      "The Mystery Crumbs Debate|Leaving crumbs on the counter and walking away is obvious evidence.|They are tiny crumbs, not a structural emergency.",
+      "The Mirror Time Complaint|Using the mirror for ages during the morning rush blocks everyone else.|Looking normal before leaving the house takes time."
     ];
 
     const cases = caseLines.map(line => {

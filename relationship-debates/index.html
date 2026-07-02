@@ -17,25 +17,25 @@
   <style>
     :root { --bg-main: #1c1917; --bg-card: #0c0a09; --text-main: #f5f5f4; --text-muted: #a8a29e; --accent: #d97706; --accent-hover: #f59e0b; --border: #292524; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.7; min-height: 100vh; }
-    main { max-width: 48rem; margin: 0 auto; padding: 3rem 1rem; }
+    body { background: var(--bg-main); color: var(--text-main); font-family: Inter, system-ui, sans-serif; line-height: 1.55; min-height: 100vh; }
+    main { max-width: 48rem; margin: 0 auto; padding: 1.25rem 0.85rem 2.5rem; }
     a { color: var(--accent-hover); }
-    .back { display: inline-block; margin-bottom: 1.5rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 0.75rem; background: #1c1917; color: #f5f5f4; border: 1px solid #444; border-radius: 0.45rem; padding: 0.5rem 0.75rem; font-size: 0.78rem; line-height: 1.2; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
     .back:hover { border-color: var(--accent-hover); color: #ffffff; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); }
     h1, h2 { color: var(--accent-hover); font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; }
-    h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
-    h2 { font-size: 1rem; margin: 1.7rem 0 0.6rem; }
-    p { color: #e7e5e4; margin-bottom: 0.9rem; }
-    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1.25rem; margin: 1.25rem 0; }
-    .case-title { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
-    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 1rem; margin-top: 0.75rem; }
+    h1 { font-size: 1.45rem; line-height: 1.18; margin-bottom: 0.55rem; }
+    h2 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; }
+    p { color: #e7e5e4; margin-bottom: 0.65rem; }
+    .case-box { border: 1px solid rgba(245, 158, 11, 0.32); background: rgba(217, 119, 6, 0.06); border-radius: 0.65rem; padding: 1rem; margin: 1rem 0; }
+    .case-title { color: #ffffff; font-size: 1.05rem; line-height: 1.25; font-weight: 800; margin-bottom: 0.75rem; }
+    .side { background: rgba(255, 255, 255, 0.025); border: 1px solid #292524; border-radius: 0.55rem; padding: 0.85rem; margin-top: 0.6rem; }
     .side p { color: #f5f5f4; margin-bottom: 0; }
-    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .button-row { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 1rem 0 1.55rem; }
     @media (min-width: 640px) { .button-row.two-buttons { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 640px) { .button-row.three-buttons { grid-template-columns: repeat(3, 1fr); } }
     .button-row.stacked-buttons { grid-template-columns: 1fr; }
-    button, .button { display: inline-block; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
+    button, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; width: 100%; border: 1px solid transparent; border-radius: 0.5rem; padding: 0.9rem 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; text-align: center; cursor: pointer; text-decoration: none; }
     button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
     .primary { background: var(--accent); color: #0c0a09; }
     .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
@@ -47,6 +47,28 @@
     .site-footer .footer-links { color: #d6d3d1; }
     .site-footer a { color: #d6d3d1; display: inline-block; margin: 0.2rem 0.15rem; padding: 0.28rem 0.45rem; border: 1px solid transparent; border-radius: 0.4rem; white-space: nowrap; text-decoration: underline; }
     .site-footer a:hover { border-color: var(--accent-hover, var(--accent)); color: #ffffff; text-decoration: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.8); }
+    .faq-list { display: grid; gap: 0.85rem; margin-top: 0.75rem; }
+    .faq-item { border-left: 2px solid rgba(245, 158, 11, 0.45); padding-left: 0.85rem; margin-bottom: 0; }
+    .faq-item h3 { color: var(--accent-hover, var(--accent)); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    :where(a, button, .button) { -webkit-tap-highlight-color: rgba(245, 158, 11, 0.28); }
+    .back, button, .button, .site-footer a, .panel p > a { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease; }
+    .back, button, .button { min-height: 2.9rem; }
+    .back, .secondary, .button.secondary, .site-footer a, .panel p > a { border-color: rgba(245, 158, 11, 0.5); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08); }
+    .primary, .button:not(.secondary) { border-color: rgba(245, 158, 11, 0.78); box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.12), 0 10px 22px rgba(217, 119, 6, 0.18); }
+    .case-box { border-color: rgba(245, 158, 11, 0.5); }
+    .side { border-color: rgba(245, 158, 11, 0.28); }
+    :where(.back, button, .button, .site-footer a, .panel p > a):focus-visible { outline: none; border-color: var(--accent-hover, #f59e0b); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.38), inset 0 0 0 1px rgba(245, 158, 11, 0.16); }
+    @media (hover: hover) {
+      :where(.back, button, .button, .site-footer a, .panel p > a):hover { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.68), inset 0 0 0 1px rgba(245, 158, 11, 0.14); }
+      .primary:hover, .button:not(.secondary):hover { box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.72), 0 12px 26px rgba(217, 119, 6, 0.2); }
+    }
+    button:disabled, button:disabled:hover, button:disabled:focus-visible { border-color: rgba(245, 158, 11, 0.22); color: #a8a29e; box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.04); }
+    @media (max-width: 480px) {
+      main { padding-top: 0.95rem; }
+      .back { min-height: 2.75rem; padding: 0.65rem 0.9rem; }
+      .panel { padding: 1rem; }
+      .site-footer a, .panel p > a { min-height: 2.75rem; padding: 0.55rem 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -73,6 +95,13 @@
 
 
       <p class="note">For harmless relationship debates only. Use as is or reword to suit your particular situation. Do not use this for bullying, serious relationship, safety, legal, financial, medical, or personal crisis issues. Use personal judgement before sharing anything generated by the site.</p>
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3>Is this real legal advice?</h3><p>No. Who Is Wrong is for parody, comedy, and entertainment only. It is not legal advice, mediation, counselling, or a serious finding of fact.</p></div>
+        <div class="faq-item"><h3>Why does sharing work differently on some phones?</h3><p>Some phone browsers and in-app browsers handle generated certificate images differently. Android, iPhone, Chrome, Safari, Messenger, Facebook, and other apps may not all open the same share or download menu. If the Share or Download button does not open your normal share menu, take a screenshot of the certificate and share it from your screenshot captures.</p></div>
+        <div class="faq-item"><h3>Is my judgement saved?</h3><p>Your last 8 verdicts are kept only in this browser session so you can view or share them. The case certificates are deleted once this browser session is closed. They are not published as public case pages.</p></div>
+        <div class="faq-item"><h3>What should I avoid entering?</h3><p>Do not enter private, sensitive, identifying, defamatory, bullying, unlawful, or harmful information about yourself or anyone else.</p></div>
+      </div>
     </section>
   </main>
 
@@ -86,46 +115,38 @@
   </footer>
   <script>
     const caseLines = [
-      "The Streaming Betrayal|Watching the next episode alone violated the sacred couch treaty.|Falling asleep first released all streaming obligations.",
-      "The Dinner Suggestion Trap|Asking for dinner ideas and rejecting every option is emotional menu warfare.|Wanting suggestions does not mean accepting obviously wrong food choices.",
-      "The Movie Selection Crisis|Choosing a movie should not take longer than watching one.|The right movie matters, and rushed art decisions ruin households.",
-      "The Unwanted Fries|Claiming not to want fries and then stealing half the basket is unlawful snack behaviour.|Shared fries become community property once placed within reach.",
-      "The Blanket Annexation|The entire blanket was slowly stolen during the night.|Blankets move naturally and no hostile takeover can be proven.",
-      "The Shared Dessert Sprint|Agreeing to split dessert and then eating at competitive speed is unfair.|Dessert waits for no one and slow spoons lose rights.",
-      "The Outfit Question|Asking are you wearing that was unnecessary and dangerous.|It was a neutral inquiry wearing no emotional boots whatsoever.",
-      "The Sofa Seat Tradition|Taking someone else's usual sofa spot disturbs household order.|Unoccupied furniture cannot enter witness protection.",
-      "The Text Tone Hearing|That message sounded blunt and carried unnecessary emotional frost.|The message was short because efficiency is not a crime.",
-      "The Takeaway Order Change|Changing the takeaway order after everyone agreed reopened a closed case.|New cravings are fresh evidence and deserve a hearing.",
-      "The Blanket Temperature Claim|One person cannot use two blankets while claiming to be mildly chilly.|Blanket need is personal and cannot be measured from outside.",
-      "The Weekend Plan Fog|Saying we will see what happens is not a plan.|Flexible weekends are healthier than schedules with clipboards.",
-      "The Gift Wrapping Standard|Wrapping a gift like a taped paper accident shows insufficient respect.|The gift is inside, and paper is just festive armour.",
-      "The Blanket Burrito Charge|Rolling into the blanket and leaving none for anyone else is selfish.|The blanket roll formed naturally during sleep and cannot be blamed.",
-      "The Remote Volume War|Turning the volume up and down every scene ruins the show.|Shows whisper and explode, and someone must manage the chaos.",
-      "The Tea Strength Debate|Making weak tea was an insult to the cup.|Tea strength is personal and not everyone wants furniture stain.",
-      "The Bedside Lamp War|Reading with the lamp on kept the room too bright.|Books do not read themselves and darkness is unhelpful.",
-      "The Gift Hint Dispute|Dropping obvious gift hints removed all surprise.|Hints prevent tragic gift errors.",
-      "The Streaming Treaty|Watching the next episode alone broke the sacred couch agreement.|Falling asleep first released all future episode obligations.",
-      "The Dinner Suggestion Loop|Asking what should we eat and rejecting every idea is emotional menu warfare.|Rejecting bad ideas is part of the dinner selection process.",
-      "The Not Hungry Fries|Saying not hungry and then stealing fries is snack betrayal.|Fries beside a partner become community property.",
-      "The Text Tone Trial|That short message sounded cold enough to require a blanket.|The message was efficient, not emotionally refrigerated.",
-      "The Thermostat Agreement|One person cannot turn the home into a tropical resort.|One person cannot expect romance while everyone is freezing.",
-      "The Blanket Border War|Stealing the entire blanket overnight was a hostile takeover.|Blankets move naturally and sleep court cannot prove intent.",
-      "The Movie Scroll Crisis|Choosing a movie should not take longer than watching one.|The wrong movie ruins the evening and caution is romantic.",
-      "The Shared Charger Claim|Keeping the shared charger on one side of the bed was selfish.|The charger followed the person with lower battery anxiety.",
-      "The Birthday Hint Case|Dropping obvious gift hints removed all surprise.|Hints prevent tragic gifts and save everyone from pretending.",
-      "The Restaurant Rejection Case|Rejecting restaurants without naming one is unfair.|Knowing what is wrong is the first step to finding what is right.",
-      "The Couple Photo Posting|Posting a questionable couple photo required consent.|The photo was funny, authentic, and historically useful.",
-      "The Silent Treatment Claim|Being quiet and saying nothing is wrong created courtroom confusion.|Nothing was wrong until someone asked nothing was wrong too many times.",
-      "The Decorative Cushion Debate|Too many cushions turned the bed into an obstacle course.|Cushions create style and style occasionally requires labour.",
-      "The Anniversary Guessing Game|Remembering the anniversary should not require hints, clues, or calendar breadcrumbs.|A loving partner may know the feeling is important without knowing the exact date under pressure.",
-      "The Dinner Reservation Gamble|Booking a restaurant without asking first ignored every known food preference in the relationship.|Making a plan showed initiative and prevented the ancient curse of endless scrolling.",
-      "The Phone During Dinner Case|Checking messages during dinner made the table feel like a waiting room.|A quick glance at the phone does not cancel affection or table loyalty.",
-      "The Hoodie Ownership Transfer|Borrowing a hoodie for three months is legally suspicious and emotionally bold.|A comfortable hoodie naturally migrates toward the person who appreciates it most.",
-      "The Date Night Outfit Delay|Changing outfits four times turned date night into a fashion committee hearing.|Looking right for the evening is part of respecting the occasion.",
-      "The Shared Playlist Invasion|Adding surprise songs to the couple playlist disturbed the emotional soundtrack.|A shared playlist should evolve, even if one person has stronger musical courage.",
-      "The Good Morning Text Trial|Skipping the good morning text created unnecessary romantic weather changes.|Love should not be measured by phone notifications before breakfast.",
-      "The Restaurant Leftover Claim|Taking the leftovers without asking was a direct attack on tomorrow lunch hopes.|Leftovers abandoned in the fridge become fair game after sufficient silence.",
-      "The Compliment Interpretation Hearing|Saying the outfit looked fine created more emotional paperwork than silence.|Fine was meant as approval, not a trapdoor into wardrobe court."
+      "The French Fry Dispute|If you said you did not want fries when we ordered, you do not get to eat mine now.|Stealing three small fries from your pile does not mean I wanted my own giant box.",
+      "The Almost Ready Debate|Almost ready should mean actually almost ready.|I am almost ready, I just have to put on my clothes, fix my hair, and find my bag.",
+      "The Streaming Betrayal|We started this series together, so watching the finale without me is a total betrayal.|You fell asleep five minutes into the episode, so I should not have to pause my life.",
+      "The Phone Face-Down Debate|Flipping your phone screen-side down the second I walk into the room looks incredibly shady.|I put it face down so the screen lights do not constantly distract me while we talk.",
+      "The Restaurant Not Hungry Argument|Ordering nothing means eating nothing.|I just want one tiny bite of yours to taste it, I am not trying to eat your whole meal.",
+      "The Dinner Suggestion Trap|You asked what we should eat and then rejected every single thing I said.|Bad dinner ideas do not become good just because I asked for suggestions.",
+      "The Just One More Episode Argument|If we watch another one, we are going to be absolute zombies at work tomorrow.|It's a cliffhanger! You can't just expect me to shut my brain off and go to sleep right now.",
+      "The Movie Scrolling Stand-off|You said you wanted to choose the movie, but you have been scrolling for twenty minutes.|Picking the wrong movie ruins the whole night, so I am being careful.",
+      "The Text Tone Argument|That short reply sounded cold and now I have had to reread it twelve times.|I was just answering quickly, not launching an emotional attack.",
+      "The Blanket Theft Dispute|You rolled yourself into the entire blanket and left me fighting for one corner.|If my sleeping habits bother you this much, we need to become a two-blanket household immediately.",
+      "The Shared Dessert Dispute|We agreed to share dessert, but you are eating it like you are trying to break a speed record.|In a shared dessert situation, if you hesitate for even five seconds, you forfeit your rights.",
+      "The Sofa Seat Argument|That is my spot on the couch and everyone in this house knows it.|Think of it as a compliment; you warmed up the best seat in the house for me.",
+      "The Takeaway Change Debate|Changing the food order after everyone agrees is not acceptable.|I'm just trying to make sure we don't look back on this dinner with immediate regret.",
+      "The Weekend Plans Argument|Saying we will see what happens is not a plan.|Making no plan is the whole point of having a relaxed weekend.",
+      "The Gift Hint Dispute|Dropping hints for three weeks removes every bit of surprise from the gift.|Hints are how we avoid pretending to love something we never wanted.",
+      "The Remote Volume Fight|Turning the volume up for whispers and down for explosions ruins the whole show.|The show keeps changing volume like it is trying to annoy us personally.",
+      "The Bedside Lamp Argument|I shouldn't have to bury my entire head under three heavy pillows just so you can finish a mystery novel.|Just close your eyes and turn around; it is a 40-watt bulb, not a stadium spotlight.",
+      "The Thermostat Fight|You cannot turn the room into a sauna because you refuse to wear socks.|You cannot expect romance while I am freezing under a blanket.",
+      "The Shared Charger Dispute|The charger is always on your side of the bed when both of us need it.|If sharing a single cable is a human rights crisis, you are fully allowed to buy your own.",
+      "The Restaurant Rejection Loop|You keep saying no to every restaurant without naming one you actually want.|Knowing what I do not want is still useful information.",
+      "The Couple Photo Argument|You cannot post a photo where only one of us looks good.|It is a funny photo, and nobody is zooming in as much as you think.",
+      "The Decorative Cushion Debate|There are too many cushions on the bed and moving them every night is ridiculous.|The room looks better with cushions, and looking better is the point.",
+      "The Dinner Booking Gamble|Booking a restaurant without asking ignored every food mood I had today.|Making a booking saved us from staring at delivery apps for forty minutes.",
+      "The Phone During Dinner Argument|Checking your phone during dinner makes it feel like I am eating with your notifications.|I'm literally multitasking; I can hear every single word you are saying while I reply to this.",
+      "The Borrowed Hoodie Dispute|Borrowing a hoodie for three months is not borrowing anymore.|It is comfortable, I wear it more, and it clearly chose me.",
+      "The Date Night Outfit Delay|Changing outfits four times made us late before we even left the house.|I am trying to look good for the night we are supposedly enjoying.",
+      "The Shared Playlist Argument|Adding random songs to our shared playlist ruined the whole mood.|A shared playlist should have both people's music, not just your approved museum.",
+      "The Good Morning Text Debate|Skipping the good morning text made the whole morning feel weird.|Love should not be judged before breakfast by whether I touched my phone.",
+      "The Leftover Takeover|I ordered the food and I paid for the meal, so those remaining spring rolls were strictly my property.|You were never going to eat them; they were just going to sit there turning into a science project until I threw them out.",
+      "The Outfit Feedback Trap|You asked what I thought of the outfit, then got annoyed when I answered.|There is a massive gap between a constructive critique and telling me I look like a clown right before we leave.",
+      "The Coffee Before Conversation Rule|Starting a serious conversation before coffee is unfair to everyone involved.|If the thought is important, it can survive until caffeine arrives.",
+      "The Bedtime Phone Scroll Debate|Five more minutes on your phone somehow becomes fifty every night.|I am unwinding, and the phone is how my brain shuts the day down."
     ];
 
     const cases = caseLines.map(line => {

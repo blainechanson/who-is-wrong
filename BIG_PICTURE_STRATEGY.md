@@ -60,3 +60,7 @@ Success may include:
 Who Is Wrong should be treated as both a real product and a learning vehicle.
 
 The goal is not only to make this one site work. The goal is to discover repeatable patterns for building small, valuable online properties that can compound into a durable passive-income portfolio over time.
+## Related Planning Documents
+
+- `PROJECT_PURPOSE.md` explains what Who Is Wrong is, how it should feel, and the boundaries it must preserve.
+- `MARKETING_PLAN.md` outlines the low-key launch and growth plan for getting exposure without collecting contact details or building a public social media following.
